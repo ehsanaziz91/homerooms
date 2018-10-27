@@ -49,7 +49,7 @@
                       <option>--- Position ---</option>
                       <option value="01">Admin</option>
                       <option value="02">Homeroom Teacher</option>
-                      <option value="03">Teacher</option>
+                      <option value="03">Student</option>
                   </select>
                   <br>
               </div>
