@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="REFRESH" content="10; url=http://localhost/homerooms/production/admin_index.php"> <!--loading page in every 10 second-->
 	<!--<link rel="icon" href="images/favicon.ico" type="image/ico" />-->
 
     <title>HMDS Admin</title>
@@ -56,7 +57,61 @@
             <br />
 
             <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-home"></i>Dashboard</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Users</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-user"></i>Admin</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-users"></i>Teachers</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-users"></i>Students</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-users"></i>Parents</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-user"></i>Technical Administrator</a>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Class</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-edit"></i>Assign Students To Class</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-star-o"></i>Upgrade Class</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Others</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-edit"></i>Merits | Demerits</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-edit"></i>Punishments</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-edit"></i>Consultations</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-edit"></i>Commitments</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Report</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-edit"></i>Audits</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-edit"></i>Reports</a>
+                  </li>
+                </ul>
+              </div>
 
+            </div>
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
