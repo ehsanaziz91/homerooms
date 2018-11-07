@@ -1,9 +1,3 @@
-<?php
-    //include('login.html');
-    //session_start();
-    //mysqli_close($conn);
-?> 
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="REFRESH" content="10; url=http://localhost/homerooms/production/teacher_index.php"> <!--loading page in every 10 second-->
 
     <title>HMD Add Student</title>
 
