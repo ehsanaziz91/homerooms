@@ -1,3 +1,16 @@
+<?php
+include('../Connections/connection.php');
+session_start();
+
+if (isset($_SESSION['userid']))
+{
+    $userid = $_SESSION['userid'];
+}else
+{
+    header ('location:../production/loginPage.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,7 +19,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="REFRESH" content="10; url=http://localhost/homerooms/production/admin_index.php"> <!--loading page in every 10 second-->
+    <!--<meta http-equiv="REFRESH" content="10; url=http://localhost/homerooms/production/admin_index.php"> <!--loading page in every 10 second-->
 	<!--<link rel="icon" href="images/favicon.ico" type="image/ico" />-->
 
     <title>HMDS Admin</title>
