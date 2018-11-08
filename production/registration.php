@@ -1,6 +1,5 @@
 <?php
 include('../Connections/connection.php');
-//include('login.php');
 session_start();
 
 if(isset($_POST['submit']))
@@ -10,7 +9,7 @@ if(isset($_POST['submit']))
     $positions = $_POST['position'];
     $phone = $_POST['phoneNo'];
     $emails = $_POST['email'];
-    $password = $_POST['pass'];
+    $password = $_POST['pass']; //encrypt pass
     $questions = $_POST['question'];
     $answers = $_POST['answer'];
 
