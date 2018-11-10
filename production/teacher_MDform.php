@@ -173,7 +173,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            HMD System@2018/19 - WorkshopII | BITS | FTMK | UTeM
           </div>
           <div class="clearfix"></div>
         </footer>
