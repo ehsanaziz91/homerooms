@@ -53,6 +53,81 @@
             <!-- /menu profile quick info -->
 
             <br />
+              
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-home"></i>Dashboard</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Users</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-user"></i>Admin</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-users"></i>Teachers</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-users"></i>Students</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-users"></i>Parents</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-user"></i>Technical Administrator</a>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Class</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-edit"></i>Assign Students To Class</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-star-o"></i>Upgrade Class</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Others</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-edit"></i>Merits | Demerits</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-edit"></i>Punishments</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-edit"></i>Consultations</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-edit"></i>Commitments</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Report</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-edit"></i>Audits</a>
+                  </li>
+                  <li><a href="#"><i class="fa fa-edit"></i>Reports</a>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
           </div>
         </div>
 
@@ -157,13 +232,12 @@
                                             <td>' . $studanswer . '</td>
                                             <td>
                                                 <form method="post" action="teacher_studList.php">
-                                                    <a href="defective_equip-details.php?complaintID='.$row['complaintID'].'&staffid='.$id.'" class="btn btn-info"><i class="fa fa-info fa-fw"></i></a>
+                                                    
+                                                    <input type="hidden" name="studentID" value='.$userid.'></input>
 
-                                                    <input type="hidden" name="complaintID" value='.$row['complaintID'].'></input>
+                                                    <button class="btn btn-primary" name="details" onclick="document.submit();">Details</button>
 
-                                                    <button class="btn btn-info" name="maintain" onclick="document.submit();"><i class="fa fa-wrench fa-fw"></i></button>
-
-                                                    <button class="btn btn-danger" name="disposal" onclick="document.submit();"><i class="fa fa-trash-o fa-fw"></i></button>
+                                                    <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>';
@@ -266,6 +340,15 @@
           </div>
         </div>
         <!-- /page content -->
+          
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            HMD System@2018/19 - WorkshopII | BITS | FTMK | UTeM
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
     </div>
 
