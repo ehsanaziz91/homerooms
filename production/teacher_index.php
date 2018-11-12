@@ -82,7 +82,7 @@ if (isset($_SESSION['userid']))
                 <ul class="nav side-menu">
                   <li><a href="#"><i class="fa fa-user"></i>Admin</a>
                   </li>
-                  <li><a href="#"><i class="fa fa-users"></i>Teachers</a>
+                  <li><a href="teacher_studListPage.php?userid=<?php echo $userid;?>"><i class="fa fa-users"></i>Teachers</a>
                   </li>
                   <li><a href="#"><i class="fa fa-users"></i>Students</a>
                   </li>
