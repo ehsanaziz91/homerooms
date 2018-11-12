@@ -1,16 +1,3 @@
-<?php
-include('../Connections/connection.php');
-session_start();
-
-if (isset($_SESSION['userid']))
-{
-    $userid = $_SESSION['userid'];
-}else
-{
-    header ('location:../production/loginPage.php');
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,7 +8,7 @@ if (isset($_SESSION['userid']))
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--<meta http-equiv="REFRESH" content="10; url=http://localhost/homerooms/production/teacher_studListPage.php"> <!--loading page in every 10 second-->
 
-    <title>HMDS Student List</title>
+    <title>Merit Form</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -183,86 +170,19 @@ if (isset($_SESSION['userid']))
 
             <div class="clearfix"></div>
 
-            <div class="row"><!--start of modal page-->
+            <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>List of Student</h2>
+                    <h2>Merit Form</h2>
                     <!-- Button trigger modal -->
                     <div class="content">
-                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
-                    Add New Student
-                    </button>
+                   
                     </div>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>Student ID</th>
-                          <th>Student Name</th>
-                          <th>Merit Point</th>
-                          <th>Demerit Point</th>
-                          <th>Current Points</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                       <?php
-                          include('../Connections/connection.php');
-                          
-/*                            $userid = "ASP961801";
-                            //$userid = $_POST['userid'];
-                          
-                            $stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrName, recoAnswer FROM student WHERE studentID = ?");
-                            $stmt->bind_param("s", $userid);
-                            $stmt->execute();
-                            $result = $stmt->get_result();
-
-                            while ($row = $result->fetch_assoc())
-                            {
-                                echo '<tr>
-                                        <td>'.$row['studentID'].'</td>
-                                        <td>'.$row['studName'].'</td>
-                                        <td>'.$row['studContcNo'].'</td>
-                                        <td>'.$row['hrName'].'</td>
-                                        <td>'.$row['recoAnswer'].'</td>
-                                    </tr>';
-                            }*/
-                          
-                            if($stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrName, recoAnswer FROM student")) 
-                            {
-                                $stmt -> execute();
-                                $stmt -> bind_result($userid, $studname, $studno, $studhr, $studanswer);
-                                while($stmt->fetch()) 
-                                {
-                                    echo '<tr>
-                                            <td>' . $userid . '</td>
-                                            <td>' . $studname . '</td>
-                                            <td>' . $studno . '</td>
-                                            <td>' . $studhr . '</td>
-                                            <td>' . $studanswer . '</td>
-                                            <td>
-                                                <form method="post" action="teacher_studList.php">
-                                                    
-                                                    <input type="hidden" name="studentID" value='.$userid.'></input>
-
-                                                    <button class="btn btn-primary" name="details" id="details" onclick="document.submit();">Details</button>
-
-                                                    <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
-                                                    <button class="btn btn-danger" name="del" onclick="document.submit();">Merit</button>
-                                                    <button class="btn btn-danger" name="del" onclick="document.submit();">Demerit</button>
-                                                </form>
-                                            </td>
-                                        </tr>';
-                                }
-                            }
-                          $stmt->close();
-                          $conn->close();
-                        ?>
-                      </tbody>
-                    </table>
+                    
                   </div>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -351,7 +271,7 @@ if (isset($_SESSION['userid']))
                     </div>
                 </div>
               </div>
-            </div> <!--end of modal page-->
+            </div>
           </div>
         </div>
         <!-- /page content -->
