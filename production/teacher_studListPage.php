@@ -1,3 +1,16 @@
+<?php
+include('../Connections/connection.php');
+session_start();
+
+if (isset($_SESSION['userid']))
+{
+    $userid = $_SESSION['userid'];
+}else
+{
+    header ('location:../production/loginPage.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -191,7 +204,7 @@
                           <th>Student Name</th>
                           <th>Merit Point</th>
                           <th>Demerit Point</th>
-                          <th>Others</th>
+                          <th>Current Points</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -235,9 +248,11 @@
                                                     
                                                     <input type="hidden" name="studentID" value='.$userid.'></input>
 
-                                                    <button class="btn btn-primary" name="details" onclick="document.submit();">Details</button>
+                                                    <button class="btn btn-primary" name="details" id="details" onclick="document.submit();">Details</button>
 
                                                     <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
+                                                    <button class="btn btn-danger" name="del" onclick="document.submit();">Merit</button>
+                                                    <button class="btn btn-danger" name="del" onclick="document.submit();">Demerit</button>
                                                 </form>
                                             </td>
                                         </tr>';
