@@ -30,10 +30,10 @@ session_start();
     }
     $stmt->close();
     $conn->close();
-};
+}
 
 //delete student
-if (isset($_POST['del']))
+/*if (isset($_POST['del']))
 {
     $userid = $_GET['studentID'];
     
@@ -55,6 +55,43 @@ if (isset($_POST['del']))
     }
     $stmt->close();
     $conn->close();
-}
+}*/
 
+?>
+
+<?php
+include('../Connections/connection.php');
+session_start();
+
+if (isset($_SESSION['userid']))
+{
+    $userid = $_SESSION['userid'];
+}else
+{
+    header ('location:../production/loginPage.php');
+};
+
+if (isset($_POST['details']))
+{
+    $studid = $_POST['studentID'];
+    
+    $stmt = $conn->prepare("SELECT studentID FROM student WHERE studentID = ?");
+    $stmt->bind_param('s', $studid);
+    $stmt->execute();
+    
+    if($stmt)
+    {
+        echo "<script type=\"text/javascript\">";
+        echo "alert('View data successfully'),location.href='teacher_studProfilePage.php?userid=$userid&studid=$studid'";
+        echo "</script>";
+    }
+    else
+    {
+        echo "<script type=\"text/javascript\">";
+        echo "alert('Could not delete data !')";
+        echo "</script>";
+    }
+    $stmt->close();
+    $conn->close();
+}
 ?>
