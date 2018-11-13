@@ -40,7 +40,10 @@ if (isset($_SESSION['userid']))
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+       <!-- bootstrap-datetimepicker -->
+    <link href="../vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
   </head>
+    
 
   <body class="nav-md">
     <div class="container body">
@@ -251,8 +254,8 @@ if (isset($_SESSION['userid']))
                                                     <button class="btn btn-primary" name="details" id="details" onclick="document.submit();">Details</button>
 
                                                     <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
-                                                    <button class="btn btn-danger" name="del" onclick="document.submit();">Merit</button>
-                                                    <button class="btn btn-danger" name="del" onclick="document.submit();">Demerit</button>
+                                                    <button type="button" class="btn btn-success" pull-right" data-toggle="modal" data-target="#exampleModalMerit">Merit</button>
+                                                    <button type="button" class="btn btn-warning" pull-right" data-toggle="modal" data-target="#exampleModalDemerit">Demerit</button>
                                                 </form>
                                             </td>
                                         </tr>';
@@ -292,7 +295,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Contac No.</label>
+                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Contact No.</label>
                                 <div class="col-md-8 col-sm-6 col-xs-12">
                                   <input type="text" name="contc" id="middle-name" required="required" class="form-control col-md-7 col-xs-12">
                                 </div>
@@ -349,9 +352,146 @@ if (isset($_SESSION['userid']))
                         </div>
                       </div>
                     </div>
+                    
+                    <!-- ModalMerit -->
+                    <div class="modal fade" id="exampleModalMerit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">Merit Page</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form method="post" action="teacher_studList.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                              <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                          <input type="text" class="form-control" readonly="readonly" placeholder="Student ID">
+                        </div>
+                      </div>
+                              <div class="form-group">
+                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                  <select name="question" class="form-control">
+                                    <option>--- Security Question ---</option>
+                                    <option value="0">What was the name of your first pet?</option>
+                                    <option value="1">What was the first thing you learned to cook?</option>
+                                    <option value="2">What was the first film you saw in the cinema?</option>
+                                    <option value="3">Where did you go the first time you flew on an airplane?</option>
+                                    <option value="4">In what city did your parents meet?</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Merit Activity</label>
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                  <select name="hrname" class="form-control">
+                                    <option>--- Teacher Names ---</option>
+                                    <option value="0">Muhammad Ehsan Bin Aziz (Java)</option>
+                                    <option value="1">Wirda Amira Binti Mohd Asri (ASP.Net)</option>
+                                    <option value="2">Muhammad Nabil Bin Zakaria (Fortran)</option>
+                                    <option value="3">Nur Hazirah Binti Mohd Sabri (Scala)</option>
+                                  </select>
+                                </div>
+                              </div>
+                                 <div class="form-group">
+                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                  <select name="hrname" class="form-control">
+                                    <option>--- Teacher Names ---</option>
+                                    <option value="0">Muhammad Ehsan Bin Aziz (Java)</option>
+                                    <option value="1">Wirda Amira Binti Mohd Asri (ASP.Net)</option>
+                                    <option value="2">Muhammad Nabil Bin Zakaria (Fortran)</option>
+                                    <option value="3">Nur Hazirah Binti Mohd Sabri (Scala)</option>
+                                  </select>
+                                </div>
+<div class='col-sm-4'>
+                    Basic Example
+                    <div class="form-group">
+                        <div class='input-group date' id='myDatepicker'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                               <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--EndModalMerit -->
+                    <!-- ModalDeMerit -->
+                    <div class="modal fade" id="exampleModalDemerit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title" id="exampleModalLabel">Demerit Page</h4>
+                          </div>
+                          <div class="modal-body">
+                            <form method="post" action="teacher_studList.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                  <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                          <input type="text" class="form-control" readonly="readonly" placeholder="Student ID">
+                        </div>
+                      </div>
+                              <div class="form-group">
+                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                  <select name="question" class="form-control">
+                                    <option>--- Security Question ---</option>
+                                    <option value="0">What was the name of your first pet?</option>
+                                    <option value="1">What was the first thing you learned to cook?</option>
+                                    <option value="2">What was the first film you saw in the cinema?</option>
+                                    <option value="3">Where did you go the first time you flew on an airplane?</option>
+                                    <option value="4">In what city did your parents meet?</option>
+                                  </select>
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Demerit Activity</label>
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                  <select name="hrname" class="form-control">
+                                    <option>--- Teacher Names ---</option>
+                                    <option value="0">Muhammad Ehsan Bin Aziz (Java)</option>
+                                    <option value="1">Wirda Amira Binti Mohd Asri (ASP.Net)</option>
+                                    <option value="2">Muhammad Nabil Bin Zakaria (Fortran)</option>
+                                    <option value="3">Nur Hazirah Binti Mohd Sabri (Scala)</option>
+                                  </select>
+                                </div>
+                              </div>
+                                 <div class="form-group">
+                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                  <select name="hrname" class="form-control">
+                                    <option>--- Teacher Names ---</option>
+                                    <option value="0">Muhammad Ehsan Bin Aziz (Java)</option>
+                                    <option value="1">Wirda Amira Binti Mohd Asri (ASP.Net)</option>
+                                    <option value="2">Muhammad Nabil Bin Zakaria (Fortran)</option>
+                                    <option value="3">Nur Hazirah Binti Mohd Sabri (Scala)</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--EndModalDeMerit -->
                 </div>
               </div>
-            </div> <!--end of modal page-->
+            </div> <!--end of modal page-->         
           </div>
         </div>
         <!-- /page content -->
@@ -368,6 +508,7 @@ if (isset($_SESSION['userid']))
     </div>
 
     <!-- jQuery -->
+   
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -393,9 +534,13 @@ if (isset($_SESSION['userid']))
     <script src="../vendors/jszip/dist/jszip.min.js"></script>
     <script src="../vendors/pdfmake/build/pdfmake.min.js"></script>
     <script src="../vendors/pdfmake/build/vfs_fonts.js"></script>
+      <!-- bootstrap-datetimepicker -->    
+    <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+     
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+    <script>$('#myDatepicker').datetimepicker();</script>
 
   </body>
 </html>
