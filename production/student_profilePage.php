@@ -194,23 +194,24 @@ if (isset($_SESSION['userid']))
 
                                         if (isset($_GET['userid']))
                                         {
-                                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                                            $stmt = $conn->prepare("SELECT * FROM student WHERE studentID = ?");
                                             $stmt->bind_param('s', $userid);
                                             $stmt->execute();
                                             $result = $stmt->get_result();
                                             $row = $result->fetch_assoc();
 
-                                            $name = $row['staffName'];
-                                            $position = $row['position'];
-                                            $no = $row['phoneNo'];
-                                            $email = $row['email'];
+                                            $studname = $row['studName'];
+                                            $studaddress = $row['studAddress'];
+                                            $studno = $row['studContcNo'];
+                                            $parents = $row['parentName'];
                                             $question = $row['recoQuestion'];
-                                            $answer = $row['recoAnswer'];
+                                            $studanswer = $row['recoAnswer'];
+                                            $studhr = $row['hrName'];
 
                                         }
 
                                         ?>
-                                        <td>Staff ID</td>
+                                        <td>Student ID</td>
                                         <td>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -219,51 +220,41 @@ if (isset($_SESSION['userid']))
                                         <td><?php echo $userid;?></td>
                                     </tr><br><br>
                                     <tr>
-                                        <td>Full Name</td>
+                                        <td>Student Name</td>
                                         <td>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             &nbsp;&nbsp;
                                         </td>
                                         <td>:</td>
-                                        <td><?php echo $name;?></td>
+                                        <td><?php echo $studname;?></td>
                                     </tr><br><br>
                                     <tr>
-                                        <td>Position</td>
+                                        <td>Student Address</td>
                                         <td>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </td>
                                         <td>:</td>
-                                        <td><?php 
-                                                $position;
-                                                if($position == 01)
-                                                {
-                                                    echo "Admin";
-                                                }
-                                                else if ($position == 02)
-                                                {
-                                                     echo "Homeroom Teacher";
-                                                }
-                                            ?>
+                                        <td><?php echo $studaddress;?>
                                         </td>
                                     </tr><br><br>
                                     <tr>
-                                        <td>Contac No</td>
+                                        <td>Contact No</td>
                                         <td>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             &nbsp;
                                         </td>
                                         <td>:</td>
-                                        <td><?php echo $no;?></td>
+                                        <td><?php echo $studno;?></td>
                                     </tr><br><br>
                                     <tr>
-                                        <td>Email</td>
+                                        <td>Parents' Name</td>
                                         <td>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </td>
                                         <td>:</td>
-                                        <td><?php echo $email;?></td>
+                                        <td><?php echo $parents;?></td>
                                     </tr><br><br>
                                     <tr>
                                         <td>Recovery Question</td>
@@ -298,7 +289,13 @@ if (isset($_SESSION['userid']))
                                         <td>Recovery Answer</td>
                                         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                         <td>:</td>
-                                        <td><?php echo $answer;?></td>
+                                        <td><?php echo $studanswer;?></td>
+                                    </tr><br><br>
+                                     <tr>
+                                        <td>Homeroom Teacher</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>:</td>
+                                        <td><?php echo $studhr;?></td>
                                     </tr><br><br>
                                     <tr>
                                         <!-- Button trigger modal -->
