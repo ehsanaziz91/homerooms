@@ -160,7 +160,7 @@ if (isset($_SESSION['userid']))
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                    <li><a href="student_profilePage.php"> Profile</a></li>
                     <li><a href="javascript:;"> Change Password</a></li>
                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
@@ -238,20 +238,128 @@ if (isset($_SESSION['userid']))
 
         <!-- page content -->
         <div class="right_col" role="main">
-          <!-- top tiles -->
-          <div class="row tile_count">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Students' Dashboard</h3>
+              </div>
 
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" style="height:600px;">
+                  <div class="x_title">
+                    <h2>Students' Activity</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+                    <div class="row">
+
+                      <div class="col-md-12">
+
+                        <!-- merit demerit element -->
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <div class="pricing">
+                            <div class="title">
+                              <h1>Merit & Demerit</h1>
+                            </div>
+                            <div class="x_content">
+                              <div class="">
+                                <div class="pricing_features">
+                                  <ul class="list-unstyled text-left">
+                                    <li><i class="fa fa-check text-success"></i> <strong>View Student's Merit Demerit Record</strong></li>
+                                    <li><i class="fa fa-check text-success"></i> <strong>View Current and Past Record</strong></li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="pricing_footer">
+                                <a href="javascript:void(0);" class="btn btn-success btn-block" role="button">View</a>
+                                <p>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- merit demerit element -->
+
+                        <!-- stage element -->
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <div class="pricing">
+                            <div class="title">
+                              <h1>Demerit Stage</h1>
+                            </div>
+                            <div class="x_content">
+                              <div class="">
+                                <div class="pricing_features">
+                                  <ul class="list-unstyled text-left">
+                                    <li><i class="fa fa-check text-success"></i><strong>View Demerit Stage</strong></li>
+                                    <li><i class="fa fa-check text-success"></i> <strong>Reference for students and Parents</strong></li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="pricing_footer">
+                                <a href="javascript:void(0);" class="btn btn-danger btn-block" role="button">View</a>
+                                <p>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- stage element -->
+
+                        <!-- schedule element -->
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <div class="pricing">
+                            <div class="title">
+                              <h1>Merit & Demerit Schedule</h1>
+                            </div>
+                            <div class="x_content">
+                              <div class="">
+                                <div class="pricing_features">
+                                  <ul class="list-unstyled text-left">
+                                    <li><i class="fa fa-check text-success"></i> <strong>Schedule for Merit and Demerit</strong></li>
+                                    <li><i class="fa fa-check text-success"></i> <strong>For Students and Parents Reference</strong>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="pricing_footer">
+                                <a href="javascript:void(0);" class="btn btn-dark btn-block" role="button">View</a>
+                                <p>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- schedule element -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- /top tiles -->
-
-          <br />
-
-          <div class="row">
-
-          </div>
-
         </div>
         <!-- /page content -->
+
 
 
       </div>
