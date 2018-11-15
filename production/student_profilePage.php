@@ -222,8 +222,7 @@ if (isset($_SESSION['userid']))
                                     <tr>
                                         <td>Student Name</td>
                                         <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </td>
                                         <td>:</td>
                                         <td><?php echo $studname;?></td>
@@ -231,8 +230,7 @@ if (isset($_SESSION['userid']))
                                     <tr>
                                         <td>Student Address</td>
                                         <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </td>
                                         <td>:</td>
                                         <td><?php echo $studaddress;?>
@@ -242,7 +240,7 @@ if (isset($_SESSION['userid']))
                                         <td>Contact No</td>
                                         <td>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </td>
                                         <td>:</td>
                                         <td><?php echo $studno;?></td>
@@ -250,15 +248,15 @@ if (isset($_SESSION['userid']))
                                     <tr>
                                         <td>Parents' Name</td>
                                         <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                           
                                         </td>
                                         <td>:</td>
                                         <td><?php echo $parents;?></td>
                                     </tr><br><br>
                                     <tr>
                                         <td>Recovery Question</td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                         <td>:</td>
                                         <td><?php 
                                                 $question;
@@ -287,13 +285,13 @@ if (isset($_SESSION['userid']))
                                     </tr><br><br>
                                     <tr>
                                         <td>Recovery Answer</td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                         <td>:</td>
                                         <td><?php echo $studanswer;?></td>
                                     </tr><br><br>
                                      <tr>
                                         <td>Homeroom Teacher</td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                         <td>:</td>
                                         <td><?php echo $studhr;?></td>
                                     </tr><br><br>
