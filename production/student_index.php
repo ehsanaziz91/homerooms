@@ -80,49 +80,10 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-user"></i>Admin</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-users"></i>Teachers</a>
-                  </li>
                   <li><a href="#"><i class="fa fa-users"></i>Students</a>
                   </li>
-                  <li><a href="#"><i class="fa fa-users"></i>Parents</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-user"></i>Technical Administrator</a>
                 </ul>
               </div>
-              <div class="menu_section">
-                <h3>Class</h3>
-                <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Assign Students To Class</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-star-o"></i>Upgrade Class</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Others</h3>
-                <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Merits | Demerits</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Punishments</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Consultations</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Commitments</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Report</h3>
-                <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Audits</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Reports</a>
-                  </li>
-                </ul>
-              </div>
-
             </div>
             <!-- /sidebar menu -->
 
@@ -161,7 +122,7 @@ if (isset($_SESSION['userid']))
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="student_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
-                    <li><a href="javascript:;"> Change Password</a></li>
+                    <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
                     <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
