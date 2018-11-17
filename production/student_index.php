@@ -53,6 +53,21 @@ if (isset($_SESSION['userid']))
             </div>
 
             <div class="clearfix"></div>
+              
+               <?php
+                                        include('../Connections/connection.php');
+
+                                        if (isset($_GET['userid']))
+                                        {
+                                            $stmt = $conn->prepare("SELECT * FROM student WHERE studentID = ?");
+                                            $stmt->bind_param('s', $userid);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            $row = $result->fetch_assoc();
+
+                                            $studname = $row['studName'];
+                                        }
+              ?>
 
             <!-- menu profile quick info -->
             <div class="profile clearfix">
@@ -60,8 +75,8 @@ if (isset($_SESSION['userid']))
                 <img src="images/img.JPG" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Headmaster</span>
-                <h2>Muhd Ehsan</h2>
+                <span>Student</span>
+                <h2><?php echo $studname;?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -80,7 +95,12 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-users"></i>Students</a>
+                  <li><a href="#"><i class="fa fa-users"></i>Students<span class="fa fa-chevron-down"></span></a>
+                       <ul class="nav child_menu">
+                      <li><a href="#">Merit & Demerit</a></li>
+                      <li><a href="#">Demerit Stage</a></li>
+                      <li><a href="#">Merit & Demerit Schedule</a></li>
+                      </ul>
                   </li>
                 </ul>
               </div>
@@ -117,7 +137,7 @@ if (isset($_SESSION['userid']))
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.JPG" alt="">Muhd Ehsan
+                    <img src="images/img.JPG" alt=""><?php echo $studname;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
