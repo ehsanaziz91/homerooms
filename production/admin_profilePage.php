@@ -45,15 +45,28 @@ if (isset($_SESSION['userid']))
             </div>
 
             <div class="clearfix"></div>
+  <?php
+                                        include('../Connections/connection.php');
 
+                                        if (isset($_GET['userid']))
+                                        {
+                                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                                            $stmt->bind_param('s', $userid);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            $row = $result->fetch_assoc();
+
+                                            $staffname = $row['staffName'];
+                                        }
+              ?>
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="images/img.JPG" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Headmaster</span>
-                <h2>Muhd Ehsan</h2>
+                <span>Admin</span>
+                <h2><?php echo $staffname;?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -72,46 +85,20 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-user"></i>Admin</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-users"></i>Teachers</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-users"></i>Students</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-users"></i>Parents</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-user"></i>Technical Administrator</a>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Class</h3>
-                <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Assign Students To Class</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-star-o"></i>Upgrade Class</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Others</h3>
-                <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Merits | Demerits</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Punishments</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Consultations</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Commitments</a>
+                   <li><a href="#"><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
+                       <ul class="nav child_menu">
+                      <li><a href="#">Merit & Demerit</a></li>
+                      <li><a href="#">Demerit Stage</a></li>
+                      <li><a href="#">Merit & Demerit Schedule</a></li>
+                      <li><a href="#">Assign Students</a></li>
+                      </ul>
                   </li>
                 </ul>
               </div>
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Audits</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Reports</a>
-                  </li>
+                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Student</a>
                 </ul>
               </div>
 
@@ -148,13 +135,13 @@ if (isset($_SESSION['userid']))
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">Muhd Ehsan
+                    <img src="images/img.jpg" alt=""><?php echo $staffname;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li><a href="javascript:;"> Change Password</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="admin_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
+                    <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
+                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
