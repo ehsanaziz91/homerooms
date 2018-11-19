@@ -9,11 +9,25 @@ if (isset($_SESSION['userid']))
 {
     header ('location:../production/loginPage.php');
 }
+
+
 ?>
 
 <?php
-    
-?>
+                                        include('../Connections/connection.php');
+
+                                        if (isset($_GET['studid']))
+                                        {
+                                            $stmt = $conn->prepare("SELECT * FROM student WHERE studentID = ?");
+                                            $stmt->bind_param('s', $studid);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            $row = $result->fetch_assoc();
+
+                                            /*$name = $row['staffName'];*/
+                                        }
+              ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -55,22 +69,35 @@ if (isset($_SESSION['userid']))
             </div>
 
             <div class="clearfix"></div>
+<?php
+                                        include('../Connections/connection.php');
 
+                                        if (isset($_GET['userid']))
+                                        {
+                                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                                            $stmt->bind_param('s', $userid);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            $row = $result->fetch_assoc();
+
+                                            $name = $row['staffName'];
+                                        }
+              ?>
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="images/img.JPG" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Headmaster</span>
-                <h2>Muhd Ehsan</h2>
+                <span>Teacher</span>
+                 <h2><?php echo $name;?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
 
             <br />
               
-            <!-- sidebar menu -->
+ <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>General</h3>
@@ -82,51 +109,27 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-user"></i>Admin</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-users"></i>Teachers</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-users"></i>Students</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-users"></i>Parents</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-user"></i>Technical Administrator</a>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Class</h3>
-                <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Assign Students To Class</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-star-o"></i>Upgrade Class</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Others</h3>
-                <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Merits | Demerits</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Punishments</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Consultations</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Commitments</a>
+                  <li><a href="#"><i class="fa fa-users"></i>Teacher<span class="fa fa-chevron-down"></span></a>
+                       <ul class="nav child_menu">
+                      <li><a href="#">Merit & Demerit</a></li>
+                      <li><a href="#">Demerit Stage</a></li>
+                      <li><a href="#">Merit & Demerit Schedule</a></li>
+                      
+                      </ul>
                   </li>
                 </ul>
               </div>
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Audits</a>
-                  </li>
-                  <li><a href="#"><i class="fa fa-edit"></i>Reports</a>
+                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
 
             </div>
             <!-- /sidebar menu -->
+
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
@@ -158,13 +161,13 @@ if (isset($_SESSION['userid']))
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">Muhd Ehsan
+                    <img src="images/img.jpg" alt=""><?php echo $name;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
-                    <li><a href="javascript:;"> Change Password</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                     <li><a href="teacher_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
+                    <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
+                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -180,141 +183,234 @@ if (isset($_SESSION['userid']))
         </div>
         <!-- /top navigation -->
 
-        <!-- page content -->
+ <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-
+            <div class="page-title">
+              <div class="title_left">
+              </div>
+            </div>
             <div class="clearfix"></div>
-
             <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="col-md-12 col-sm-12 col-xs-24">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>List of Student</h2>
-                    <!-- Button trigger modal -->
-                    <div class="content">
-                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
-                    Add New Student
-                    </button>
-                    </div>
+                    <h2>Student Report </h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
-                      <thead>
-                        <tr>
-                          <th>Student ID</th>
-                          <th>Student Name</th>
-                          <th>Merit Point</th>
-                          <th>Demerit Point</th>
-                          <th>Others</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                       <?php
-                          include('../Connections/connection.php');
-                          
-/*                            $userid = "ASP961801";
-                            //$userid = $_POST['userid'];
-                          
-                            $stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrName, recoAnswer FROM student WHERE studentID = ?");
-                            $stmt->bind_param("s", $userid);
-                            $stmt->execute();
-                            $result = $stmt->get_result();
+                  <div class="x_content" >
+                      
+                    <div class="col-md-6 col-sm-6 col-xs-12 profile_left"><!--ubah kedudukan graf-->
+                     
+                      <h3>Student's Profile</h3>
+                <div class="x_panel">
+                    <div class="panel-body">
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <tr>
+                                        <?php
+                                        include('../Connections/connection.php');
 
-                            while ($row = $result->fetch_assoc())
-                            {
-                                echo '<tr>
-                                        <td>'.$row['studentID'].'</td>
-                                        <td>'.$row['studName'].'</td>
-                                        <td>'.$row['studContcNo'].'</td>
-                                        <td>'.$row['hrName'].'</td>
-                                        <td>'.$row['recoAnswer'].'</td>
-                                    </tr>';
-                            }*/
-                          
-                            if($stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrName, recoAnswer FROM student")) 
-                            {
-                                $stmt -> execute();
-                                $stmt -> bind_result($userid, $studname, $studno, $studhr, $studanswer);
-                                while($stmt->fetch()) 
-                                {
-                                    echo '<tr>
-                                            <td>' . $userid . '</td>
-                                            <td>' . $studname . '</td>
-                                            <td>' . $studno . '</td>
-                                            <td>' . $studhr . '</td>
-                                            <td>' . $studanswer . '</td>
-                                            <td>
-                                                <form method="post" action="teacher_studList.php">
-                                                    
-                                                    <input type="hidden" name="studentID" value='.$userid.'></input>
+                                        if (isset($_GET['studid']))
+                                        {
+                                            $stmt = $conn->prepare("SELECT * FROM student WHERE studentID = ?");
+                                            $stmt->bind_param('s', $studid);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            $row = $result->fetch_assoc();
+                                            
+                                           /* while*/ 
+                                            
+                                            $studid = $row['studentID'];
+                                            $studname = $row['studName'];
+                                            $studAddr = $row['studAddress'];
+                                            $studno = $row['studContcNo'];
+                                            $parent = $row['parentName'];
+                                            $hr = $row['hrName'];
+                                            $question = $row['recoQuestion'];
+                                            $answer = $row['recoAnswer'];
+                                            
+                                            echo $studid;
 
-                                                    <button class="btn btn-primary" name="details" id="details" onclick="document.submit();">Details</button>
+                                        }
 
-                                                    <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>';
-                                }
-                            }
-                          $stmt->close();
-                          $conn->close();
-                        ?>
-                      </tbody>
-                    </table>
-                  </div>
+                                        ?>
+                                        <td>Student ID</td>
+                                        <td>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </td>
+                                        <td>:</td>
+                                        <td><?php echo $studid;?></td>
+                                    </tr><br><br>
+                                    <tr>
+                                        <td>Full Name</td>
+                                        <td>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;
+                                        </td>
+                                        <td>:</td>
+                                        <td><?php echo $studname;?></td>
+                                    </tr><br><br>
+                                    <tr>
+                                        <td>Address</td>
+                                        <td>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </td>
+                                        <td>:</td>
+                                        <td><?php echo $studAddr;?>
+                                        </td>
+                                    </tr><br><br>
+                                    <tr>
+                                        <td>Contact No</td>
+                                        <td>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;
+                                        </td>
+                                        <td>:</td>
+                                        <td><?php echo $studno;?></td>
+                                    </tr><br><br>
+                                    <tr>
+                                        <td>Homeroom</td>
+                                        <td>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </td>
+                                        <td>:</td>
+                                        <td><?php echo $hr;?></td>
+                                    </tr><br><br>
+                                    <tr>
+                                        <td>Recovery Question</td>
+                                        <td>&nbsp;&nbsp;&nbsp;</td>
+                                        <td>:</td>
+                                        <td><?php 
+                                                $question;
+                                                if($question == 0)
+                                                {
+                                                    echo "What was the name of your first pet?";
+                                                }
+                                                else if ($question == 1)
+                                                {
+                                                     echo "What was the first thing you learned to cook?";
+                                                }
+                                                else if ($question == 2)
+                                                {
+                                                     echo "What was the first film you saw in the cinema?";
+                                                }
+                                                else if ($question == 3)
+                                                {
+                                                     echo "Where did you go the first time you flew on an airplane?";
+                                                }
+                                                else if ($question == 4)
+                                                {
+                                                     echo "In what city did your parents meet?";
+                                                }
+                                            ?>
+                                        </td>
+                                    </tr><br><br>
+                                    <tr>
+                                        <td>Recovery Answer</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                        <td>:</td>
+                                        <td><?php echo $answer;?></td>
+                                    </tr><br><br>
+                                    <tr>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        Update Profile
+                                        </button>
+                                        <!--<button type="submit" class="btn btn-primary" name="update">Update Profile</button>-->
+                                        <button type="submit" class="btn btn-default" name="del">Delete Account</button>
+                                    </tr>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
-                            <h4 class="modal-title" id="exampleModalLabel">Add New Student</h4>
+                            <h4 class="modal-title" id="exampleModalLabel">Update Profile</h4>
                           </div>
                           <div class="modal-body">
-                            <form method="post" action="teacher_studList.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            <form method="post" action="profile.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                               <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Student ID</label>
                                 <div class="col-md-8 col-sm-6 col-xs-12">
-                                  <input type="text" name="studid" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                                  <input type="text" name="userid" class="form-control col-md-7 col-xs-12" value="<?php echo $studid;?>" readonly>
                                 </div>
                               </div>
                                 <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Student Name</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Full Name</label>
                                 <div class="col-md-8 col-sm-6 col-xs-12">
-                                  <input type="text" name="studname" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                                  <input type="text" name="staffName" class="form-control col-md-7 col-xs-12" value="<?php echo $studname;?>">
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Student Address</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Address</label>
                                 <div class="col-md-8 col-sm-6 col-xs-12">
-                                  <input type="text" name="studadd" id="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                                  <input type="text" name="position" class="form-control col-md-7 col-xs-12" value="<?php echo $studAddr;?>" readonly>
                                 </div>
                               </div>
                               <div class="form-group">
                                 <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Contac No.</label>
                                 <div class="col-md-8 col-sm-6 col-xs-12">
-                                  <input type="text" name="contc" id="middle-name" required="required" class="form-control col-md-7 col-xs-12">
+                                  <input type="text" name="phoneNo" class="form-control col-md-7 col-xs-12" value="<?php echo $studno;?>">
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Parent Name</label>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Homeroom</label>
                                 <div class="col-md-8 col-sm-6 col-xs-12">
-                                  <input type="text" name="parent" id="parent" required="required" class="form-control col-md-7 col-xs-12" placeholder="Father / Mother">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Password</label>
-                                <div class="col-md-8 col-sm-6 col-xs-12">
-                                  <input type="password" name="password" id="password" class="date-picker form-control col-md-7 col-xs-12" required="required"  placeholder="Ex:skrs18ip0012">
+                                  <input type="email" name="email" class="form-control col-md-7 col-xs-12" value="<?php echo $hr;?>">
                                 </div>
                               </div>
                               <div class="form-group">
                                 <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Recovery Question</label>
                                 <div class="col-md-8 col-sm-6 col-xs-12">
-                                  <select name="question" class="form-control">
-                                    <option>--- Security Question ---</option>
+                                  <select name="recoQuestion" class="form-control">
+                                    <option value="<?php echo $question;?>">
+                                    <?php 
+                                        $question;
+                                        if($question == 0)
+                                        {
+                                            echo "What was the name of your first pet?";
+                                        }
+                                        else if ($question == 1)
+                                        {
+                                             echo "What was the first thing you learned to cook?";
+                                        }
+                                        else if ($question == 2)
+                                        {
+                                             echo "What was the first film you saw in the cinema?";
+                                        }
+                                        else if ($question == 3)
+                                        {
+                                             echo "Where did you go the first time you flew on an airplane?";
+                                        }
+                                        else if ($question == 4)
+                                        {
+                                             echo "In what city did your parents meet?";
+                                        }
+                                    ?>
+                                    </option>
                                     <option value="0">What was the name of your first pet?</option>
                                     <option value="1">What was the first thing you learned to cook?</option>
                                     <option value="2">What was the first film you saw in the cinema?</option>
@@ -326,24 +422,13 @@ if (isset($_SESSION['userid']))
                               <div class="form-group">
                                 <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Recovery Answer</label>
                                 <div class="col-md-8 col-sm-6 col-xs-12">
-                                  <input type="text" name="answer" id="middle-name" class="form-control col-md-7 col-xs-12">
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Teacher Names</label>
-                                <div class="col-md-8 col-sm-6 col-xs-12">
-                                  <select name="hrname" class="form-control">
-                                    <option>--- Teacher Names ---</option>
-                                    <option value="0">Muhammad Ehsan Bin Aziz (Java)</option>
-                                    <option value="1">Wirda Amira Binti Mohd Asri (ASP.Net)</option>
-                                    <option value="2">Muhammad Nabil Bin Zakaria (Fortran)</option>
-                                    <option value="3">Nur Hazirah Binti Mohd Sabri (Scala)</option>
-                                  </select>
+                                  <input type="text" name="recoAnswer" class="form-control col-md-7 col-xs-12" value="<?php echo $answer;?>">
                                 </div>
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Add New Student</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary" name="update" id="update">Update Profile</button>
+                                <!--<input type="submit" class="btn btn-primary" name="update" id="update"  value="Update">-->
                               </div>
                             </form>
                           </div>
@@ -351,11 +436,39 @@ if (isset($_SESSION['userid']))
                       </div>
                     </div>
                 </div>
+            
+                     
+                     
+                    </div>
+                      <div style="width:left; height:280px;">
+                    <div class="col-md-9 col-sm-6 col-xs-12" style="width:50%; height:280px;">
+                        
+                      <div class="profile_title">
+                        <div class="col-md-6">
+                          <h2>User Activity Report</h2>
+                        </div>
+                        <div class="col-md-6">
+                          <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
+                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- start of user-activity-graph -->
+                      <div id="graph_bar" style="width:100%; height:280px;"></div>
+                      <!-- end of user-activity-graph -->
+
+                    </div>
+                          </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <!-- /page content -->
+
+       
           
         <!-- footer content -->
         <footer>
@@ -378,6 +491,15 @@ if (isset($_SESSION['userid']))
     <script src="../vendors/nprogress/nprogress.js"></script>
     <!-- iCheck -->
     <script src="../vendors/iCheck/icheck.min.js"></script>
+       <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- morris.js -->
+    <script src="../vendors/raphael/raphael.min.js"></script>
+    <script src="../vendors/morris.js/morris.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../vendors/moment/min/moment.min.js"></script>
+    <script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
     <!-- Datatables -->
     <script src="../vendors/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="../vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -397,6 +519,10 @@ if (isset($_SESSION['userid']))
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
+      
+   
+    
+
 
   </body>
 </html>
