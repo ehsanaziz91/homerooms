@@ -19,9 +19,10 @@ if (isset($_SESSION['userid']))
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta http-equiv="REFRESH" content="10; url=http://localhost/homerooms/production/admin_index.php"> <!--loading page in every 10 second-->
 	<!--<link rel="icon" href="images/favicon.ico" type="image/ico" />-->
 
-    <title>HMDS Student</title>
+    <title>HMDS Admin</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -49,34 +50,32 @@ if (isset($_SESSION['userid']))
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMDS</span></a>
+              <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
             </div>
 
             <div class="clearfix"></div>
-              
-               <?php
+  <?php
                                         include('../Connections/connection.php');
 
                                         if (isset($_GET['userid']))
                                         {
-                                            $stmt = $conn->prepare("SELECT * FROM student WHERE studentID = ?");
+                                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
                                             $stmt->bind_param('s', $userid);
                                             $stmt->execute();
                                             $result = $stmt->get_result();
                                             $row = $result->fetch_assoc();
 
-                                            $studname = $row['studName'];
+                                            $staffname = $row['staffName'];
                                         }
               ?>
-
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="images/img.JPG" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
-                <span>Student</span>
-                <h2><?php echo $studname;?></h2>
+                <span>Admin</span>
+                <h2><?php echo $staffname;?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -95,15 +94,24 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-users"></i>Students<span class="fa fa-chevron-down"></span></a>
+                  <li><a href="#"><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
                        <ul class="nav child_menu">
                       <li><a href="#">Merit & Demerit</a></li>
                       <li><a href="#">Demerit Stage</a></li>
                       <li><a href="#">Merit & Demerit Schedule</a></li>
+                      <li><a href="#">Assign Students</a></li>
                       </ul>
                   </li>
                 </ul>
               </div>
+              <div class="menu_section">
+                <h3>Report</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
+                  </li>
+                </ul>
+              </div>
+
             </div>
             <!-- /sidebar menu -->
 
@@ -137,13 +145,13 @@ if (isset($_SESSION['userid']))
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.JPG" alt=""><?php echo $studname;?>
+                    <img src="images/img.JPG" alt=""><?php echo $staffname;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="student_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
+                    <li><a href="admin_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
                     <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
@@ -152,64 +160,6 @@ if (isset($_SESSION['userid']))
                     <i class="fa fa-envelope-o"></i>
                     <span class="badge bg-green">6</span>
                   </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
                 </li>
               </ul>
             </nav>
@@ -217,12 +167,13 @@ if (isset($_SESSION['userid']))
         </div>
         <!-- /top navigation -->
 
+      
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Students' Dashboard</h3>
+                <h3></h3>
               </div>
 
               <div class="title_right">
@@ -237,9 +188,9 @@ if (isset($_SESSION['userid']))
 
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel" style="height:600px;">
+                <div class="x_panel" style="height:500px;">
                   <div class="x_title">
-                    <h2>Students' Activity</h2>
+                    <h2>Demerit Stage</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -256,91 +207,49 @@ if (isset($_SESSION['userid']))
                     <div class="row">
 
                       <div class="col-md-12">
-
-                        <!-- merit demerit element -->
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                          <div class="pricing">
-                            <div class="title">
-                              <h1>Merit & Demerit</h1>
-                            </div>
-                            <div class="x_content">
-                              <div class="">
-                                <div class="pricing_features">
-                                  <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i> <strong>View Student's Merit Demerit Record</strong></li>
-                                    <li><i class="fa fa-check text-success"></i> <strong>View Current and Past Record</strong></li>
-                                  </ul>
-                                </div>
-                              </div>
-                              <div class="pricing_footer">
-                                <a href="javascript:void(0);" class="btn btn-success btn-block" role="button">View</a>
-                                <p>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- merit demerit element -->
-
-                        <!-- stage element -->
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                          <div class="pricing">
-                            <div class="title">
-                              <h1>Demerit Stage</h1>
-                            </div>
-                            <div class="x_content">
-                              <div class="">
-                                <div class="pricing_features">
-                                  <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong>View Demerit Stage</strong></li>
-                                    <li><i class="fa fa-check text-success"></i> <strong>Reference for students and Parents</strong></li>
-                                  </ul>
-                                </div>
-                              </div>
-                              <div class="pricing_footer">
-                                <a href="sdemerit_stage.php?userid=<?php echo $userid; ?>" class="btn btn-danger btn-block" role="button">View</a>
-                                <p>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- stage element -->
-
-                        <!-- schedule element -->
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                          <div class="pricing">
-                            <div class="title">
-                              <h1>Merit & Demerit Schedule</h1>
-                            </div>
-                            <div class="x_content">
-                              <div class="">
-                                <div class="pricing_features">
-                                  <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i> <strong>Schedule for Merit and Demerit</strong></li>
-                                    <li><i class="fa fa-check text-success"></i> <strong>For Students and Parents Reference</strong>
-                                  </ul>
-                                </div>
-                              </div>
-                              <div class="pricing_footer">
-                                <a href="smerit_schedule.php?userid=<?php echo $userid; ?>" class="btn btn-dark btn-block" role="button">View</a>
-                                <p>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- schedule element -->
+                           <div class="x_content">
+                              <table id="datatable-buttons" class="table table-striped table-bordered">
+                                 <thead>
+                                    <tr>
+                                       <th>Stage ID</th>
+                                       <th>Current Point</th>
+                                       <th>Description</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <?php
+                                       include('../Connections/connection.php');
+                                       
+                                         if($stmt = $conn->prepare("SELECT stageID, currentPoint, description FROM stage")) 
+                                         {
+                                             $stmt -> execute();
+                                             $stmt -> bind_result($stageID, $currentPoint, $description);
+                                             while($stmt->fetch()) 
+                                             {
+                                                 echo '<tr>
+                                                         <td>' . $stageID . '</td>
+                                                         <td>' . $currentPoint . '</td>
+                                                         <td>' . $description . '</td>
+                                                     </tr>';
+                                             }
+                                         }
+                                       $stmt->close();
+                                       $conn->close();
+                                       ?>
+                                 </tbody>
+                              </table>
+                           </div>
+                       
                       </div>
                     </div>
                   </div>
                 </div>
+                  
               </div>
             </div>
           </div>
         </div>
         <!-- /page content -->
-
 
 
       </div>
