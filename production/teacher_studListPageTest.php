@@ -238,6 +238,8 @@
                                        
                                                                  <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
                                                                  
+                                                                 <a href="MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-default">Merit / Demerit</a>
+                                                                 
                                                                  <a href="defective_equip-details.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit</a>
                                                                  
                                                                  <a href="defective_equip-details.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-warning">Demerit</a>
