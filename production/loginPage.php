@@ -40,7 +40,7 @@
               </div>
               <div>
                 <!--<a class="btn btn-default submit" name="login">Log In</a>-->
-                <button class="btn btn-default submit" name="login">Log In</button>
+                <button class="btn btn-default submit" name="login">Log In</button> <!--set default password-->
                 <a class="reset_pass" href="recoveryPage.php">Lost your password?</a>
               </div>
             </form>

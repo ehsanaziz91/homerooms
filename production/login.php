@@ -53,14 +53,26 @@ if(isset($_POST['login']))
         
         if($stmts->num_rows == 1)  //To check if the row exists
         {
-            while($stmts->fetch()) //fetching the contents of the row
+            if($stmts->fetch()) //fetching the contents of the row
             {
-                session_start();
-                $_SESSION['Logged'] = 1;
-                $_SESSION['userid'] = $userid;
-                echo "<script type=\"text/javascript\">";
-                echo "alert('Login Success As Student !'),location.href='student_index.php?userid=$userid'";
-                echo "</script>";
+                if($password == '123456')
+                {
+                    session_start();
+                    $_SESSION['Logged'] = 1;
+                    $_SESSION['userid'] = $userid;
+                    echo "<script type=\"text/javascript\">";
+                    echo "alert('Login Success For The First Time, Please Change Your Password !'),location.href='recoveryPage.php?userid=$userid'";
+                    echo "</script>";
+                }
+                else 
+                {
+                    session_start();
+                    $_SESSION['Logged'] = 1;
+                    $_SESSION['userid'] = $userid;
+                    echo "<script type=\"text/javascript\">";
+                    echo "alert('Login Success As Student !'),location.href='student_index.php?userid=$userid'";
+                    echo "</script>";
+                }
             }
 
         }
@@ -78,4 +90,5 @@ if(isset($_POST['login']))
     $stmt->close();
     $conn->close();
 }
+
 ?>
