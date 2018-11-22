@@ -307,7 +307,7 @@ if (isset($_SESSION['userid']))
                             <h4 class="modal-title" id="exampleModalLabel">Update Profile</h4>
                           </div>
                           <div class="modal-body">
-                            <form method="post" action="profile.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            <form method="post" action="admin_profile.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                               <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Staff ID</label>
                                 <div class="col-md-8 col-sm-6 col-xs-12">
