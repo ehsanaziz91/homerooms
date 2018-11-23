@@ -9,7 +9,7 @@
    {
        header ('location:../production/loginPage.php');
    }
-   ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -220,11 +220,11 @@
                                          if($stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrName, recoAnswer FROM student")) 
                                          {
                                              $stmt -> execute();
-                                             $stmt -> bind_result($userid, $studname, $studno, $studhr, $studanswer);
+                                             $stmt -> bind_result($studid, $studname, $studno, $studhr, $studanswer);
                                              while($stmt->fetch()) 
                                              {
                                                  echo '<tr>
-                                                         <td>' . $userid . '</td>
+                                                         <td>' . $studid . '</td>
                                                          <td>' . $studname . '</td>
                                                          <td>' . $studno . '</td>
                                                          <td>' . $studhr . '</td>
@@ -232,13 +232,24 @@
                                                          <td>
                                                              <form method="post" action="teacher_studList.php">
                                                                  
-                                                                 <input type="hidden" name="studentID" value='.$userid.'></input>
+                                                                 <input type="hidden" name="studentID" value='.$studid.'></input>
                                        
                                                                  <button class="btn btn-primary" name="details" id="details" onclick="document.submit();">Details</button>
                                        
-                                                                 <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
-                                                                 <button type="button" class="btn btn-success" pull-right" data-toggle="modal" data-target="#exampleModalMerit">Merit</button>
-                                                                 <button type="button" class="btn btn-warning" pull-right" data-toggle="modal" data-target="#exampleModalDemerit">Demerit</button>
+                                                                 <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>';
+                                             ?>      
+                                             
+                                             
+                                                                 <!--<button type="button" class="btn btn-success" pull-right" data-toggle="modal" data-target="#exampleModalMerit'.$studid.'">Merit</button>
+                                                                '.$studid.'-->
+                                                                
+                                                               <?php include ('teacher_studListDrop.php'); ?>
+                                                                <a href="#exampleModalMerit<?php echo $studid; ?>" data-toggle="modal" class="btn btn-success" pull-right>Merit</a>
+                                                                
+                                              <?php                   
+                                                           echo'
+                                                           
+                                                           <button type="button" class="btn btn-warning" pull-right" data-toggle="modal" data-target="#exampleModalDemerit">Demerit</button>
                                                              </form>
                                                          </td>
                                                      </tr>';
@@ -328,7 +339,7 @@
                                           </div>
                                           <div class="modal-footer">
                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                             <button type="submit" class="btn btn-primary">Add New Student</button>
+                                             <button type="submit" class="btn btn-primary" name="addstudent" id="addstudent">Add New Student</button>
                                           </div>
                                        </form>
                                     </div>
@@ -336,7 +347,8 @@
                               </div>
                            </div>
                            <!-- ModalMerit -->
-                           <div class="modal fade" id="exampleModalMerit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--
+                           <div class="modal fade" id="exampleModalMerit<?php //echo $studid; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog" role="document">
                                  <div class="modal-content">
                                     <div class="modal-header">
@@ -347,31 +359,54 @@
                                           <div class="form-group">
                                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
                                              <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <input type="text" class="form-control" readonly="readonly" placeholder="Student ID">
+                                                <input type="text" class="form-control" readonly="readonly">
                                              </div>
                                           </div>
                                           <div class="form-group">
                                              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
                                              <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select name="question" class="form-control">
-                                                   <option>--- Security Question ---</option>
-                                                   <option value="0">What was the name of your first pet?</option>
-                                                   <option value="1">What was the first thing you learned to cook?</option>
-                                                   <option value="2">What was the first film you saw in the cinema?</option>
-                                                   <option value="3">Where did you go the first time you flew on an airplane?</option>
-                                                   <option value="4">In what city did your parents meet?</option>
+                                                <select id="groups" name="category" class="form-control">
+                                                   <option value="">--- Category ---</option>
+                                                   <option value="Pengawas/Pusat Sumber/Koperasi/PRS">Pengawas/Pusat Sumber/Koperasi/PRS</option>
+                                                   <option value="Unit Beruniform/Persatuan/Kelab/Rumah Sukan">Unit Beruniform/Persatuan/Kelab/Rumah Sukan</option>
+                                                   <option value="Pertandingan/Penyertaan">Pertandingan/Penyertaan</option>
+                                                   <option value="Tindakan Sahsiah">Tindakan Sahsiah</option>
                                                 </select>
                                              </div>
                                           </div>
                                           <div class="form-group">
                                              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Merit Activity</label>
                                              <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select name="hrname" class="form-control">
-                                                   <option>--- Teacher Names ---</option>
-                                                   <option value="0">Muhammad Ehsan Bin Aziz (Java)</option>
-                                                   <option value="1">Wirda Amira Binti Mohd Asri (ASP.Net)</option>
-                                                   <option value="2">Muhammad Nabil Bin Zakaria (Fortran)</option>
-                                                   <option value="3">Nur Hazirah Binti Mohd Sabri (Scala)</option>
+                                                <select id="sub_groups" name="merit" class="form-control">
+                                                   <option data-group='SHOW' value="">--- Select Merit ---</option>
+                                                    
+                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Ketua Pengawas/Pusat Sumber/Koperasi/PRS">Ketua Pengawas/Pusat Sumber/Koperasi/PRS</option>
+                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Pen. Ketua Pengawas">Pen. Ketua Pengawas</option>
+                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Pengawas Sekolah">Pengawas Sekolah</option>
+                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="PRS/PPS/Koperasi/Stor Sukan">PRS/PPS/Koperasi/Stor Sukan</option>
+                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Pen. Ketua Kelas">Pen. Ketua Kelas</option>
+                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Ahli Jawatankuasa Kelas">Ahli Jawatankuasa Kelas</option>
+                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Ketua Kelas">Ketua Kelas</option>
+                                                    
+                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Ketua Unit Beruniform">Ketua Unit Beruniform</option>
+                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Pen. Ketua Unit Beruniform">Pen. Ketua Unit Beruniform</option>
+                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Setiausaha/Bendahari">Setiausaha/Bendahari</option>
+                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Ahli Jawatankuasa">Ahli Jawatankuasa</option>
+                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Pengerusi/Kapten Persatuan">Pengerusi/Kapten Persatuan</option>
+                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Naib Pengerusi/Penolong Ketua Persatuan">Naib Pengerusi/Penolong Ketua Persatuan</option>
+                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Setiausaha/Bendahari Persatuan">Setiausaha/Bendahari Persatuan</option>
+                                                    
+                                                   <option data-group='Pertandingan/Penyertaan' value="Penyertaan Peringkat Kebangsaan/Negara">Penyertaan Peringkat Kebangsaan/Negara</option>
+                                                   <option data-group='Pertandingan/Penyertaan' value="Penyertaan Peringkat NegerI">Penyertaan Peringkat NegerI</option>
+                                                   <option data-group='Pertandingan/Penyertaan' value="Penyertaan Peringkat Daerah">Penyertaan Peringkat Daerah</option>
+                                                   <option data-group='Pertandingan/Penyertaan' value="Penyertaan Peringkat Sekolah">Penyertaan Peringkat Sekolah</option>
+                                                   <option data-group='Pertandingan/Penyertaan' value="Penyertaan Peringkat Persatuan">Penyertaan Peringkat Persatuan</option>
+                                                    
+                                                   <option data-group='Tindakan Sahsiah' value="Bertugas dalam Sukan/Permainan/Badan Beruniform/Kelab/Persatuan">Bertugas dalam Sukan/Permainan/Badan Beruniform/Kelab/Persatuan</option>
+                                                   <option data-group='Tindakan Sahsiah' value="Memberi maklumat sehingga tertangkap pencuri atau pesalah">Memberi maklumat sehingga tertangkap pencuri atau pesalah</option>
+                                                   <option data-group='Tindakan Sahsiah' value="Membantu dalam meleraikan pergaduhan">Membantu dalam meleraikan pergaduhan</option>
+                                                   <option data-group='Tindakan Sahsiah' value="Menolong Guru Besar/Guru secara sukarela">Menolong Guru Besar/Guru secara sukarela</option>
+                                                   <option data-group='Tindakan Sahsiah' value="Berkelakuan baik dalam kelas-3 bulan tanpa kesalahan dalam fail disiplin kelas">Berkelakuan baik dalam kelas-3 bulan tanpa kesalahan dalam fail disiplin kelas</option>
                                                 </select>
                                              </div>
                                           </div>
@@ -386,15 +421,18 @@
                                                 </div>
                                              </div>
                                           </div>
+                                          <div class="form-group">
+                                          </div>
                                           <div class="modal-footer">
                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                             <button type="submit" class="btn btn-primary">Save</button>
+                                             <button type="submit" class="btn btn-primary" name="addmerit">Save</button>
                                           </div>
                                        </form>
                                     </div>
                                  </div>
                               </div>
                            </div>
+-->
                            <!--EndModalMerit -->
                            <!-- ModalDeMerit -->
                            <div class="modal fade" id="exampleModalDemerit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -414,25 +452,35 @@
                                           <div class="form-group">
                                              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
                                              <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select name="question" class="form-control">
-                                                   <option>--- Security Question ---</option>
-                                                   <option value="0">What was the name of your first pet?</option>
-                                                   <option value="1">What was the first thing you learned to cook?</option>
-                                                   <option value="2">What was the first film you saw in the cinema?</option>
-                                                   <option value="3">Where did you go the first time you flew on an airplane?</option>
-                                                   <option value="4">In what city did your parents meet?</option>
+                                                <select id="groups" name="question" class="form-control">
+                                                   <option value="">--- Category ---</option>
+                                                   <option value="Pengawas/Pusat Sumber/Koperasi/PRS">Pengawas/Pusat Sumber/Koperasi/PRS</option>
+                                                   <option value="Unit Beruniform/Persatuan/Kelab/Rumah Sukan">Unit Beruniform/Persatuan/Kelab/Rumah Sukan</option>
+                                                   <option value="m3">Pertandingan/Penyertaan</option>
+                                                   <option value="m4">Tindakan Sahsiah</option>
                                                 </select>
                                              </div>
                                           </div>
                                           <div class="form-group">
                                              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Demerit Activity</label>
                                              <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select name="hrname" class="form-control">
-                                                   <option>--- Teacher Names ---</option>
-                                                   <option value="0">Muhammad Ehsan Bin Aziz (Java)</option>
-                                                   <option value="1">Wirda Amira Binti Mohd Asri (ASP.Net)</option>
-                                                   <option value="2">Muhammad Nabil Bin Zakaria (Fortran)</option>
-                                                   <option value="3">Nur Hazirah Binti Mohd Sabri (Scala)</option>
+                                                <select id="sub_groups" name="hrname" class="form-control">
+                                                   <option data-group='SHOW' value="">--- Select Merit ---</option>
+                                                   <option data-group='m1' value="Ketua Pengawas/Pusat Sumber/Koperasi/PRS">Ketua Pengawas/Pusat Sumber/Koperasi/PRS</option>
+                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Pen. Ketua Pengawas">Pen. Ketua Pengawas</option>
+                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Pengawas Sekolah">Pengawas Sekolah</option>
+                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="PRS/PPS/Koperasi/Stor Sukan">PRS/PPS/Koperasi/Stor Sukan</option>
+                                                   <option data-group='m1' value="Pen. Ketua Kelas">Pen. Ketua Kelas</option>
+                                                   <option data-group='m1' value="Ahli Jawatankuasa Kelas">Ahli Jawatankuasa Kelas</option>
+                                                   <option data-group='m1' value="Ketua Kelas">Ketua Kelas</option>
+                                                    
+                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Ketua Unit Beruniform">Ketua Unit Beruniform</option>
+                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Pen. Ketua Unit Beruniform">Pen. Ketua Unit Beruniform</option>
+                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Setiausaha/Bendahari">Setiausaha/Bendahari</option>
+                                                   <option data-group='m2' value="Ahli Jawatankuasa">Ahli Jawatankuasa</option>
+                                                   <option data-group='m2' value="Pengerusi/Kapten Persatuan">Pengerusi/Kapten Persatuan</option>
+                                                   <option data-group='m2' value="Naib Pengerusi/Penolong Ketua Persatuan">Naib Pengerusi/Penolong Ketua Persatuan</option>
+                                                   <option data-group='m2' value="Setiausaha/Bendahari Persatuan">Setiausaha/Bendahari Persatuan</option>
                                                 </select>
                                              </div>
                                           </div>
@@ -523,5 +571,33 @@
       <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
       <!-- Custom Theme Scripts -->
       <script src="../build/js/custom.min.js"></script>
+      <script>
+         $("#dropgroup").change ( function () 
+         {
+             var targID  = $(this).val ();
+             $("div.style-sub-1").hide ();
+             $('#' + targID).show ();
+         } );
+      </script>
+      <script>
+          $(function()
+          {
+            $('#groups').on('change', function(){
+                var val = $(this).val();
+                var sub = $('#sub_groups');
+                $('option', sub).filter(function(){
+                    if (
+                         $(this).attr('data-group') === val 
+                      || $(this).attr('data-group') === 'SHOW'
+                    ) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+            $('#groups').trigger('change');
+        });
+      </script>
    </body>
 </html>
