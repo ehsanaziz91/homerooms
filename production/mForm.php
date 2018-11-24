@@ -42,8 +42,8 @@ if (isset($_POST['addmerit']))
     $catType = $row1["categoryType"];
     
     
-    $stmt2 = $conn->prepare("SELECT meritName, meritPoint FROM merit WHERE categoryID = ? ");
-    $stmt2->bind_param('s',$category);
+    $stmt2 = $conn->prepare("SELECT meritName, meritPoint FROM merit WHERE meritID = ? ");
+    $stmt2->bind_param('s',$merit);
     $stmt2->execute();
     $result2 = $stmt2->get_result();
     $row2 = $result2->fetch_assoc();
