@@ -250,11 +250,11 @@
                       <div class="form-group">
                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class='input-group date' id='myDatepicker'>
-                               <input type='type' name="date" class="form-control" />
-                               <span class="input-group-addon">
+                            <div class='input-group date'>
+                               <input type='date' name="date" class="form-control" />
+<!--                               <span class="input-group-addon">
                                <span class="glyphicon glyphicon-calendar"></span>
-                               </span>
+                               </span>-->
                             </div>
                          </div>
                       </div>
@@ -328,11 +328,11 @@
                       <div class="form-group">
                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class='input-group date' id='myDatepicker2'>
-                               <input type='text' name="date" class="form-control" />
-                               <span class="input-group-addon">
+                            <div class='input-group date'>
+                               <input type='date' name="date" class="form-control" />
+<!--                               <span class="input-group-addon">
                                <span class="glyphicon glyphicon-calendar"></span>
-                               </span>
+                               </span>-->
                             </div>
                          </div>
                       </div>
@@ -420,7 +420,7 @@
             if(catID){
                 $.ajax({
                     type:'POST',
-                    url:'MDForm.php',
+                    url:'mForm.php',
                     data:'categoryID='+catID,
                     success:function(html){
                         $('#merit').html(html);
@@ -436,7 +436,7 @@
             if(meritID){
                 $.ajax({
                     type:'POST',
-                    url:'MDForm.php',
+                    url:'mForm.php',
                     data:'meritID='+meritID,
                     success:function(html){
                         //$('#city').html(html);
