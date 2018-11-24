@@ -40,6 +40,8 @@
     <link href="../vendors/starrr/dist/starrr.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- bootstrap-datetimepicker -->
+    <link href="../vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
@@ -189,7 +191,7 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form method="post" action="MDForm.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form method="post" action="mForm.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                       <?php 
                         
                         $studid = $_GET["studid"];  
@@ -215,8 +217,11 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php
                             include('../Connections/connection.php');
+                            
+                            $status = "1";
 
-                            $stmt = $conn->prepare("SELECT * FROM category WHERE categoryStage = 'Good'");
+                            $stmt = $conn->prepare("SELECT * FROM category WHERE status = ?");
+                            $stmt->bind_param('s',$status);
                             $stmt->execute();
                             $result = $stmt->get_result();
                             ?>
@@ -225,14 +230,13 @@
                                 <?php
                                 if($result->num_rows>0){
                                     while($row = $result->fetch_assoc()){ 
-                                        echo '<option value="'.$row['categoryCode'].'">'.$row['categoryType'].'</option>';
+                                        echo '<option value="'.$row['categoryID'].'">'.$row['categoryType'].'</option>';
                                     }
                                 }else{
                                     echo '<option value="">Category not available</option>';
                                 }
                                 ?>
                             </select>
-                            
                         </div>
                       </div>
                       <div class="form-group">
@@ -246,11 +250,11 @@
                       <div class="form-group">
                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class='input-group date' id='myDatepicker'>
-                               <input type='text' name="date" class="form-control" />
-                               <span class="input-group-addon">
+                            <div class='input-group date'>
+                               <input type='date' name="date" class="form-control" />
+<!--                               <span class="input-group-addon">
                                <span class="glyphicon glyphicon-calendar"></span>
-                               </span>
+                               </span>-->
                             </div>
                          </div>
                       </div>
@@ -278,180 +282,65 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form method="post" action="dForm.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="first-name" class="form-control col-md-7 col-xs-12" readonly>
+                          <input type="text" name="studid" class="form-control col-md-7 col-xs-12" value=" <?php echo $studid; ?> " readonly>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control">
-                            <option>Choose option</option>
-                            <option>Option one</option>
-                            <option>Option two</option>
-                            <option>Option three</option>
-                            <option>Option four</option>
-                          </select>
+                            <?php
+                            include('../Connections/connection.php');
+                            
+                            $status = "2";
+
+                            $stmt = $conn->prepare("SELECT * FROM category WHERE status = ?");
+                            $stmt->bind_param('s',$status);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            ?>
+                            <select id="catD" name="category" class="form-control">
+                                <option value="">Select Category</option>
+                                <?php
+                                if($result->num_rows>0){
+                                    while($row = $result->fetch_assoc()){ 
+                                        echo '<option value="'.$row['categoryID'].'">'.$row['categoryType'].'</option>';
+                                    }
+                                }else{
+                                    echo '<option value="">Category not available</option>';
+                                }
+                                ?>
+                            </select>
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Demerit</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select class="form-control">
-                            <option>Choose option</option>
-                            <option>Option one</option>
-                            <option>Option two</option>
-                            <option>Option three</option>
-                            <option>Option four</option>
+                          <select id="demerit" name="demerit" class="form-control">
+                            <option value="">Select Demerit</option>
                           </select>
                         </div>
                       </div>
                       <div class="form-group">
                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class='input-group date' id='myDatepicker2'>
-                               <input type='text' name="date" class="form-control" />
-                               <span class="input-group-addon">
+                            <div class='input-group date'>
+                               <input type='date' name="date" class="form-control" />
+<!--                               <span class="input-group-addon">
                                <span class="glyphicon glyphicon-calendar"></span>
-                               </span>
+                               </span>-->
                             </div>
                          </div>
                       </div>
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="submit" class="btn btn-success">Submit</button>
+                          <button type="submit" class="btn btn-success" name="adddemerit">Submit</button>
                           <button class="btn btn-primary" type="button">Cancel</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Merit Form</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <form class="form-horizontal form-label-left input_mask">
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" readonly>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select class="form-control">
-                            <option>Choose option</option>
-                            <option>Option one</option>
-                            <option>Option two</option>
-                            <option>Option three</option>
-                            <option>Option four</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Merit</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select class="form-control">
-                            <option>Choose option</option>
-                            <option>Option one</option>
-                            <option>Option two</option>
-                            <option>Option three</option>
-                            <option>Option four</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class='input-group date' id='myDatepicker'>
-                               <input type='text' class="form-control" />
-                               <span class="input-group-addon">
-                               <span class="glyphicon glyphicon-calendar"></span>
-                               </span>
-                            </div>
-                         </div>
-                      </div>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                          <button type="submit" class="btn btn-success">Submit</button>
-                          <button type="button" class="btn btn-primary">Cancel</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-6 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Demerit Form</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <form class="form-horizontal form-label-left">
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <input type="text" class="form-control" readonly>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select class="form-control">
-                            <option>Choose option</option>
-                            <option>Option one</option>
-                            <option>Option two</option>
-                            <option>Option three</option>
-                            <option>Option four</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Demerit</label>
-                        <div class="col-md-9 col-sm-9 col-xs-12">
-                          <select class="form-control">
-                            <option>Choose option</option>
-                            <option>Option one</option>
-                            <option>Option two</option>
-                            <option>Option three</option>
-                            <option>Option four</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class='input-group date' id='myDatepicker'>
-                               <input type='text' class="form-control" />
-                               <span class="input-group-addon">
-                               <span class="glyphicon glyphicon-calendar"></span>
-                               </span>
-                            </div>
-                         </div>
-                      </div>
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                          <button type="submit" class="btn btn-success">Submit</button>
-                          <button type="button" class="btn btn-primary">Cancel</button>
                         </div>
                       </div>
                     </form>
@@ -493,10 +382,15 @@
     <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <!-- Initialize datetimepicker -->
     <script>
-     $('#myDatepicker').datetimepicker();
+     //$('#myDatepicker').datetimepicker();
+        $('#myDatepicker').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
     </script>
     <script>
-     $('#myDatepicker2').datetimepicker();
+     $('#myDatepicker2').datetimepicker({
+        format: 'DD.MM.YYYY'
+    });
     </script>
     <!-- bootstrap-wysiwyg -->
     <script src="../vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
@@ -518,8 +412,6 @@
     <script src="../vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-    <!-- bootstrap-datetimepicker -->    
-    <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
       
     <script type="text/javascript">
     $(document).ready(function(){
@@ -528,8 +420,8 @@
             if(catID){
                 $.ajax({
                     type:'POST',
-                    url:'MDForm.php',
-                    data:'categoryCode='+catID,
+                    url:'mForm.php',
+                    data:'categoryID='+catID,
                     success:function(html){
                         $('#merit').html(html);
                     }
@@ -544,8 +436,42 @@
             if(meritID){
                 $.ajax({
                     type:'POST',
-                    url:'MDForm.php',
-                    data:'meritCode='+meritID,
+                    url:'mForm.php',
+                    data:'meritID='+meritID,
+                    success:function(html){
+                        //$('#city').html(html);
+                    }
+                }); 
+            }
+        });
+    });
+    </script>
+    
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#catD').on('change',function(){
+            var cateID = $(this).val();
+            if(cateID){
+                $.ajax({
+                    type:'POST',
+                    url:'dForm.php',
+                    data:'categoryID='+cateID,
+                    success:function(html){
+                        $('#demerit').html(html);
+                    }
+                }); 
+            }else{
+                $('#demerit').html('<option value="">Select Category first</option>');
+            }
+        });
+
+        $('#demerit').on('change',function(){
+            var demeritID = $(this).val();
+            if(demeritID){
+                $.ajax({
+                    type:'POST',
+                    url:'dForm.php',
+                    data:'demeritID='+demeritID,
                     success:function(html){
                         //$('#city').html(html);
                     }

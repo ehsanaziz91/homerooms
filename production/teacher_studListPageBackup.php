@@ -9,7 +9,7 @@
    {
        header ('location:../production/loginPage.php');
    }
-?>
+   ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -197,12 +197,12 @@
                                  <tbody>
                                     <?php
                                        include('../Connections/connection.php');
-                                       
-                                       /*                            $userid = "ASP961801";
-                                         //$userid = $_POST['userid'];
+                                        
+/*                                         $userID = "ASP961801";
+                                         //$userID = $_GET['studentID'];
                                        
                                          $stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrName, recoAnswer FROM student WHERE studentID = ?");
-                                         $stmt->bind_param("s", $userid);
+                                         $stmt->bind_param("s", $userID);
                                          $stmt->execute();
                                          $result = $stmt->get_result();
                                        
@@ -214,6 +214,14 @@
                                                      <td>'.$row['studContcNo'].'</td>
                                                      <td>'.$row['hrName'].'</td>
                                                      <td>'.$row['recoAnswer'].'</td>
+                                                     <td>
+                                                             <form method="post" action="teacher_studList.php">
+                                                                 
+                                                                 <input type="hidden" name="studentID" value='.$userID.'></input>
+
+                                                                 <a href="#exampleModalMerit<?php echo '.$row['studentID'].'; ?>" data-toggle="modal" class="btn btn-primary"><i class="fa fa-share fa-fw"></i></a>
+                                                             </form>
+                                                         </td>
                                                  </tr>';
                                          }*/
                                        
@@ -236,20 +244,12 @@
                                        
                                                                  <button class="btn btn-primary" name="details" id="details" onclick="document.submit();">Details</button>
                                        
-                                                                 <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>';
-                                             ?>      
-                                             
-                                             
-                                                                 <!--<button type="button" class="btn btn-success" pull-right" data-toggle="modal" data-target="#exampleModalMerit'.$studid.'">Merit</button>
-                                                                '.$studid.'-->
-                                                                
-                                                               <?php include ('teacher_studListDrop.php'); ?>
-                                                                <a href="#exampleModalMerit<?php echo $studid; ?>" data-toggle="modal" class="btn btn-success" pull-right>Merit</a>
-                                                                
-                                              <?php                   
-                                                           echo'
-                                                           
-                                                           <button type="button" class="btn btn-warning" pull-right" data-toggle="modal" data-target="#exampleModalDemerit">Demerit</button>
+                                                                 <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
+                                                                 
+                                                                 <button type="button" class="btn btn-success" pull-right" data-toggle="modal" data-target="#exampleModalMerit">Merit</button>
+                                                                 
+                                                                 <button type="button" class="btn btn-warning" pull-right" data-toggle="modal" data-target="#exampleModalDemerit">Demerit</button>
+                                                               
                                                              </form>
                                                          </td>
                                                      </tr>';
@@ -339,7 +339,7 @@
                                           </div>
                                           <div class="modal-footer">
                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                             <button type="submit" class="btn btn-primary" name="addstudent" id="addstudent">Add New Student</button>
+                                             <button type="submit" class="btn btn-primary">Add New Student</button>
                                           </div>
                                        </form>
                                     </div>
@@ -347,8 +347,7 @@
                               </div>
                            </div>
                            <!-- ModalMerit -->
-<!--
-                           <div class="modal fade" id="exampleModalMerit<?php //echo $studid; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                           <div class="modal fade" id="exampleModalMerit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog" role="document">
                                  <div class="modal-content">
                                     <div class="modal-header">
@@ -359,13 +358,13 @@
                                           <div class="form-group">
                                              <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
                                              <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <input type="text" class="form-control" readonly="readonly">
+                                                <input type="text" class="form-control" value="<?php echo $studid ?>" readonly="readonly">
                                              </div>
                                           </div>
                                           <div class="form-group">
                                              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
                                              <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select id="groups" name="category" class="form-control">
+                                                <select id="groups" name="question" class="form-control">
                                                    <option value="">--- Category ---</option>
                                                    <option value="Pengawas/Pusat Sumber/Koperasi/PRS">Pengawas/Pusat Sumber/Koperasi/PRS</option>
                                                    <option value="Unit Beruniform/Persatuan/Kelab/Rumah Sukan">Unit Beruniform/Persatuan/Kelab/Rumah Sukan</option>
@@ -377,7 +376,7 @@
                                           <div class="form-group">
                                              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Merit Activity</label>
                                              <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select id="sub_groups" name="merit" class="form-control">
+                                                <select id="sub_groups" name="hrname" class="form-control">
                                                    <option data-group='SHOW' value="">--- Select Merit ---</option>
                                                     
                                                    <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Ketua Pengawas/Pusat Sumber/Koperasi/PRS">Ketua Pengawas/Pusat Sumber/Koperasi/PRS</option>
@@ -425,14 +424,13 @@
                                           </div>
                                           <div class="modal-footer">
                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                             <button type="submit" class="btn btn-primary" name="addmerit">Save</button>
+                                             <button type="submit" class="btn btn-primary">Save</button>
                                           </div>
                                        </form>
                                     </div>
                                  </div>
                               </div>
                            </div>
--->
                            <!--EndModalMerit -->
                            <!-- ModalDeMerit -->
                            <div class="modal fade" id="exampleModalDemerit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
