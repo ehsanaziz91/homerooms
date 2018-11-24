@@ -32,7 +32,7 @@ if (isset($_POST['adddemerit']))
     $category = $_POST['category'];
     $dmerit = $_POST['demerit'];
     $date = $_POST['date'];
-    $date = date("Y-m-d",$date);
+    //$date = date("Y-m-d",$date);
     
     $stmt1 = $conn->prepare("SELECT categoryType FROM category WHERE categoryID = ? ");
     $stmt1->bind_param('s',$category);
@@ -43,8 +43,8 @@ if (isset($_POST['adddemerit']))
     $catType = $row1["categoryType"];
     
     
-    $stmt2 = $conn->prepare("SELECT demeritName, demeritPoint FROM demerit WHERE categoryID = ? ");
-    $stmt2->bind_param('s',$category);
+    $stmt2 = $conn->prepare("SELECT demeritName, demeritPoint FROM demerit WHERE demeritID = ? ");
+    $stmt2->bind_param('s',$dmerit);
     $stmt2->execute();
     $result2 = $stmt2->get_result();
     $row2 = $result2->fetch_assoc();
