@@ -191,6 +191,12 @@ if (isset($_SESSION['userid']))
                 <div class="x_panel" style="height:1000px;">
                   <div class="x_title">
                     <h2>Merit Schedule</h2>
+                      <!-- Button trigger modal -->
+                              <div class="content">
+                                 <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#Modalmerit">
+                                 Add New Merit
+                                 </button>
+                              </div>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -214,7 +220,7 @@ if (isset($_SESSION['userid']))
                                        <th>Category Code</th>
                                        <th>Merit Code</th>
                                        <th>Merit Name</th>
-                                       <th>Merit Point</th10
+                                        <th>Merit Point</th>
                                     </tr>
                                  </thead>
                                  <tbody>
@@ -250,6 +256,12 @@ if (isset($_SESSION['userid']))
                                   <div class="x_panel" style="height:3500px;">
                   <div class="x_title">
                     <h2>Demerit Schedule</h2>
+                      <!-- Button trigger modal -->
+                              <div class="content">
+                                 <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#Modaldemerit">
+                                 Add New Demerit
+                                 </button>
+                              </div>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -261,7 +273,175 @@ if (isset($_SESSION['userid']))
                     </ul>
                     <div class="clearfix"></div>
                   </div>
+                                      <!--modal-->
+              <div class="modal fade" id="Modalmerit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h4 class="modal-title" id="exampleModalLabel">Add New Merit</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form method="post" action="merit_schedule.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Merit Code</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="studid" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Merit Name</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="studname" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Merit Point</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="studadd" id="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Status Merit</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <select name="question" class="form-control">
+                                                   <option>--- Status Merit ---</option>
+                                                   <option value="0">0</option>
+                                                   <option value="1">1</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Category Code</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="answer" id="middle-name" class="form-control col-md-7 col-xs-12">
+                                             </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                             <button type="submit" class="btn btn-primary" name="addmerits" id="addmerits">Add New Merit</button>
+                                          </div>
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                                      <?php
+include('../Connections/connection.php');
 
+if (isset($_POST['addmerits']))
+{
+    //$userid = $_GET['userid'];
+    $meritCode = $_POST['meritCode'];
+    $meritName = $_POST['meritName'];
+    $meritPoint = $_POST['meritPoint'];
+    $statusMerit = $_POST['statusMerit'];
+    $categoryCode = $_POST['categoryCode'];
+
+    $stmt = $conn->prepare("INSERT INTO `merit` (meritCode, meritName, meritPoint, statusMerit, categoryCode) VALUES(?,?,?,?,?)");
+    $stmt->bind_param('sssss', $meritCode, $meritName, $meritPoint, $meritPoint, $statusMerit, $categoryCode);
+    $stmt->execute();
+	//header('location:teacher_studListPage.php');
+    if($stmt)
+    {
+        print "<script type=\"text/javascript\">";
+        print "alert('Successfully Registered New Merit!'),location.href='merit_schedule.php?userid=$userid'";
+        print "</script>";
+    }
+    else
+    {
+        print "<script type=\"text/javascript\">";
+        print "alert('Failure to register new Merit!')";
+        print "</script>";
+    }
+    $stmt->close();
+    $conn->close();
+};
+                                      ?>
+                                      <!--modaldemerit-->
+                                                    <div class="modal fade" id="Modaldemerit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h4 class="modal-title" id="exampleModalLabel">Add New Demerit</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form method="post" action="merit_schedule.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Demerit Code</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="studid" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Demerit Name</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="studname" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Demerit Point</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="studadd" id="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Demerit Status</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <select name="question" class="form-control">
+                                                   <option>--- Demerit Status ---</option>
+                                                   <option value="0">0</option>
+                                                   <option value="1">1</option>
+                                                </select>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Category Code</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="answer" id="middle-name" class="form-control col-md-7 col-xs-12">
+                                             </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                             <button type="submit" class="btn btn-primary" name="adddemerit" id="adddemerit">Add New Demerit</button>
+                                          </div>
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                                       <?php
+include('../Connections/connection.php');
+
+if (isset($_POST['adddemerit']))
+{
+    //$userid = $_GET['userid'];
+    $demeritCode = $_POST['demeritCode'];
+    $demeritName = $_POST['demeritName'];
+    $demeritPoint = $_POST['demeritPoint'];
+    $statusDemerit = $_POST['statusDemerit'];
+    $categoryCode = $_POST['categoryCode'];
+
+    $stmt = $conn->prepare("INSERT INTO `demerit` (demeritCode, demeritName, demeritPoint, statusDemerit, categoryCode) VALUES(?,?,?,?,?)");
+    $stmt->bind_param('sssss', $demeritCode, $demeritName, $demeritPoint, $demeritPoint, $statusDemerit, $categoryCode);
+    $stmt->execute();
+	//header('location:teacher_studListPage.php');
+    if($stmt)
+    {
+        print "<script type=\"text/javascript\">";
+        print "alert('Successfully Registered New Demerit!'),location.href='merit_schedule.php?userid=$userid'";
+        print "</script>";
+    }
+    else
+    {
+        print "<script type=\"text/javascript\">";
+        print "alert('Failure to register new Demerit!')";
+        print "</script>";
+    }
+    $stmt->close();
+    $conn->close();
+};
+                                      ?>
+                                    
                   <div class="x_content">
                     <div class="row">
 
@@ -273,7 +453,7 @@ if (isset($_SESSION['userid']))
                                        <th>Category Code</th>
                                        <th>Demerit Code</th>
                                        <th>Demerit Name</th>
-                                       <th>Demerit Point</th10
+                                        <th>Demerit Point</th>
                                     </tr>
                                  </thead>
                                  <tbody>
