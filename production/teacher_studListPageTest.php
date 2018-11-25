@@ -226,10 +226,23 @@
                                                      <td>' . $studname . '</td>
                                                      <td>' . $class . '</td>
                                                      <td>' . $userid . '</td>
+                                                     <td>' . $userid . '</td>
+                                                     <td>
+                                                         <form method="post" action="teacher_studList.php">
+
+                                                             <input type="hidden" name="studentID" value='.$studid.'></input>
+
+                                                             <a href="teacher_studProfilePage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-primary">Details</a>
+
+                                                             <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
+
+                                                             <a href="MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
+                                                         </form>
+                                                     </td>
                                                  </tr>';
                                          }
                                        
-                                         $stmt = $conn->prepare("SELECT student.studentID, student.studName, homeroom.className, staff.staffID FROM homeroom JOIN student ON student.hrID = homeroom.hrID JOIN staff ON staff.staffID = homeroom.staffID AND staff.staffID = ?");
+/*                                         $stmt = $conn->prepare("SELECT student.studentID, student.studName, homeroom.className, staff.staffID FROM homeroom JOIN student ON student.hrID = homeroom.hrID JOIN staff ON staff.staffID = homeroom.staffID AND staff.staffID = ?");
                                          $stmt->bind_param('s', $userid);
                                          $stmt->execute();
                                          $result = $stmt->get_result();
@@ -273,11 +286,10 @@
                                              }
                                                $stmt->close();
                                                $conn->close();
-                                         }
+                                         }*/
                                        ?>
                                  </tbody>
                               </table>
-                               <h2>List of Student <?php echo $studid; ?></h2>
                            </div>
                            <!-- Modal -->
                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -329,11 +341,9 @@
                                              <div class="col-md-8 col-sm-6 col-xs-12">
                                                 <select name="question" class="form-control">
                                                    <option>--- Security Question ---</option>
-                                                   <option value="0">What was the name of your first pet?</option>
-                                                   <option value="1">What was the first thing you learned to cook?</option>
-                                                   <option value="2">What was the first film you saw in the cinema?</option>
-                                                   <option value="3">Where did you go the first time you flew on an airplane?</option>
-                                                   <option value="4">In what city did your parents meet?</option>
+                                                   <option value="0">What is your father ic number?</option>
+                                                   <option value="1">Where is your birth place?</option>
+                                                   <option value="2">What is your mother ic number?</option>
                                                 </select>
                                              </div>
                                           </div>
@@ -346,12 +356,18 @@
                                           <div class="form-group">
                                              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Teacher Names</label>
                                              <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select name="hrname" class="form-control">
+                                                <select name="hrid" class="form-control">
                                                    <option>--- Teacher Names ---</option>
-                                                   <option value="0">Muhammad Ehsan Bin Aziz (Java)</option>
-                                                   <option value="1">Wirda Amira Binti Mohd Asri (ASP.Net)</option>
-                                                   <option value="2">Muhammad Nabil Bin Zakaria (Fortran)</option>
-                                                   <option value="3">Nur Hazirah Binti Mohd Sabri (Scala)</option>
+                                                   <option value="0">Nur Maisarah Bt Abdul Ghani (ASP.Net)</option>
+                                                   <option value="1">Hazirah Bt Mohd Shabri (CakePHP)</option>
+                                                   <option value="2">Hapsah binti Jusoh (Elixir)</option>
+                                                   <option value="3">Mahmod bin Ali (Fortran)</option>
+                                                   <option value="4">Azlina binti Anuar (Java)</option>
+                                                   <option value="5">Shamsul bin Husin (Visual)</option>
+                                                   <option value="6">Zubir bin Mohd (Json)</option>
+                                                   <option value="7">Aminah binti Zakaria (Modula)</option>
+                                                   <option value="8">Maimunah binti Mahadi (Perl)</option>
+                                                   <option value="9">Syukri Yahya bin Kasim (Python)</option>
                                                 </select>
                                              </div>
                                           </div>
