@@ -21,10 +21,10 @@ if (isset($_POST['addstudent']))
     $pass = $_POST['password'];
     $questions = $_POST['question'];
     $answers = $_POST['answer'];
-    $hrname = $_POST['hrname'];
+    $hrid = $_POST['hrid'];
 
-    $stmt = $conn->prepare("INSERT INTO `student` (studentID, studName, studAddress, studContcNo, parentName, password, recoQuestion, recoAnswer, hrName) VALUES(?,?,?,?,?,?,?,?,?)");
-    $stmt->bind_param('sssssssss', $studid, $studname, $studadd, $studno, $parent, $pass, $questions, $answers, $hrname);
+    $stmt = $conn->prepare("INSERT INTO `student` (studentID, studName, studAddress, studContcNo, parentName, password, recoQuestion, recoAnswer, hrID) VALUES(?,?,?,?,?,?,?,?,?)");
+    $stmt->bind_param('sssssssss', $studid, $studname, $studadd, $studno, $parent, $pass, $questions, $answers, $hrid);
     $stmt->execute();
 	//header('location:teacher_studListPage.php');
     if($stmt)
