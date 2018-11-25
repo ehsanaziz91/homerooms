@@ -43,17 +43,18 @@ if (isset($_POST['adddemerit']))
     $catType = $row1["categoryType"];
     
     
-    $stmt2 = $conn->prepare("SELECT demeritName, demeritPoint FROM demerit WHERE demeritID = ? ");
+    $stmt2 = $conn->prepare("SELECT demeritID, demeritName, demeritPoint FROM demerit WHERE demeritID = ? ");
     $stmt2->bind_param('s',$dmerit);
     $stmt2->execute();
     $result2 = $stmt2->get_result();
     $row2 = $result2->fetch_assoc();
     
+    $dmerit = $row2["demeritID"];
     $dName = $row2["demeritName"];
     $dPoint = $row2["demeritPoint"];
     
-    $stmt = $conn->prepare("INSERT INTO `record` (studentID, demeritName, demeritPoint, date, categoryType) VALUES(?,?,?,?,?)");
-    $stmt->bind_param('sssss', $studid, $dName, $dPoint, $date, $catType);
+    $stmt = $conn->prepare("INSERT INTO `record` (studentID, date, categoryType, demeritID, demeritName, demeritPoint) VALUES(?,?,?,?,?,?)");
+    $stmt->bind_param('ssssss', $studid, $date, $catType, $dmerit, $dName, $dPoint);
     $stmt->execute();
     if($stmt)
     {
