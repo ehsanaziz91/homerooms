@@ -173,7 +173,14 @@
                      <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                            <div class="x_title">
-                              <h2>List of Student</h2>
+                               <?php   
+                                $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, homeroom.className, staff.staffID FROM homeroom JOIN student ON student.hrID = homeroom.hrID JOIN staff ON staff.staffID = homeroom.staffID AND staff.staffID = ?");
+                                $stmt1->bind_param('s', $userid);
+                                $stmt1->execute();
+                                $stmt1 -> bind_result($studid, $studname, $class, $userid);
+                                $stmt1->fetch(); 
+                               ?>
+                              <h2>List of Student Class  <?php echo $class; ?></h2>
                               <!-- Button trigger modal -->
                               <div class="content">
                                  <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
@@ -197,27 +204,48 @@
                                  <tbody>
                                     <?php
                                        include('../Connections/connection.php');
+                                     
+                                        /*SELECT student.studentID, student.studName, homeroom.className, staff.staffID
+                                        FROM homeroom
+                                        JOIN student
+                                        ON student.hrID = homeroom.hrID
+                                        JOIN staff
+                                        ON staff.staffID = homeroom.staffID
+                                        AND staff.staffID = 'A02001'*/
                                        
-                                       /*                            $userid = "ASP961801";
-                                         //$userid = $_POST['userid'];
+                                         //$userid = "ASP961801";
+                                         //$studentID = $_GET['studentID'];
+                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, homeroom.className, staff.staffID FROM homeroom JOIN student ON student.hrID = homeroom.hrID JOIN staff ON staff.staffID = homeroom.staffID AND staff.staffID = ?");
+                                         $stmt1->bind_param('s', $userid);
+                                         $stmt1->execute();
+                                         $stmt1 -> bind_result($studid, $studname, $class, $userid);
+                                         while($stmt1->fetch()) 
+                                         {
+                                              echo '<tr>
+                                                     <td>' . $studid . '</td>
+                                                     <td>' . $studname . '</td>
+                                                     <td>' . $class . '</td>
+                                                     <td>' . $userid . '</td>
+                                                 </tr>';
+                                         }
                                        
-                                         $stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrName, recoAnswer FROM student WHERE studentID = ?");
-                                         $stmt->bind_param("s", $userid);
+                                         $stmt = $conn->prepare("SELECT student.studentID, student.studName, homeroom.className, staff.staffID FROM homeroom JOIN student ON student.hrID = homeroom.hrID JOIN staff ON staff.staffID = homeroom.staffID AND staff.staffID = ?");
+                                         $stmt->bind_param('s', $userid);
                                          $stmt->execute();
                                          $result = $stmt->get_result();
                                        
                                          while ($row = $result->fetch_assoc())
                                          {
+                                             //$studid[] = $row['studentID'];
                                              echo '<tr>
-                                                     <td>'.$row['studentID'].'</td>
+                                                     <td>'.$studid = $row['studentID']. '</td>
                                                      <td>'.$row['studName'].'</td>
-                                                     <td>'.$row['studContcNo'].'</td>
-                                                     <td>'.$row['hrName'].'</td>
-                                                     <td>'.$row['recoAnswer'].'</td>
+                                                     <td>'.$row['className'].'</td>
+                                                     <td>'.$row['staffID'].'</td>
                                                  </tr>';
-                                         }*/
+                                         }
                                        
-                                         if($stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrName, recoAnswer FROM student")) 
+                                         if($stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrID, recoAnswer FROM student")) 
                                          {
                                              $stmt -> execute();
                                              $stmt -> bind_result($studid, $studname, $studno, $studhr, $studanswer);
@@ -243,12 +271,13 @@
                                                          </td>
                                                      </tr>';
                                              }
+                                               $stmt->close();
+                                               $conn->close();
                                          }
-                                       $stmt->close();
-                                       $conn->close();
                                        ?>
                                  </tbody>
                               </table>
+                               <h2>List of Student <?php echo $studid; ?></h2>
                            </div>
                            <!-- Modal -->
                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
