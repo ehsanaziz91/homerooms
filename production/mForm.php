@@ -41,18 +41,18 @@ if (isset($_POST['addmerit']))
     
     $catType = $row1["categoryType"];
     
-    
-    $stmt2 = $conn->prepare("SELECT meritName, meritPoint FROM merit WHERE meritID = ? ");
+    $stmt2 = $conn->prepare("SELECT meritID, meritName, meritPoint FROM merit WHERE meritID = ? ");
     $stmt2->bind_param('s',$merit);
     $stmt2->execute();
     $result2 = $stmt2->get_result();
     $row2 = $result2->fetch_assoc();
     
+    $merit = $row2['meritID'];
     $mName = $row2["meritName"];
     $mPoint = $row2["meritPoint"];
     
-    $stmt = $conn->prepare("INSERT INTO `record` (studentID, meritName, meritPoint, date, categoryType) VALUES(?,?,?,?,?)");
-    $stmt->bind_param('sssss', $studid, $mName, $mPoint, $date, $catType);
+    $stmt = $conn->prepare("INSERT INTO `record` (studentID, meritID, meritName, meritPoint, date, categoryType) VALUES(?,?,?,?,?,?)");
+    $stmt->bind_param('ssssss', $studid, $merit, $mName, $mPoint, $date, $catType);
     $stmt->execute();
     if($stmt)
     {
