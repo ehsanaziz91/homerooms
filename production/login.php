@@ -4,7 +4,7 @@ include('../Connections/connection.php');
 if(isset($_POST['login']))
 {
     $userid = $_POST['userid'];
-    $password = $_POST['pass']; //encrypt pass
+    $password = md5($_POST['pass']); //encrypt pass
     $position = "";
     
     $stmt = $conn->prepare("SELECT staffID, password, position FROM staff WHERE staffID=? AND password=? ");
