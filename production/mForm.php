@@ -57,7 +57,7 @@ if (isset($_POST['addmerit']))
     if($stmt)
     {
         print "<script type=\"text/javascript\">";
-        print "alert('Successfully Added Merit !'),location.href='teacher_studListPageTest.php?userid=$userid'";
+        print "alert('Successfully Added Merit !'),location.href='teacher_studListPage.php?userid=$userid'";
         print "</script>";
     }
     else
