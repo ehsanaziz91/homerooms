@@ -2,11 +2,11 @@
 include('../Connections/connection.php');
 session_start();
 
-if(isset($_GET['staffid']))
+if(isset($_GET['studid']))
 {
-    $id = $_GET['staffid'];
+    $id = $_GET['studid'];
     
-    $stmt = $conn->prepare("SELECT staffID FROM staff WHERE staffID=? LIMIT 1");
+    $stmt = $conn->prepare("SELECT studentID FROM student WHERE studentID=? LIMIT 1");
     $stmt->bind_param('s', $id);
     $stmt->execute();
     $stmt->bind_result($id);
@@ -17,8 +17,8 @@ if(isset($_GET['staffid']))
         while($stmt->fetch()) //fetching the contents of the row
         {
             $_SESSION['Logged'] = 1;
-            $_SESSION['staffid'] = $id;
-            header("Location: ../production/recoAnswerPage.php?staffid=$id");
+            $_SESSION['studid'] = $id;
+            header("Location: ../production/studentRecoAnswerPage.php?studid=$id");
             //<script>$("#").load("Location: ../production/index.php?userid=$userid")</script>
             //echo 'Success!';
             exit();
@@ -28,7 +28,7 @@ if(isset($_GET['staffid']))
     else
     {
         print "<script type=\"text/javascript\">";
-        print "alert('Staff ID not found, please try again.'),location.href='recoveryPage.php'";
+        print "alert('Student ID not found, please try again.'),location.href='recoveryPage.php'";
         print "</script>";
     }
     $stmt->close();

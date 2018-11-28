@@ -30,11 +30,11 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form method="get" action="recovery.php">
+            <form method="get" action="studentRecovery.php">
               <h1>Password Recovery</h1>
               <p>You can use this form to recover your password if you have forgotten it. Enter your id below to get started.</p>
               <div>
-                <input type="text" class="form-control" name="staffid" placeholder="User id" required="" />
+                <input type="text" class="form-control" name="studid" placeholder="User id" required="" />
               </div>
               <div>
                 <button class="btn btn-default submit" name="reset">Reset My Password</button>

@@ -320,6 +320,7 @@ if (isset($_SESSION['userid']))
                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                              <button type="submit" class="btn btn-primary" name="addmerits" id="addmerits">Add New Merit</button>
                                           </div>
+                                           <!-- <input type="hidden" name="categoryid" id="middle-name" class="form-control col-md-7 col-xs-12" value="<?php echo $categoryID;?>">-->
                                        </form>
                                     </div>
                                  </div>
@@ -330,15 +331,16 @@ include('../Connections/connection.php');
 
 if (isset($_POST['addmerits']))
 {
-    //$userid = $_GET['userid'];
+    $userid = $_GET['userid'];
     $meritCode = $_POST['meritCode'];
     $meritName = $_POST['meritName'];
     $meritPoint = $_POST['meritPoint'];
     $statusMerit = $_POST['statusMerit'];
     $categoryCode = $_POST['categoryCode'];
+    $categoryID = $_POST['categoryID'];
 
-    $stmt = $conn->prepare("INSERT INTO `merit` (meritCode, meritName, meritPoint, statusMerit, categoryCode) VALUES(?,?,?,?,?)");
-    $stmt->bind_param('sssss', $meritCode, $meritName, $meritPoint, $meritPoint, $statusMerit, $categoryCode);
+    $stmt = $conn->prepare("INSERT INTO `merit` (meritCode, meritName, meritPoint, statusMerit, categoryID, categoryCode WHERE categoryCode =?) VALUES(?,?,?,?,?,?)");
+    $stmt->bind_param('ssssss', $meritCode, $meritName, $meritPoint, $statusMerit,  $categoryID, $categoryCode);
     $stmt->execute();
 	//header('location:teacher_studListPage.php');
     if($stmt)
@@ -422,7 +424,7 @@ if (isset($_POST['adddemerit']))
     $categoryCode = $_POST['categoryCode'];
 
     $stmt = $conn->prepare("INSERT INTO `demerit` (demeritCode, demeritName, demeritPoint, statusDemerit, categoryCode) VALUES(?,?,?,?,?)");
-    $stmt->bind_param('sssss', $demeritCode, $demeritName, $demeritPoint, $demeritPoint, $statusDemerit, $categoryCode);
+    $stmt->bind_param('sssss', $demeritCode, $demeritName, $demeritPoint, $statusDemerit, $categoryCode);
     $stmt->execute();
 	//header('location:teacher_studListPage.php');
     if($stmt)

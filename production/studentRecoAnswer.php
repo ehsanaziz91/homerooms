@@ -2,25 +2,25 @@
 include('../Connections/connection.php');
 //session_start();
 
-if(isset($_GET['staffid']))
+if(isset($_GET['studid']))
 {
-    $id = $_GET['staffid'];
+    $id = $_GET['studid'];
     
-    $stmt = $conn->prepare("SELECT staffID FROM staff WHERE staffID=? LIMIT 1");
-    $stmt->bind_param('s', $staffid);
+    $stmt = $conn->prepare("SELECT studentID FROM student WHERE studentID=? LIMIT 1");
+    $stmt->bind_param('s', $studid);
     $stmt->execute();
-    $stmt->bind_result($staffid);
+    $stmt->bind_result($studid);
     $stmt->store_result();
     
-    if(isset($_POST['staffid']))
+    if(isset($_POST['studid']))
     {
-        $id = $_POST['staffid'];
+        $studid = $_POST['studid'];
 
-        $stmt = $conn->prepare("SELECT recoAnswer FROM staff WHERE recoAnswer=? LIMIT 1");
+        $stmt = $conn->prepare("SELECT recoAnswer FROM student WHERE recoAnswer=? LIMIT 1");
         //$stmt2 = $conn->prepare("SELECT studentID FROM staff WHERE staffID=? LIMIT 1");
-        $stmt->bind_param('s', $staffid);
+        $stmt->bind_param('s', $studid);
         $stmt->execute();
-        $stmt->bind_result($staffid);
+        $stmt->bind_result($studid);
         $stmt->store_result();
 
         if($stmt->num_rows == 1)  //To check if the row exists
