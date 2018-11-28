@@ -39,7 +39,7 @@
                 <input type="text" class="form-control" name="fullName" placeholder="Full Name" required="" />
               </div>
               <div>
-                <input type="text" class="form-control" name="phoneNo" placeholder="Phone No" required="" />
+                <input type="text" class="form-control" name="phoneNo" placeholder="Phone No +6019..." required="" />
               </div>
               <div>
                 <input type="email" class="form-control" name="email" placeholder="Email" required="" />
@@ -49,7 +49,7 @@
                       <option>--- Position ---</option>
                       <option value="01">Admin</option>
                       <option value="02">Homeroom Teacher</option>
-                      <option value="03">Student</option>
+                      <!--<option value="03">Student</option>-->
                   </select>
                   <br>
               </div>
