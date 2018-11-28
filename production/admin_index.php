@@ -96,10 +96,10 @@ if (isset($_SESSION['userid']))
                 <ul class="nav side-menu">
                   <li><a href="#"><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
                        <ul class="nav child_menu">
-                      <li><a href="#">Merit & Demerit</a></li>
-                      <li><a href="#">Demerit Stage</a></li>
-                      <li><a href="#">Merit & Demerit Schedule</a></li>
-                      <li><a href="#">Assign Students</a></li>
+                       <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>">Merit & Demerit</a></li>
+                      <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>">Demerit Stage</a></li>
+                      <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>">Merit & Demerit Schedule</a></li>
+                      <li><a href="#">Assign Students</a></li> <!--kalau sempat, buat form utk assign student-->
                       </ul>
                   </li>
                 </ul>
