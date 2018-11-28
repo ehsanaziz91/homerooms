@@ -173,7 +173,14 @@
                      <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                            <div class="x_title">
-                              <h2>List of Student</h2>
+                               <?php   
+                                $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, homeroom.className, staff.staffID FROM homeroom JOIN student ON student.hrID = homeroom.hrID JOIN staff ON staff.employeeID = homeroom.employeeID AND staff.staffID = ?");
+                                $stmt1->bind_param('s', $userid);
+                                $stmt1->execute();
+                                $stmt1 -> bind_result($studid, $studname, $class, $userid);
+                                $stmt1->fetch(); 
+                               ?>
+                              <h2>List of Student Class  <?php echo $class; ?></h2>
                               <!-- Button trigger modal -->
                               <div class="content">
                                  <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">
@@ -197,27 +204,61 @@
                                  <tbody>
                                     <?php
                                        include('../Connections/connection.php');
+                                     
+                                        /*SELECT student.studentID, student.studName, homeroom.className, staff.staffID
+                                        FROM homeroom
+                                        JOIN student
+                                        ON student.hrID = homeroom.hrID
+                                        JOIN staff
+                                        ON staff.staffID = homeroom.staffID
+                                        AND staff.staffID = 'A02001'*/
                                        
-                                       /*                            $userid = "ASP961801";
-                                         //$userid = $_POST['userid'];
+                                         //$userid = "ASP961801";
+                                         //$studentID = $_GET['studentID'];
+                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, homeroom.className, staff.staffID FROM homeroom JOIN student ON student.hrID = homeroom.hrID JOIN staff ON staff.employeeID = homeroom.employeeID AND staff.staffID = ?");
+                                         $stmt1->bind_param('s', $userid);
+                                         $stmt1->execute();
+                                         $stmt1 -> bind_result($studid, $studname, $class, $userid);
+                                         while($stmt1->fetch()) 
+                                         {
+                                              echo '<tr>
+                                                     <td>' . $studid . '</td>
+                                                     <td>' . $studname . '</td>
+                                                     <td>' . $class . '</td>
+                                                     <td>' . $userid . '</td>
+                                                     <td>' . $userid . '</td>
+                                                     <td>
+                                                         <form method="post" action="teacher_studList.php">
+
+                                                             <input type="hidden" name="studentID" value='.$studid.'></input>
+
+                                                             <a href="teacher_studProfilePage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-primary">Details</a>
+
+                                                             <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
+
+                                                             <a href="MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
+                                                         </form>
+                                                     </td>
+                                                 </tr>';
+                                         }
                                        
-                                         $stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrName, recoAnswer FROM student WHERE studentID = ?");
-                                         $stmt->bind_param("s", $userid);
+/*                                         $stmt = $conn->prepare("SELECT student.studentID, student.studName, homeroom.className, staff.staffID FROM homeroom JOIN student ON student.hrID = homeroom.hrID JOIN staff ON staff.staffID = homeroom.staffID AND staff.staffID = ?");
+                                         $stmt->bind_param('s', $userid);
                                          $stmt->execute();
                                          $result = $stmt->get_result();
                                        
                                          while ($row = $result->fetch_assoc())
                                          {
+                                             //$studid[] = $row['studentID'];
                                              echo '<tr>
-                                                     <td>'.$row['studentID'].'</td>
+                                                     <td>'.$studid = $row['studentID']. '</td>
                                                      <td>'.$row['studName'].'</td>
-                                                     <td>'.$row['studContcNo'].'</td>
-                                                     <td>'.$row['hrName'].'</td>
-                                                     <td>'.$row['recoAnswer'].'</td>
+                                                     <td>'.$row['className'].'</td>
+                                                     <td>'.$row['staffID'].'</td>
                                                  </tr>';
-                                         }*/
+                                         }
                                        
-                                         if($stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrName, recoAnswer FROM student")) 
+                                         if($stmt = $conn->prepare("SELECT studentID, studName, studContcNo, hrID, recoAnswer FROM student")) 
                                          {
                                              $stmt -> execute();
                                              $stmt -> bind_result($studid, $studname, $studno, $studhr, $studanswer);
@@ -233,30 +274,19 @@
                                                              <form method="post" action="teacher_studList.php">
                                                                  
                                                                  <input type="hidden" name="studentID" value='.$studid.'></input>
+                                                                 
+                                                                 <a href="teacher_studProfilePage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-primary">Details</a>
                                        
-                                                                 <button class="btn btn-primary" name="details" id="details" onclick="document.submit();">Details</button>
-                                       
-                                                                 <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>';
-                                             ?>      
-                                             
-                                             
-                                                                 <!--<button type="button" class="btn btn-success" pull-right" data-toggle="modal" data-target="#exampleModalMerit'.$studid.'">Merit</button>
-                                                                '.$studid.'-->
-                                                                
-                                                               <?php include ('teacher_studListDrop.php'); ?>
-                                                                <a href="#exampleModalMerit<?php echo $studid; ?>" data-toggle="modal" class="btn btn-success" pull-right>Merit</a>
-                                                                
-                                              <?php                   
-                                                           echo'
-                                                           
-                                                           <button type="button" class="btn btn-warning" pull-right" data-toggle="modal" data-target="#exampleModalDemerit">Demerit</button>
+                                                                 <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
+                                                                 
+                                                                 <a href="MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
                                                              </form>
                                                          </td>
                                                      </tr>';
                                              }
-                                         }
-                                       $stmt->close();
-                                       $conn->close();
+                                               $stmt->close();
+                                               $conn->close();
+                                         }*/
                                        ?>
                                  </tbody>
                               </table>
@@ -311,11 +341,9 @@
                                              <div class="col-md-8 col-sm-6 col-xs-12">
                                                 <select name="question" class="form-control">
                                                    <option>--- Security Question ---</option>
-                                                   <option value="0">What was the name of your first pet?</option>
-                                                   <option value="1">What was the first thing you learned to cook?</option>
-                                                   <option value="2">What was the first film you saw in the cinema?</option>
-                                                   <option value="3">Where did you go the first time you flew on an airplane?</option>
-                                                   <option value="4">In what city did your parents meet?</option>
+                                                   <option value="0">What is your father ic number?</option>
+                                                   <option value="1">Where is your birth place?</option>
+                                                   <option value="2">What is your mother ic number?</option>
                                                 </select>
                                              </div>
                                           </div>
@@ -328,12 +356,18 @@
                                           <div class="form-group">
                                              <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Teacher Names</label>
                                              <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select name="hrname" class="form-control">
+                                                <select name="hrid" class="form-control">
                                                    <option>--- Teacher Names ---</option>
-                                                   <option value="0">Muhammad Ehsan Bin Aziz (Java)</option>
-                                                   <option value="1">Wirda Amira Binti Mohd Asri (ASP.Net)</option>
-                                                   <option value="2">Muhammad Nabil Bin Zakaria (Fortran)</option>
-                                                   <option value="3">Nur Hazirah Binti Mohd Sabri (Scala)</option>
+                                                   <option value="0">Nur Maisarah Bt Abdul Ghani (ASP.Net)</option>
+                                                   <option value="1">Hazirah Bt Mohd Shabri (CakePHP)</option>
+                                                   <option value="2">Hapsah binti Jusoh (Elixir)</option>
+                                                   <option value="3">Mahmod bin Ali (Fortran)</option>
+                                                   <option value="4">Azlina binti Anuar (Java)</option>
+                                                   <option value="5">Shamsul bin Husin (Visual)</option>
+                                                   <option value="6">Zubir bin Mohd (Json)</option>
+                                                   <option value="7">Aminah binti Zakaria (Modula)</option>
+                                                   <option value="8">Maimunah binti Mahadi (Perl)</option>
+                                                   <option value="9">Syukri Yahya bin Kasim (Python)</option>
                                                 </select>
                                              </div>
                                           </div>
@@ -346,165 +380,6 @@
                                  </div>
                               </div>
                            </div>
-                           <!-- ModalMerit -->
-<!--
-                           <div class="modal fade" id="exampleModalMerit<?php //echo $studid; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog" role="document">
-                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                       <h4 class="modal-title" id="exampleModalLabel">Merit Page</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                       <form method="post" action="teacher_studList.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                                          <div class="form-group">
-                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
-                                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <input type="text" class="form-control" readonly="readonly">
-                                             </div>
-                                          </div>
-                                          <div class="form-group">
-                                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
-                                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select id="groups" name="category" class="form-control">
-                                                   <option value="">--- Category ---</option>
-                                                   <option value="Pengawas/Pusat Sumber/Koperasi/PRS">Pengawas/Pusat Sumber/Koperasi/PRS</option>
-                                                   <option value="Unit Beruniform/Persatuan/Kelab/Rumah Sukan">Unit Beruniform/Persatuan/Kelab/Rumah Sukan</option>
-                                                   <option value="Pertandingan/Penyertaan">Pertandingan/Penyertaan</option>
-                                                   <option value="Tindakan Sahsiah">Tindakan Sahsiah</option>
-                                                </select>
-                                             </div>
-                                          </div>
-                                          <div class="form-group">
-                                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Merit Activity</label>
-                                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select id="sub_groups" name="merit" class="form-control">
-                                                   <option data-group='SHOW' value="">--- Select Merit ---</option>
-                                                    
-                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Ketua Pengawas/Pusat Sumber/Koperasi/PRS">Ketua Pengawas/Pusat Sumber/Koperasi/PRS</option>
-                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Pen. Ketua Pengawas">Pen. Ketua Pengawas</option>
-                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Pengawas Sekolah">Pengawas Sekolah</option>
-                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="PRS/PPS/Koperasi/Stor Sukan">PRS/PPS/Koperasi/Stor Sukan</option>
-                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Pen. Ketua Kelas">Pen. Ketua Kelas</option>
-                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Ahli Jawatankuasa Kelas">Ahli Jawatankuasa Kelas</option>
-                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Ketua Kelas">Ketua Kelas</option>
-                                                    
-                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Ketua Unit Beruniform">Ketua Unit Beruniform</option>
-                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Pen. Ketua Unit Beruniform">Pen. Ketua Unit Beruniform</option>
-                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Setiausaha/Bendahari">Setiausaha/Bendahari</option>
-                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Ahli Jawatankuasa">Ahli Jawatankuasa</option>
-                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Pengerusi/Kapten Persatuan">Pengerusi/Kapten Persatuan</option>
-                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Naib Pengerusi/Penolong Ketua Persatuan">Naib Pengerusi/Penolong Ketua Persatuan</option>
-                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Setiausaha/Bendahari Persatuan">Setiausaha/Bendahari Persatuan</option>
-                                                    
-                                                   <option data-group='Pertandingan/Penyertaan' value="Penyertaan Peringkat Kebangsaan/Negara">Penyertaan Peringkat Kebangsaan/Negara</option>
-                                                   <option data-group='Pertandingan/Penyertaan' value="Penyertaan Peringkat NegerI">Penyertaan Peringkat NegerI</option>
-                                                   <option data-group='Pertandingan/Penyertaan' value="Penyertaan Peringkat Daerah">Penyertaan Peringkat Daerah</option>
-                                                   <option data-group='Pertandingan/Penyertaan' value="Penyertaan Peringkat Sekolah">Penyertaan Peringkat Sekolah</option>
-                                                   <option data-group='Pertandingan/Penyertaan' value="Penyertaan Peringkat Persatuan">Penyertaan Peringkat Persatuan</option>
-                                                    
-                                                   <option data-group='Tindakan Sahsiah' value="Bertugas dalam Sukan/Permainan/Badan Beruniform/Kelab/Persatuan">Bertugas dalam Sukan/Permainan/Badan Beruniform/Kelab/Persatuan</option>
-                                                   <option data-group='Tindakan Sahsiah' value="Memberi maklumat sehingga tertangkap pencuri atau pesalah">Memberi maklumat sehingga tertangkap pencuri atau pesalah</option>
-                                                   <option data-group='Tindakan Sahsiah' value="Membantu dalam meleraikan pergaduhan">Membantu dalam meleraikan pergaduhan</option>
-                                                   <option data-group='Tindakan Sahsiah' value="Menolong Guru Besar/Guru secara sukarela">Menolong Guru Besar/Guru secara sukarela</option>
-                                                   <option data-group='Tindakan Sahsiah' value="Berkelakuan baik dalam kelas-3 bulan tanpa kesalahan dalam fail disiplin kelas">Berkelakuan baik dalam kelas-3 bulan tanpa kesalahan dalam fail disiplin kelas</option>
-                                                </select>
-                                             </div>
-                                          </div>
-                                          <div class="form-group">
-                                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
-                                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <div class='input-group date' id='myDatepicker'>
-                                                   <input type='text' class="form-control" />
-                                                   <span class="input-group-addon">
-                                                   <span class="glyphicon glyphicon-calendar"></span>
-                                                   </span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="form-group">
-                                          </div>
-                                          <div class="modal-footer">
-                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                             <button type="submit" class="btn btn-primary" name="addmerit">Save</button>
-                                          </div>
-                                       </form>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
--->
-                           <!--EndModalMerit -->
-                           <!-- ModalDeMerit -->
-                           <div class="modal fade" id="exampleModalDemerit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog" role="document">
-                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                       <h4 class="modal-title" id="exampleModalLabel">Demerit Page</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                       <form method="post" action="teacher_studList.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                                          <div class="form-group">
-                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
-                                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <input type="text" class="form-control" readonly="readonly" placeholder="Student ID">
-                                             </div>
-                                          </div>
-                                          <div class="form-group">
-                                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
-                                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select id="groups" name="question" class="form-control">
-                                                   <option value="">--- Category ---</option>
-                                                   <option value="Pengawas/Pusat Sumber/Koperasi/PRS">Pengawas/Pusat Sumber/Koperasi/PRS</option>
-                                                   <option value="Unit Beruniform/Persatuan/Kelab/Rumah Sukan">Unit Beruniform/Persatuan/Kelab/Rumah Sukan</option>
-                                                   <option value="m3">Pertandingan/Penyertaan</option>
-                                                   <option value="m4">Tindakan Sahsiah</option>
-                                                </select>
-                                             </div>
-                                          </div>
-                                          <div class="form-group">
-                                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Demerit Activity</label>
-                                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <select id="sub_groups" name="hrname" class="form-control">
-                                                   <option data-group='SHOW' value="">--- Select Merit ---</option>
-                                                   <option data-group='m1' value="Ketua Pengawas/Pusat Sumber/Koperasi/PRS">Ketua Pengawas/Pusat Sumber/Koperasi/PRS</option>
-                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Pen. Ketua Pengawas">Pen. Ketua Pengawas</option>
-                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="Pengawas Sekolah">Pengawas Sekolah</option>
-                                                   <option data-group='Pengawas/Pusat Sumber/Koperasi/PRS' value="PRS/PPS/Koperasi/Stor Sukan">PRS/PPS/Koperasi/Stor Sukan</option>
-                                                   <option data-group='m1' value="Pen. Ketua Kelas">Pen. Ketua Kelas</option>
-                                                   <option data-group='m1' value="Ahli Jawatankuasa Kelas">Ahli Jawatankuasa Kelas</option>
-                                                   <option data-group='m1' value="Ketua Kelas">Ketua Kelas</option>
-                                                    
-                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Ketua Unit Beruniform">Ketua Unit Beruniform</option>
-                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Pen. Ketua Unit Beruniform">Pen. Ketua Unit Beruniform</option>
-                                                   <option data-group='Unit Beruniform/Persatuan/Kelab/Rumah Sukan' value="Setiausaha/Bendahari">Setiausaha/Bendahari</option>
-                                                   <option data-group='m2' value="Ahli Jawatankuasa">Ahli Jawatankuasa</option>
-                                                   <option data-group='m2' value="Pengerusi/Kapten Persatuan">Pengerusi/Kapten Persatuan</option>
-                                                   <option data-group='m2' value="Naib Pengerusi/Penolong Ketua Persatuan">Naib Pengerusi/Penolong Ketua Persatuan</option>
-                                                   <option data-group='m2' value="Setiausaha/Bendahari Persatuan">Setiausaha/Bendahari Persatuan</option>
-                                                </select>
-                                             </div>
-                                          </div>
-                                          <div class="form-group">
-                                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
-                                             <div class="col-md-8 col-sm-6 col-xs-12">
-                                                <div class='input-group date' id='myDatepicker2'>
-                                                   <input type='text' class="form-control" />
-                                                   <span class="input-group-addon">
-                                                   <span class="glyphicon glyphicon-calendar"></span>
-                                                   </span>
-                                                </div>
-                                             </div>
-                                          </div>
-                                          <div class="modal-footer">
-                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                             <button type="submit" class="btn btn-primary">Save</button>
-                                          </div>
-                                       </form>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <!--EndModalDeMerit -->
                         </div>
                      </div>
                   </div>
@@ -571,14 +446,6 @@
       <script src="../vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
       <!-- Custom Theme Scripts -->
       <script src="../build/js/custom.min.js"></script>
-      <script>
-         $("#dropgroup").change ( function () 
-         {
-             var targID  = $(this).val ();
-             $("div.style-sub-1").hide ();
-             $('#' + targID).show ();
-         } );
-      </script>
       <script>
           $(function()
           {
