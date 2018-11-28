@@ -196,14 +196,14 @@
                         
                         $studid = $_GET["studid"];  
                                        
-                        $stmt2 = $conn->prepare("SELECT studentID, studName, studContcNo FROM student WHERE studentID = ?");
+                        $stmt2 = $conn->prepare("SELECT studentID FROM student WHERE studID = ?");
                         $stmt2->bind_param("s", $studid);
                         $stmt2->execute();
                         $result2 = $stmt2->get_result();
                         $row2 = $result2->fetch_assoc();
-                        $studentID = $row2["studentID"];  
+                        /*$studentID = $row2["studentID"];  
                         $studName =  $row2["studName"];
-                        $studContcNo =  $row2 ["studContcNo"];
+                        $studContcNo =  $row2 ["studContcNo"];*/
                             
                         ?>    
                       <div class="form-group">
