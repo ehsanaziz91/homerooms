@@ -47,12 +47,12 @@ if (isset($_POST['addmerit']))
     $result2 = $stmt2->get_result();
     $row2 = $result2->fetch_assoc();
     
-    $merit = $row2['meritID'];
+    $meritid = $row2['meritID'];
     $mName = $row2["meritName"];
     $mPoint = $row2["meritPoint"];
     
     $stmt = $conn->prepare("INSERT INTO `record` (studentID, meritID, meritName, meritPoint, date, categoryType) VALUES(?,?,?,?,?,?)");
-    $stmt->bind_param('ssssss', $studid, $merit, $mName, $mPoint, $date, $catType);
+    $stmt->bind_param('ssssss', $studid, $meritid, $mName, $mPoint, $date, $catType);
     $stmt->execute();
     if($stmt)
     {
