@@ -88,9 +88,7 @@
                 <ul class="nav side-menu">
                   <li><a href="#"><i class="fa fa-users"></i>Teacher<span class="fa fa-chevron-down"></span></a>
                        <ul class="nav child_menu">
-                      <li><a href="MDFormPage.php?userid=<?php echo $userid; ?>">Merit & Demerit</a></li>
-                      <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>">Demerit Stage</a></li>
-                      <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>">Merit & Demerit Schedule</a></li>
+                    
                       </ul>
                   </li>
                 </ul>
