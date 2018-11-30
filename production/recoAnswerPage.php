@@ -31,15 +31,50 @@
         <div class="animate form login_form">
           <section class="login_content">
             <form method="post" action="recoAnswer.php">
+              <?php 
+                include('../Connections/connection.php');
+                
+                $userid = $_GET['staffid']; 
+                
+                $stmt = $conn->prepare("SELECT staffID, recoQuestion FROM staff WHERE staffID = ?");
+                $stmt->bind_param("s", $userid);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+                
+                $question = $row["recoQuestion"]; 
+              ?>
               <h1>Password Recovery</h1>
               <p>Please answer the security question below :</p>
-                <p><?php echo $question; ?>Your Question : What was your childhood nickname?</p>
+                <p><?php $question;
+                        if($question == 0)
+                        {
+                            echo "What was the name of your first pet?";
+                        }
+                        else if ($question == 1)
+                        {
+                             echo "What was the first thing you learned to cook?";
+                        }
+                        else if ($question == 2)
+                        {
+                             echo "What was the first film you saw in the cinema?";
+                        }
+                        else if ($question == 3)
+                        {
+                             echo "Where did you go the first time you flew on an airplane?";
+                        }
+                        else if ($question == 4)
+                        {
+                             echo "In what city did your parents meet?";
+                        }
+                    ?></p>
               <div>
-                <input type="text" class="form-control" name="answer" required="" />
+                <input type="text" class="form-control" name="answer" required/>
               </div>
               <div>
-                <button class="btn btn-default submit" name="resetPass">Reset My Password</button>
-                <!--<a class="btn btn-default submit" href="resetPassPage.php">Submit</a>-->
+                <button type="submit" class="btn btn-default submit" name="submit">Reset My Password</button>
+                <input type="hidden" name="userid" value="<?php echo $userid;?>">
+<!--               <a type="submit" class="btn btn-default" href="recoAnswer.php?staffid=">Reset My Password</a>-->
               </div>
 
               <div class="clearfix"></div>
