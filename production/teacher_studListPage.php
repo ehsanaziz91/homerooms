@@ -192,21 +192,22 @@
                                         JOIN staff
                                         ON staff.staffID = homeroom.staffID
                                         AND staff.staffID = 'A02001'*/
-                                       
                                          //$userid = "ASP961801";
                                          //$studentID = $_GET['studentID'];
-                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, homeroom.className, staff.staffID FROM homeroom JOIN student ON student.hrID = homeroom.hrID JOIN staff ON staff.employeeID = homeroom.employeeID AND staff.staffID = ?");
+                                         /*$stmt1 = $conn->prepare("SELECT student.studentID, student.studName, homeroom.className, staff.staffID FROM homeroom JOIN student ON student.hrID = homeroom.hrID JOIN staff ON staff.employeeID = homeroom.employeeID AND staff.staffID = ?");*/
+                                         /*$stmt1 = $conn->prepare("SELECT student.studentID, student.studName, SUM(record.meritPoint) as meritPoint, SUM(record.demeritPoint) as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)), homeroom.className, homeroom.staffID FROM student LEFT OUTER JOIN record ON record.studID = student.studID JOIN homeroom ON homeroom.hrID = student.hrID WHERE homeroom.staffID = ? GROUP BY studentID");*/
+                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, SUM(record.meritPoint) as meritPoint, SUM(record.demeritPoint) as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)), homeroom.staffID FROM student LEFT OUTER JOIN record ON record.studID = student.studID JOIN homeroom ON homeroom.hrID = student.hrID WHERE homeroom.staffID = ? GROUP BY studentID");
                                          $stmt1->bind_param('s', $userid);
                                          $stmt1->execute();
-                                         $stmt1 -> bind_result($studid, $studname, $class, $userid);
+                                         $stmt1 -> bind_result($studid, $studname, $mpoint, $dpoint, $cpoint, $userid);
                                          while($stmt1->fetch()) 
                                          {
                                               echo '<tr>
                                                      <td>' . $studid . '</td>
                                                      <td>' . $studname . '</td>
-                                                     <td>' . $class . '</td>
-                                                     <td>' . $userid . '</td>
-                                                     <td>' . $userid . '</td>
+                                                     <td>' . $mpoint . '</td>
+                                                     <td>' . $dpoint . '</td>
+                                                     <td>' . $cpoint . '</td>
                                                      <td>
                                                          <form method="post" action="teacher_studList.php">
 
