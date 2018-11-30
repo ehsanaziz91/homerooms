@@ -1,72 +1,33 @@
 <?php
-    //include('login.html');
-    //session_start();
-    //mysqli_close($conn);
-?> 
+include('../Connections/connection.php');
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+if (isset($_POST['submit']))
+{
+    $newpass = md5($_POST["newpass"]);
+    $confrmpass = md5($_POST["confrmpass"]);
+    $userid = $_POST["userid"];
 
-    <title>HMD PassReset</title>
+    if($newpass != $confrmpass)
+    {
+        print "<script type=\"text/javascript\">";
+        print "alert('The new passwords must match and must not be empty.')";
+        print "</script>";
+    }
 
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+    else 
+    {
+        $stmt = $conn->prepare("UPDATE staff SET password = ? WHERE staffID = ?");
+        $stmt->bind_param('ss',$confrmpass, $userid);
+        $stmt->execute();
+        if($stmt)
+        {
+            print "<script type=\"text/javascript\">";
+            print "alert('Update Successful !'),location.href='loginPage.php'";
+            print "</script>";
 
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
-  </head>
-
-  <body class="login">
-    <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
-
-      <div class="login_wrapper">
-        <div class="animate form login_form">
-          <section class="login_content">
-            <form>
-              <h1>New Password</h1>
-              <p>In the fields below, enter your new password :</p>
-              <p>New Password</p>
-              <div>
-                <input type="text" class="form-control" placeholder="Enter your new password" required="" />
-              </div>
-              <p>Confirm Password</p>
-              <div>
-                <input type="text" class="form-control" placeholder="Enter your confirm password" required="" />
-              </div>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Reset Password</a>
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1><i class="fa fa-university" aria-hidden="true"></i> Homeroom Merit Demerit</h1>
-                  <p>©2018 All Rights Reserved. Homeroom Merit Demerit is a CopyRight template. Privacy and Terms</p>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
+        }
+        $stmt->close();
+        $conn->close();
+    }
+}
+?>
