@@ -34,13 +34,14 @@ if (isset($_POST['adddemerit']))
     $date = $_POST['date'];
     //$date = date("Y-m-d",$date);
     
-    $stmt1 = $conn->prepare("SELECT categoryType FROM category WHERE categoryID = ? ");
+    $stmt1 = $conn->prepare("SELECT * FROM category WHERE categoryID = ? ");
     $stmt1->bind_param('s',$category);
     $stmt1->execute();
     $result1 = $stmt1->get_result();
     $row1 = $result1->fetch_assoc();
     
-    $catType = $row1["categoryType"];
+    $catid = $row1["categoryID"];
+    //$catType = $row1["categoryType"];
     
     
     $stmt2 = $conn->prepare("SELECT demeritID, demeritName, demeritPoint FROM demerit WHERE demeritID = ? ");
@@ -49,17 +50,17 @@ if (isset($_POST['adddemerit']))
     $result2 = $stmt2->get_result();
     $row2 = $result2->fetch_assoc();
     
-    $dmerit = $row2["demeritID"];
+    $dmeritid = $row2["demeritID"];
     $dName = $row2["demeritName"];
     $dPoint = $row2["demeritPoint"];
     
-    $stmt = $conn->prepare("INSERT INTO `record` (studentID, date, categoryType, demeritID, demeritName, demeritPoint) VALUES(?,?,?,?,?,?)");
-    $stmt->bind_param('ssssss', $studid, $date, $catType, $dmerit, $dName, $dPoint);
+    $stmt = $conn->prepare("INSERT INTO `record` (studID, date, demeritID, demeritName, demeritPoint) VALUES(?,?,?,?,?)");
+    $stmt->bind_param('sssss', $studid, $date, $dmeritid, $dName, $dPoint);
     $stmt->execute();
     if($stmt)
     {
         print "<script type=\"text/javascript\">";
-        print "alert('Successfully Added Demerit !'),location.href='teacher_studListPageTest.php?userid=$userid'";
+        print "alert('Successfully Added Demerit !'),location.href='teacher_studListPage.php?userid=$userid'";
         print "</script>";
     }
     else

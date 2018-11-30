@@ -33,13 +33,14 @@ if (isset($_POST['addmerit']))
     $merit = $_POST['merit'];
     $date = $_POST['date'];
     
-    $stmt1 = $conn->prepare("SELECT categoryType FROM category WHERE categoryID = ? ");
+    $stmt1 = $conn->prepare("SELECT * FROM category WHERE categoryID = ? ");
     $stmt1->bind_param('s',$category);
     $stmt1->execute();
     $result1 = $stmt1->get_result();
     $row1 = $result1->fetch_assoc();
     
-    $catType = $row1["categoryType"];
+    $catid = $row1["categoryID"];
+    //$catType = $row1["categoryType"];
     
     $stmt2 = $conn->prepare("SELECT meritID, meritName, meritPoint FROM merit WHERE meritID = ? ");
     $stmt2->bind_param('s',$merit);
@@ -51,9 +52,10 @@ if (isset($_POST['addmerit']))
     $mName = $row2["meritName"];
     $mPoint = $row2["meritPoint"];
     
-    $stmt = $conn->prepare("INSERT INTO `record` (studentID, meritID, meritName, meritPoint, date, categoryType) VALUES(?,?,?,?,?,?)");
-    $stmt->bind_param('ssssss', $studid, $meritid, $mName, $mPoint, $date, $catType);
+    $stmt = $conn->prepare("INSERT INTO `record`(`studID`, `meritID`, `meritName`, `meritPoint`, `date`) VALUES (?,?,?,?,?)");
+    $stmt->bind_param('sssss', $studid, $meritid, $mName, $mPoint, $date);
     $stmt->execute();
+    
     if($stmt)
     {
         print "<script type=\"text/javascript\">";

@@ -57,20 +57,20 @@
             </div>
 
             <div class="clearfix"></div>
-  <?php
-                                        include('../Connections/connection.php');
+            <?php
+                include('../Connections/connection.php');
 
-                                        if (isset($_GET['userid']))
-                                        {
-                                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
-                                            $stmt->bind_param('s', $userid);
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-                                            $row = $result->fetch_assoc();
+                if (isset($_GET['userid']))
+                {
+                    $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                    $stmt->bind_param('s', $userid);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $row = $result->fetch_assoc();
 
-                                            $staffname = $row['staffName'];
-                                        }
-              ?>
+                    $staffname = $row['staffName'];
+                }
+            ?>
             <!-- menu profile quick info -->
                   <div class="profile clearfix">
                      <div class="profile_pic">
@@ -168,29 +168,28 @@
                     <form method="post" action="mForm.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                       <?php 
                         
-                        $studid = $_GET["studid"];  
+                        $studentID = $_GET["studid"];  
                                        
-                        $stmt2 = $conn->prepare("SELECT studentID FROM student WHERE studID = ?");
-                        $stmt2->bind_param("s", $studid);
+                        $stmt2 = $conn->prepare("SELECT studID, studName FROM student WHERE studentID = ?");
+                        $stmt2->bind_param("s", $studentID);
                         $stmt2->execute();
                         $result2 = $stmt2->get_result();
                         $row2 = $result2->fetch_assoc();
-                        /*$studentID = $row2["studentID"];  
+                        $studID = $row2["studID"];  
                         $studName =  $row2["studName"];
-                        $studContcNo =  $row2 ["studContcNo"];*/
                             
-                        ?>    
+                        ?>  
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="studid" name="studid" class="form-control col-md-7 col-xs-12" value=" <?php echo $studid; ?> " readonly>
+                          <input type="text" name="studentid" class="form-control col-md-7 col-xs-12" value="<?php echo $studentID ; ?>" readonly>
+                            <input type="hidden" name="studid" value="<?php echo $studID ?>">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Category</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php
-                            include('../Connections/connection.php');
                             
                             $status = "1";
 
@@ -236,7 +235,6 @@
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <input type="hidden" name="studName" value="<?php echo $studName ?>">
-                          <input type="hidden" name="studContcNo" value="<?php echo $studContcNo ?>">
                           <button type="submit" class="btn btn-success" name="addmerit">Submit</button>
                           <button class="btn btn-primary" type="button">Cancel</button>
                         </div>
@@ -261,7 +259,8 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="studid" class="form-control col-md-7 col-xs-12" value=" <?php echo $studid; ?> " readonly>
+                          <input type="text" name="studentid" class="form-control col-md-7 col-xs-12" value="<?php echo $studentID; ?>" readonly>
+                          <input type="hidden" name="studid" value="<?php echo $studID ?>">
                         </div>
                       </div>
                       <div class="form-group">
