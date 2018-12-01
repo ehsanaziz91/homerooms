@@ -68,18 +68,18 @@ if (isset($_POST['details']))
 };
 
 //delete student
-/*if (isset($_POST['del']))
+if (isset($_POST['del']))
 {
-    $userid = $_GET['studentID'];
+    $studid = $_GET['studid'];
     
     $stmt = $conn->prepare("DELETE FROM `student` WHERE studentID = ?");
-    $stmt->bind_param('s', $userid);
+    $stmt->bind_param('s', $studid);
     $stmt->execute();
     
     if($stmt)
     {
         echo "<script type=\"text/javascript\">";
-        echo "alert('Deleted data successfully'),location.href='teacher_studListPage.php'";
+        echo "alert('Deleted data successfully'),location.href='teacher_studListPage.php?userid=$userid'";
         echo "</script>";
     }
     else
@@ -90,7 +90,7 @@ if (isset($_POST['details']))
     }
     $stmt->close();
     $conn->close();
-}*/
+};
 
 if (isset($_POST['addmerit']))
 {

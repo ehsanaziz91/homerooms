@@ -209,12 +209,12 @@
                                                      <td>' . $dpoint . '</td>
                                                      <td>' . $cpoint . '</td>
                                                      <td>
-                                                         <form method="post" action="teacher_studList.php">
+                                                         <form method="post" action="teacher_studList.php?userid='.$userid.'&studid='.$studid.'">
 
-                                                             <input type="hidden" name="studentID" value='.$studid.'></input>
+                                                             <input type="hidden" name="studid" value='.$studid.'></input>
 
                                                              <a href="teacher_studProfilePage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-primary">Details</a>
-
+                                                             
                                                              <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
 
                                                              <a href="MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
@@ -339,16 +339,16 @@
                                              <div class="col-md-8 col-sm-6 col-xs-12">
                                                 <select name="hrid" class="form-control">
                                                    <option>--- Teacher Names ---</option>
-                                                   <option value="0">Nur Maisarah Bt Abdul Ghani (ASP.Net)</option>
-                                                   <option value="1">Hazirah Bt Mohd Shabri (CakePHP)</option>
-                                                   <option value="2">Hapsah binti Jusoh (Elixir)</option>
-                                                   <option value="3">Mahmod bin Ali (Fortran)</option>
-                                                   <option value="4">Azlina binti Anuar (Java)</option>
-                                                   <option value="5">Shamsul bin Husin (Visual)</option>
-                                                   <option value="6">Zubir bin Mohd (Json)</option>
-                                                   <option value="7">Aminah binti Zakaria (Modula)</option>
-                                                   <option value="8">Maimunah binti Mahadi (Perl)</option>
-                                                   <option value="9">Syukri Yahya bin Kasim (Python)</option>
+                                                   <option value="1">Nur Maisarah Bt Abdul Ghani (ASP.Net)</option>
+                                                   <option value="2">Hazirah Bt Mohd Shabri (CakePHP)</option>
+                                                   <option value="3">Hapsah binti Jusoh (Elixir)</option>
+                                                   <option value="4">Mahmod bin Ali (Fortran)</option>
+                                                   <option value="5">Azlina binti Anuar (Java)</option>
+                                                   <option value="6">Shamsul bin Husin (Visual)</option>
+                                                   <option value="7">Zubir bin Mohd (Json)</option>
+                                                   <option value="8">Aminah binti Zakaria (Modula)</option>
+                                                   <option value="9">Maimunah binti Mahadi (Perl)</option>
+                                                   <option value="10">Syukri Yahya bin Kasim (Python)</option>
                                                 </select>
                                              </div>
                                           </div>
