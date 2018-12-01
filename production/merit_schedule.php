@@ -240,9 +240,11 @@ if (isset($_SESSION['userid']))
                                                          <td>' . $meritPoint . '</td>
                                                      </tr>';
                                              }
-                                         }
-                                       $stmt->close();
+                                              $stmt->close();
                                        $conn->close();
+                                         }
+                                      /* $stmt->close();
+                                       $conn->close();*/
                                        ?>
                                  </tbody>
                               </table>
@@ -339,7 +341,10 @@ if (isset($_POST['addmerits']))
     $categoryCode = $_POST['categoryCode'];
     $categoryID = $_POST['categoryID'];
 
-    $stmt = $conn->prepare("INSERT INTO `merit` (meritCode, meritName, meritPoint, statusMerit, categoryID, categoryCode WHERE categoryCode =?) VALUES(?,?,?,?,?,?)");
+   /* $stmt = $conn->prepare("INSERT INTO `merit` (meritCode, meritName, meritPoint, statusMerit, categoryID, categoryCode WHERE categoryCode =?) 
+   */
+    $stmt = $conn->prepare("INSERT INTO `merit` (meritCode, meritName, meritPoint, statusMerit, categoryID, categoryCode WHERE merit.categoryID=category.categoryID) 
+    VALUES(?,?,?,?,?,?)");
     $stmt->bind_param('ssssss', $meritCode, $meritName, $meritPoint, $statusMerit,  $categoryID, $categoryCode);
     $stmt->execute();
 	//header('location:teacher_studListPage.php');
@@ -347,6 +352,7 @@ if (isset($_POST['addmerits']))
     {
         print "<script type=\"text/javascript\">";
         print "alert('Successfully Registered New Merit!'),location.href='merit_schedule.php?userid=$userid'";
+        /*href="merit_schedule.php?userid=<?php echo $userid; ?>"*/
         print "</script>";
     }
     else
@@ -475,9 +481,11 @@ if (isset($_POST['adddemerit']))
                                                          <td>' . $demeritPoint . '</td>
                                                      </tr>';
                                              }
+                                              $stmt->close();
+                                              $conn->close();
                                          }
-                                       $stmt->close();
-                                       $conn->close();
+                                 /*      $stmt->close();
+                                       $conn->close();*/
                                        ?>
                                  </tbody>
                               </table>
