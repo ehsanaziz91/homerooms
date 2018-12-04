@@ -77,7 +77,7 @@
                         <img src="images/img.JPG" alt="..." class="img-circle profile_img">
                      </div>
                      <div class="profile_info">
-                        <span>Teacher</span>
+                        <span>Admin</span>
                         <h2><?php echo $staffname;?></h2>
                      </div>
                   </div>
@@ -90,15 +90,20 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-home"></i>Dashboard</a>
+                  <li><a href="admin_index.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Dashboard</a>
                   </li>
                 </ul>
               </div>
               <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-users"></i>Teacher<span class="fa fa-chevron-down"></span></a>
-                       
+                  <li><a href="#"><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
+                       <ul class="nav child_menu">
+                       <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>">Merit & Demerit</a></li>
+                      <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>">Demerit Stage</a></li>
+                      <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>">Merit & Demerit Schedule</a></li>
+                      <li><a href="#">Assign Students</a></li> <!--kalau sempat, buat form utk assign student-->
+                      </ul>
                   </li>
                 </ul>
               </div>
