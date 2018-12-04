@@ -117,16 +117,8 @@ if (isset($_SESSION['userid']))
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+              
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="loginPage.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -224,7 +216,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="javascript:void(0);" class="btn btn-success btn-block" role="button">View</a>
+                                <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button">View</a>
                                 <p>
                                 </p>
                               </div>
