@@ -351,7 +351,9 @@ if (isset($_POST['addmerits']))
     if($stmt)
     {
         print "<script type=\"text/javascript\">";
-        print "alert('Successfully Registered New Merit!'),location.href='merit_schedule.php?userid=$userid'";
+        /*print "alert('Successfully Registered New Merit!')";*/
+         print "alert('Successfully Registered New Merit!'),location.href='merit_schedule.php?userid=<?php echo $userid; ?>'";
+        /*print "alert('Successfully Registered New Merit!'),location.href='merit_schedule.php?userid=$userid'";*/
         /*href="merit_schedule.php?userid=<?php echo $userid; ?>"*/
         print "</script>";
     }
