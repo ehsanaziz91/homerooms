@@ -87,19 +87,19 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-home"></i>Dashboard</a>
+                  <li><a href="admin_index.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Dashboard</a>
                   </li>
                 </ul>
               </div>
               <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
+                   <li><a href="#"><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
                        <ul class="nav child_menu">
-                      <li><a href="#">Merit & Demerit</a></li>
-                      <li><a href="#">Demerit Stage</a></li>
-                      <li><a href="#">Merit & Demerit Schedule</a></li>
-                      <li><a href="#">Assign Students</a></li>
+                       <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>">Merit & Demerit</a></li>
+                      <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>">Demerit Stage</a></li>
+                      <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>">Merit & Demerit Schedule</a></li>
+                      <li><a href="#">Assign Students</a></li> <!--kalau sempat, buat form utk assign student-->
                       </ul>
                   </li>
                 </ul>
@@ -117,16 +117,7 @@ if (isset($_SESSION['userid']))
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="loginPage.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
