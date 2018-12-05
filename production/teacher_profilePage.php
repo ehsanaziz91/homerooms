@@ -41,6 +41,7 @@ if (isset($_SESSION['userid']))
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
+              <!--<img src="images/mrsm.png" class="img-thumbnail" width="140" height="80" style="background-transparent">-->
               <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
             </div>
 
@@ -188,28 +189,48 @@ if (isset($_SESSION['userid']))
                         <form method="post">
                             <div class="row">
                                 <div class="col-lg-12">
+                                    <?php
+                                    include('../Connections/connection.php');
+
+                                    if (isset($_GET['userid']))
+                                    {
+                                        $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                                        $stmt->bind_param('s', $userid);
+                                        $stmt->execute();
+                                        $result = $stmt->get_result();
+                                        $row = $result->fetch_assoc();
+
+                                        $name = $row['staffName'];
+                                        $position = $row['position'];
+                                        $no = $row['phoneNo'];
+                                        $email = $row['email'];
+                                        $question = $row['recoQuestion'];
+                                        $answer = $row['recoAnswer'];
+                                        $img = $row['img'];
+
+                                    }
+
+                                    ?>
                                     <tr>
+                                        <td>                                    
                                         <?php
-                                        include('../Connections/connection.php');
+                                            include('../Connections/connection.php');
 
-                                        if (isset($_GET['userid']))
-                                        {
-                                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
-                                            $stmt->bind_param('s', $userid);
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-                                            $row = $result->fetch_assoc();
+                                            if (isset($_GET['userid']))
+                                            {
+                                                $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                                                $stmt->bind_param('s', $userid);
+                                                $stmt->execute();
+                                                $result = $stmt->get_result();
+                                                $row = $result->fetch_assoc();
+                                                echo '<div><img src="data:images/JPG;base64,'.base64_encode( $row['img'] ).'" class="img-rounded" width="160" height="140"/></div>';
 
-                                            $name = $row['staffName'];
-                                            $position = $row['position'];
-                                            $no = $row['phoneNo'];
-                                            $email = $row['email'];
-                                            $question = $row['recoQuestion'];
-                                            $answer = $row['recoAnswer'];
-
-                                        }
-
+                                            }
                                         ?>
+                                        </td>
+                                        <br>
+                                    </tr>
+                                    <tr>
                                         <td>Staff ID</td>
                                         <td>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -322,6 +343,12 @@ if (isset($_SESSION['userid']))
                           <div class="modal-body">
                             <form method="post" action="profile.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                               <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Profile Image</label>
+                                <div class="col-md-8 col-sm-6 col-xs-12">
+                                  <input type="file" name="img" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
+                                </div>
+                              </div>
+                              <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Staff ID</label>
                                 <div class="col-md-8 col-sm-6 col-xs-12">
                                   <input type="text" name="userid" class="form-control col-md-7 col-xs-12" value="<?php echo $userid;?>" readonly>
@@ -414,6 +441,286 @@ if (isset($_SESSION['userid']))
                         </div>
                       </div>
                     </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>My Profile</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form class="form-horizontal form-label-left input_mask" method="post">
+                      <?php
+                        include('../Connections/connection.php');
+
+                        if (isset($_GET['userid']))
+                        {
+                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                            $stmt->bind_param('s', $userid);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            $row = $result->fetch_assoc();
+
+                            $name = $row['staffName'];
+                            $position = $row['position'];
+                            $no = $row['phoneNo'];
+                            $email = $row['email'];
+                            $question = $row['recoQuestion'];
+                            $answer = $row['recoAnswer'];
+                            $img = $row['img'];
+
+                        }
+
+                        ?>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <?php
+                                include('../Connections/connection.php');
+
+                                if (isset($_GET['userid']))
+                                {
+                                    $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                                    $stmt->bind_param('s', $userid);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+                                    $row = $result->fetch_assoc();
+                                    echo '<div><img src="data:images/JPG;base64,'.base64_encode( $row['img'] ).'" class="img-rounded" width="160" height="140"/></div>';
+
+                                }
+                            ?>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Staff ID</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" value="<?php echo $userid;?>" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Full Name</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" value="<?php echo $name;?>" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Position</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" value="<?php 
+                                $position;
+                                if($position == 01)
+                                {
+                                    echo "Admin";
+                                }
+                                else if ($position == 02)
+                                {
+                                     echo "Homeroom Teacher";
+                                }
+                            ?>" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Contac No.</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" value="<?php echo $no;?>" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" value="<?php echo $email;?>" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Recovery Question</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" value=" <?php 
+                                $question;
+                                if($question == 0)
+                                {
+                                    echo "What was the name of your first pet?";
+                                }
+                                else if ($question == 1)
+                                {
+                                     echo "What was the first thing you learned to cook?";
+                                }
+                                else if ($question == 2)
+                                {
+                                     echo "What was the first film you saw in the cinema?";
+                                }
+                                else if ($question == 3)
+                                {
+                                     echo "Where did you go the first time you flew on an airplane?";
+                                }
+                                else if ($question == 4)
+                                {
+                                     echo "In what city did your parents meet?";
+                                }
+                            ?>" readonly>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Recovery Answer</label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                          <input type="text" class="form-control" value="<?php echo $answer;?>" readonly>
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <!-- Button trigger modal -->
+                          <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#exampleModal2">
+                          Update Profile
+                          </button>
+                        <!--  <button type="submit" class="btn btn-success">Update Profile</button>-->
+                          <button type="button" class="btn btn-default">Delete Account</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Update Profile</h4>
+                      </div>
+                      <div class="modal-body">
+                        <form method="post" action="profile.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Profile Image</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                              <input type="file" name="img" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Staff ID</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                              <input type="text" name="userid" class="form-control col-md-7 col-xs-12" value="<?php echo $userid;?>" readonly>
+                            </div>
+                          </div>
+                            <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Full Name</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                              <input type="text" name="staffName" class="form-control col-md-7 col-xs-12" value="<?php echo $name;?>">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Position</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                              <input type="text" name="position" class="form-control col-md-7 col-xs-12" value="<?php 
+                                    $position;
+                                    if($position == 01)
+                                    {
+                                        echo "Admin";
+                                    }
+                                    else if ($position == 02)
+                                    {
+                                         echo "Homeroom Teacher";
+                                    }
+                                ?>" readonly>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Contac No.</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                              <input type="text" name="phoneNo" class="form-control col-md-7 col-xs-12" value="<?php echo $no;?>">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                              <input type="email" name="email" class="form-control col-md-7 col-xs-12" value="<?php echo $email;?>">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Recovery Question</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                              <select name="recoQuestion" class="form-control">
+                                <option value="<?php echo $question;?>">
+                                <?php 
+                                    $question;
+                                    if($question == 0)
+                                    {
+                                        echo "What was the name of your first pet?";
+                                    }
+                                    else if ($question == 1)
+                                    {
+                                         echo "What was the first thing you learned to cook?";
+                                    }
+                                    else if ($question == 2)
+                                    {
+                                         echo "What was the first film you saw in the cinema?";
+                                    }
+                                    else if ($question == 3)
+                                    {
+                                         echo "Where did you go the first time you flew on an airplane?";
+                                    }
+                                    else if ($question == 4)
+                                    {
+                                         echo "In what city did your parents meet?";
+                                    }
+                                ?>
+                                </option>
+                                <option value="0">What was the name of your first pet?</option>
+                                <option value="1">What was the first thing you learned to cook?</option>
+                                <option value="2">What was the first film you saw in the cinema?</option>
+                                <option value="3">Where did you go the first time you flew on an airplane?</option>
+                                <option value="4">In what city did your parents meet?</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Recovery Answer</label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                              <input type="text" name="recoAnswer" class="form-control col-md-7 col-xs-12" value="<?php echo $answer;?>">
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary" name="update" id="update">Update Profile</button>
+                            <!--<input type="submit" class="btn btn-primary" name="update" id="update"  value="Update">-->
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Upload Profile Image</h2>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form class="form-horizontal form-label-left">
+
+                      <div class="form-group" align="middle">
+                          <img src="images/user.png" class="img-rounded" width="160" height="140">
+                      </div>
+                      <div class="form-group" align="middle" style="">
+                          <input type="file" name="img" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
+                      </div>
+
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+                          <button type="submit" class="btn btn-success">Upload</button>
+                          <button type="button" class="btn btn-primary">Cancel</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>

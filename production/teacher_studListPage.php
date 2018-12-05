@@ -49,19 +49,19 @@
                   </div>
                   <div class="clearfix"></div>
                     <?php
-                                        include('../Connections/connection.php');
+                    include('../Connections/connection.php');
 
-                                        if (isset($_GET['userid']))
-                                        {
-                                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
-                                            $stmt->bind_param('s', $userid);
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-                                            $row = $result->fetch_assoc();
+                    if (isset($_GET['userid']))
+                    {
+                        $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                        $stmt->bind_param('s', $userid);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $row = $result->fetch_assoc();
 
-                                            $staffname = $row['staffName'];
-                                        }
-              ?>
+                        $staffname = $row['staffName'];
+                    }
+                    ?>
                   <!-- menu profile quick info -->
                   <div class="profile clearfix">
                      <div class="profile_pic">
@@ -218,6 +218,16 @@
                                                              <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
 
                                                              <a href="MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
+                                                             
+                                                             <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#exampleModalsms">SMS</button>
+                                                             
+                                                             <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#exampleModalEmail">Email</button>';
+                                             ?>
+                                                             
+                                                             <?php include ('email/emailinterface.php'); ?>
+                                                                <!--<a href="#exampleModalEmail<?php //echo $studid; ?>" data-toggle="modal" class="btn btn-warning">Emailsssss</a>-->
+                                     <?php
+                                             echo'
                                                          </form>
                                                      </td>
                                                  </tr>';
@@ -361,6 +371,78 @@
                                  </div>
                               </div>
                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalEmail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h4 class="modal-title" id="exampleModalLabel">Send Email</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form method="post" action="email/sendingemail.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Email</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="email" name="email" class="form-control col-md-7 col-xs-12" required>
+                                             </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                             <button type="submit" class="btn btn-primary" name="send">Send Email</button>
+                                          </div>
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModalsms" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                 <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h4 class="modal-title" id="exampleModalLabel">Send SMS</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                       <form method="post" action="sms/smsfunctions.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Username</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="username" class="form-control col-md-7 col-xs-12" required>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Hash</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="hash" class="form-control col-md-7 col-xs-12" required>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Sender</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="sender" class="form-control col-md-7 col-xs-12" required>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Phone No.</label>
+                                             <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <input type="text" name="num" class="form-control col-md-7 col-xs-12" required>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Message</label>
+                                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                                <textarea class="form-control" name="mess" rows="3"></textarea>
+                                            </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                             <button type="submit" class="btn btn-primary" name="abc">Send SMS</button>
+                                          </div>
+                                       </form>
+                                    </div>
+                                 </div>
+                              </div>
+                            </div>
                         </div>
                      </div>
                   </div>
