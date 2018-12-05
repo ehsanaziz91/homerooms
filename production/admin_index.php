@@ -54,30 +54,30 @@ if (isset($_SESSION['userid']))
             </div>
 
             <div class="clearfix"></div>
-  <?php
-                                        include('../Connections/connection.php');
+              <?php
+                include('../Connections/connection.php');
 
-                                        if (isset($_GET['userid']))
-                                        {
-                                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
-                                            $stmt->bind_param('s', $userid);
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-                                            $row = $result->fetch_assoc();
+                if (isset($_GET['userid']))
+                {
+                    $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                    $stmt->bind_param('s', $userid);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $row = $result->fetch_assoc();
 
-                                            $staffname = $row['staffName'];
-                                        }
+                    $staffname = $row['staffName'];
+                }
               ?>
             <!-- menu profile quick info -->
-            <div class="profile clearfix">
+<!--            <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="images/img.JPG" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Admin</span>
-                <h2><?php echo $staffname;?></h2>
+                <h2><?php //echo $staffname;?></h2>
               </div>
-            </div>
+            </div>-->
             <!-- /menu profile quick info -->
 
             <br />
@@ -118,7 +118,7 @@ if (isset($_SESSION['userid']))
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
               
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="loginPage.php">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -137,7 +137,7 @@ if (isset($_SESSION['userid']))
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.JPG" alt=""><?php echo $staffname;?>
+                    <img src="images/user.png" alt=""><?php echo $staffname;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -147,12 +147,12 @@ if (isset($_SESSION['userid']))
                   </ul>
                 </li>
 
-                <li role="presentation" class="dropdown">
+<!--                <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
                     <span class="badge bg-green">6</span>
                   </a>
-                </li>
+                </li>-->
               </ul>
             </nav>
           </div>
