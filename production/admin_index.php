@@ -51,6 +51,9 @@ if (isset($_SESSION['userid']))
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
               <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
+                
+                <!--<div class="col-md-4"><img src="images/logos.png" class="img-corners" width="130" height="90"></div>-->
+              
             </div>
 
             <div class="clearfix"></div>
@@ -85,25 +88,26 @@ if (isset($_SESSION['userid']))
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <h3>Actions</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-home"></i>Dashboard</a>
-                  </li>
+                    <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit</a></li>
+                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
+                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
                 </ul>
               </div>
-              <div class="menu_section">
+<!--              <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
                   <li><a href="#"><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
                        <ul class="nav child_menu">
-                       <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>">Merit & Demerit</a></li>
-                      <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>">Demerit Stage</a></li>
-                      <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>">Merit & Demerit Schedule</a></li>
-                      <li><a href="#">Assign Students</a></li> <!--kalau sempat, buat form utk assign student-->
+                       <li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>">Merit & Demerit</a></li>
+                      <li><a href="demerit_stage.php?userid=<?php //echo $userid; ?>">Demerit Stage</a></li>
+                      <li><a href="merit_schedule.php?userid=<?php //echo $userid; ?>">Merit & Demerit Schedule</a></li>
+                      <li><a href="#">Assign Students</a></li> kalau sempat, buat form utk assign student
                       </ul>
                   </li>
                 </ul>
-              </div>
+              </div>-->
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
