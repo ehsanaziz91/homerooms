@@ -68,40 +68,42 @@ if (isset($_SESSION['userid']))
                                         }
               ?>
             <!-- menu profile quick info -->
-            <div class="profile clearfix">
+          <!--  <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="images/img.JPG" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Teacher</span>
-                <h2><?php echo $staffname;?></h2>
+                <h2><?php //echo //$staffname;?></h2>
               </div>
-            </div>
+            </div>-->
             <!-- /menu profile quick info -->
 
             <br />
 
               <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
+               <div class="menu_section">
+                <h3>Actions</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-home"></i>Dashboard</a>
-                  </li>
+                    <!--<li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit</a></li>-->
+                    <li><a href="teacherDemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
+                    <li><a href="tmerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="teacher_studListPage.php?userid=<?php echo $userid;?>"><i class="fa fa-home"></i>List of Students</a></li>
                 </ul>
               </div>
-              <div class="menu_section">
+           <!--   <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
                   <li><a href="#"><i class="fa fa-users"></i>Teacher<span class="fa fa-chevron-down"></span></a>
                        <ul class="nav child_menu">
-                     <li><a href="teacher_studListPage.php?userid=<?php echo $userid;?>">List of Students</a></li>
+                     <li><a href="teacher_studListPage.php?userid=<?php //echo $userid;?>">List of Students</a></li>
                            
 
                       </ul>
                   </li>
                 </ul>
-              </div>
+              </div>-->
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
@@ -114,16 +116,7 @@ if (isset($_SESSION['userid']))
             <!-- /sidebar menu -->
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -167,18 +160,126 @@ if (isset($_SESSION['userid']))
 
         <!-- page content -->
         <div class="right_col" role="main">
-          <!-- top tiles -->
-          <div class="row tile_count">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>Teacher's Dashboard</h3>
+              </div>
 
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel" style="height:600px;">
+                  <div class="x_title">
+                    <h2>Teacher's Activity</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="x_content">
+                    <div class="row">
+
+                      <div class="col-md-12">
+
+                        <!-- merit demerit element -->
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <div class="pricing">
+                            <div class="title">
+                              <h1>Merit & Demerit</h1>
+                            </div>
+                            <div class="x_content">
+                              <div class="">
+                                <div class="pricing_features">
+                                  <ul class="list-unstyled text-left">
+                                    <li><i class="fa fa-check text-success"></i> <strong>View Student's Merit Demerit Record</strong></li>
+                                    <li><i class="fa fa-check text-success"></i> <strong>View Current and Past Record</strong></li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="pricing_footer">
+                                <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button">View</a>
+                                <p>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- merit demerit element -->
+
+                        <!-- stage element -->
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <div class="pricing">
+                            <div class="title">
+                              <h1>Demerit Stage</h1>
+                            </div>
+                            <div class="x_content">
+                              <div class="">
+                                <div class="pricing_features">
+                                  <ul class="list-unstyled text-left">
+                                    <li><i class="fa fa-check text-success"></i><strong>View Demerit Stage</strong></li>
+                                    <li><i class="fa fa-check text-success"></i> <strong>Reference for students and Parents</strong></li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="pricing_footer">
+                                <a href="demerit_stage.php?userid=<?php echo $userid; ?>" class="btn btn-danger btn-block" role="button">View</a>
+                                <p>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- stage element -->
+
+                        <!-- schedule element -->
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <div class="pricing">
+                            <div class="title">
+                              <h1>Merit & Demerit Schedule</h1>
+                            </div>
+                            <div class="x_content">
+                              <div class="">
+                                <div class="pricing_features">
+                                  <ul class="list-unstyled text-left">
+                                    <li><i class="fa fa-check text-success"></i> <strong>Schedule for Merit and Demerit</strong></li>
+                                    <li><i class="fa fa-check text-success"></i> <strong>For Students and Parents Reference</strong>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="pricing_footer">
+                                <a href="merit_schedule.php?userid=<?php echo $userid; ?>" class="btn btn-dark btn-block" role="button">View</a>
+                                <p>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- schedule element -->
+                          
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- /top tiles -->
-
-          <br />
-
-          <div class="row">
-
-          </div>
-
         </div>
         <!-- /page content -->
 
