@@ -240,7 +240,8 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button">View</a>
+                                <!--<a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>" class="btn btn-success btn-block" role="button">View</a>-->
+                                <a href="admin_studListPage.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button">Testing</a>
                                 <p>
                                 </p>
                               </div>
