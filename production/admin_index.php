@@ -90,9 +90,9 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
-                    <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit</a></li>
-                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
-                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
+                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
+                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Schedule</a></li>
                 </ul>
               </div>
 <!--              <div class="menu_section">
@@ -111,7 +111,7 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
+                  <li><a href="#"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
@@ -141,8 +141,28 @@ if (isset($_SESSION['userid']))
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/user.png" alt=""><?php echo $staffname;?>
-                    <span class=" fa fa-angle-down"></span>
+                      <?php
+                        include('../Connections/connection.php');
+
+                        if (isset($_GET['userid']))
+                        {
+                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                            $stmt->bind_param('s', $userid);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            $row = $result->fetch_assoc();
+                            if($row['img'] == NULL)
+                            {
+                                echo '<div><img src="images/user.png">'.$row['staffName'].'  <span class=" fa fa-angle-down"></span></div>';
+                            }
+                            else
+                            {
+                                echo '<div><img src="data:images/JPG;base64,'.base64_encode( $row['img'] ).'"/>'.$row['staffName'].'  <span class=" fa fa-angle-down"></span></div>';
+                            }
+                        }
+                    ?>
+                    <!--<img src="images/user.png" alt=""><?php //echo $staffname;?>-->
+                    <!--<span class=" fa fa-angle-down"></span>-->
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="admin_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
@@ -289,7 +309,14 @@ if (isset($_SESSION['userid']))
         </div>
         <!-- /page content -->
 
-
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            HMD System@2018/19 - WorkshopII | BITS | FTMK | UTeM
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
     </div>
 
