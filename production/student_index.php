@@ -70,7 +70,7 @@ if (isset($_SESSION['userid']))
               ?>
 
             <!-- menu profile quick info -->
-            <div class="profile clearfix">
+           <!-- <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="images/img.JPG" alt="..." class="img-circle profile_img">
               </div>
@@ -78,47 +78,50 @@ if (isset($_SESSION['userid']))
                 <span>Student</span>
                 <h2><?php echo $studname;?></h2>
               </div>
-            </div>
+            </div>-->
             <!-- /menu profile quick info -->
 
             <br />
 
-            <!-- sidebar menu -->
+              <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
+               <div class="menu_section">
+                <h3>Actions</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-home"></i>Dashboard</a>
-                  </li>
+                    <!--<li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit</a></li>-->
+                    <li><a href="viewStatus.php?userid=<?php echo $userid;?>"><i class="fa fa-home"></i>Status Merit & Demerit </a></li>
+                    <li><a href="sdemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
+                    <li><a href="smerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
+                    
                 </ul>
               </div>
-              <div class="menu_section">
+           <!--   <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-users"></i>Students<span class="fa fa-chevron-down"></span></a>
+                  <li><a href="#"><i class="fa fa-users"></i>Teacher<span class="fa fa-chevron-down"></span></a>
                        <ul class="nav child_menu">
-                      <li><a href="#">Merit & Demerit</a></li>
-                      <li><a href="#">Demerit Stage</a></li>
-                      <li><a href="#">Merit & Demerit Schedule</a></li>
+                     <li><a href="teacher_studListPage.php?userid=<?php //echo $userid;?>">List of Students</a></li>
+                           
+
                       </ul>
                   </li>
                 </ul>
+              </div>-->
+              <div class="menu_section">
+                <h3>Report</h3>
+                <ul class="nav side-menu">
+                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
+                  </li>
+                </ul>
               </div>
+
             </div>
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-              </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+             
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -137,20 +140,20 @@ if (isset($_SESSION['userid']))
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.JPG" alt=""><?php echo $studname;?>
+                    <img src="images/user.png" alt=""><?php echo $studname;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="student_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
                     <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
-                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
+                    <!--<i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>-->
                   </a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                     <li>
@@ -261,7 +264,7 @@ if (isset($_SESSION['userid']))
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
                             <div class="title">
-                              <h1>Merit & Demerit</h1>
+                              <h1>Status Merit & Demerit</h1>
                             </div>
                             <div class="x_content">
                               <div class="">
