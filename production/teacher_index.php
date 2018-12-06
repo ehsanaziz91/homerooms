@@ -135,12 +135,12 @@ if (isset($_SESSION['userid']))
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.JPG" alt=""><?php echo $staffname;?>
+                    <img src="images/user.png" alt=""><?php echo $staffname;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="teacher_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
-                    <li><a href="testing.php?userid=<?php echo $userid; ?>"> Testing</a></li>
+                    <!--<li><a href="testing.php?userid=<?php //echo $userid; ?>"> Testing</a></li>-->
                     <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
                     <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
