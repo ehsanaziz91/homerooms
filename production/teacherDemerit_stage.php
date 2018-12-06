@@ -69,38 +69,47 @@ if (isset($_SESSION['userid']))
                                         }
               ?>
             <!-- menu profile quick info -->
-            <div class="profile clearfix">
+           <!-- <div class="profile clearfix">
               <div class="profile_pic">
                 <img src="images/img.JPG" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Teacher</span>
-                <h2><?php echo $staffname;?></h2>
+                <h2><?php //echo $staffname;?></h2>
               </div>
-            </div>
+            </div>-->
             <!-- /menu profile quick info -->
 
             <br />
-
-            <!-- sidebar menu -->
+ <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+               <div class="menu_section">
+                    <ul class="nav side-menu">
+                    <li><a href="teacher_index.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Dashboard</a></li>
+                </ul>
+                   </div>
+                       </div>
+   <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>General</h3>
+               <div class="menu_section">
+                <h3>Actions</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-home"></i>Dashboard</a>
-                  </li>
+                    <li><a href="teacherDemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
+                    <li><a href="tmerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="teacher_studListPage.php?userid=<?php echo $userid;?>"><i class="fa fa-home"></i>List of Students</a></li>
                 </ul>
               </div>
-              <div class="menu_section">
+           <!--   <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
                   <li><a href="#"><i class="fa fa-users"></i>Teacher<span class="fa fa-chevron-down"></span></a>
                        <ul class="nav child_menu">
-                    
+                     <li><a href="teacher_studListPage.php?userid=<?php //echo $userid;?>">List of Students</a></li>
+                           
+
                       </ul>
                   </li>
                 </ul>
-              </div>
+              </div>-->
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
