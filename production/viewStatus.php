@@ -168,88 +168,58 @@ if (isset($_SESSION['userid']))
         </div>
         <!-- /top navigation -->
 
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3></h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <div class="row">
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel" style="height:500px;">
-                  <div class="x_title">
-                    <h2>Demerit Stage</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-
-                  <div class="x_content">
-                    <div class="row">
-
-                      <div class="col-md-12">
+            <!-- page content -->
+            <div class="right_col" role="main">
+               <div class="">
+                  <div class="clearfix"></div>
+                  <div class="row">
+                     <!--start of modal page-->
+                     <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                             
+                           <div class="x_title">
+                              
+                              <h2>Merit & Demerit Record <?php echo $userid; ?></h2>
+                              <!-- Button trigger modal -->
+                              <div class="clearfix"></div>
+                           </div>
                            <div class="x_content">
                               <table id="datatable-buttons" class="table table-striped table-bordered">
                                  <thead>
                                     <tr>
-                                       <th>Stage ID</th>
-                                       <th>Current Point</th>
-                                       <th>Description</th>
+                                       <th>Student ID</th>
+                                       <th>Student Name</th>
+                                       <th>Merit Point</th>
+                                       <th>Demerit Point</th>
+                                       <th>Current Points</th>
                                     </tr>
                                  </thead>
                                  <tbody>
                                     <?php
                                        include('../Connections/connection.php');
-                                       
-                                         if($stmt = $conn->prepare("SELECT stageID, currentPoint, description FROM stage")) 
+                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, SUM(record.meritPoint) as meritPoint, SUM(record.demeritPoint) as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)), homeroom.staffID FROM student LEFT OUTER JOIN record ON record.studID = student.studID JOIN homeroom ON homeroom.hrID = student.hrID WHERE studentID = ?");
+                                         $stmt1->bind_param('s', $userid);
+                                         $stmt1->execute();
+                                         $stmt1 -> bind_result($userid, $studname, $mpoint, $dpoint, $cpoint);
+                                         while($stmt1->fetch()) 
                                          {
-                                             $stmt -> execute();
-                                             $stmt -> bind_result($stageID, $currentPoint, $description);
-                                             while($stmt->fetch()) 
-                                             {
-                                                 echo '<tr>
-                                                         <td>' . $stageID . '</td>
-                                                         <td>' . $currentPoint . '</td>
-                                                         <td>' . $description . '</td>
-                                                     </tr>';
-                                             }
+                                              echo '<tr>
+                                                     <td>' . $userid . '</td>
+                                                     <td>' . $studname . '</td>
+                                                     <td>' . $mpoint . '</td>
+                                                     <td>' . $dpoint . '</td>
+                                                     <td>' . $cpoint . '</td> 
+                                                 </tr>';
                                          }
-                                       $stmt->close();
-                                       $conn->close();
+                                       
                                        ?>
                                  </tbody>
                               </table>
                            </div>
-                       
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                  
-              </div>
+                          
+                         </div>
             </div>
-          </div>
-        </div>
-        <!-- /page content -->
+            <!-- /page content -->
 
 
       </div>
