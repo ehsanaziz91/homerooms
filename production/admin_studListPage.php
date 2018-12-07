@@ -226,7 +226,7 @@
                          if($stmt = $conn->prepare("SELECT student.studentID, student.studName, SUM(record.meritPoint) as meritPoint, SUM(record.demeritPoint) as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)), homeroom.staffID FROM student LEFT OUTER JOIN record ON record.studID = student.studID JOIN homeroom ON homeroom.hrID = student.hrID GROUP BY studentID")) 
                          {
                              $stmt -> execute();
-                             $stmt -> bind_result($studid, $studname, $mpoint, $dpoint, $cpoint, $userid);
+                             $stmt -> bind_result($studid, $studname, $mpoint, $dpoint, $cpoint, $userID);
                              while($stmt->fetch()) 
                              {
                                  echo '<tr>

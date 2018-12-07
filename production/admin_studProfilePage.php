@@ -52,20 +52,6 @@ if (isset($_SESSION['userid']))
             </div>
 
             <div class="clearfix"></div>
-            <?php
-                include('../Connections/connection.php');
-
-                if (isset($_GET['userid']))
-                {
-                    $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
-                    $stmt->bind_param('s', $userid);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $row = $result->fetch_assoc();
-
-                    $name = $row['staffName'];
-                }
-            ?>
             <!-- menu profile quick info -->
 <!--            <div class="profile clearfix">
               <div class="profile_pic">
@@ -213,145 +199,118 @@ if (isset($_SESSION['userid']))
                       
                     <div class="col-md-6 col-sm-6 col-xs-12 profile_left"><!--ubah kedudukan graf-->
                      
-                      <h3>Student's Profile</h3>
+                <h3>Student's Profile</h3>
                 <div class="x_panel">
                     <div class="panel-body">
-                        <form method="post">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                <?php
-                                   include('../Connections/connection.php');
-                                    
-                                     $stmt1 = $conn->prepare("SELECT * FROM student WHERE studID = ?");
-                                     $stmt1->bind_param('s', $studentID);
-                                     $stmt1->execute();
-                                     $stmt1 -> bind_result($studid, $studname, $mpoint, $dpoint, $cpoint);
-                                     while($stmt1->fetch()) 
-                                     {
-                                          echo '<tr>
-                                                 <td>' . $studid . '</td>
-                                                 <td>' . $studname . '</td>
-                                                 <td>' . $mpoint . '</td>
-                                                 <td>' . $dpoint . '</td>
-                                                 <td>' . $cpoint . '</td>
-                                             </tr>';
-                                     }
-                                   ?>
-                                    <tr>
-                                        <?php
-                                        include('../Connections/connection.php');
+                        <?php
+                            include('../Connections/connection.php');
 
-                                        if (isset($_GET['studid']))
-                                        {
-                                            $stmt = $conn->prepare("SELECT * FROM student WHERE studID = ?");
-                                            $stmt->bind_param('s', $studid);
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-                                            $row = $result->fetch_assoc();
-                                            
-                                           /* while*/ 
-                                            $studid = $row['studID'];
-                                            $studentID = $row['studentID'];
-                                            $studname = $row['studName'];
-                                            $studAddr = $row['studAddress'];
-                                            $studno = $row['studContcNo'];
-                                            $parent = $row['parentName'];
-                                            $hr = $row['hrName'];
-                                            $question = $row['recoQuestion'];
-                                            $answer = $row['recoAnswer'];
-                                            
-                                            echo $studid;
+                            if (isset($_GET['studid']))
+                            {
+                                $studid = $_GET['studid'];
+                                /*$stmt = $conn->prepare("SELECT * FROM student WHERE studentID = ?");*/
+                                $stmt = $conn->prepare("SELECT student.*, homeroom.className FROM student JOIN homeroom ON homeroom.hrID = student.hrID WHERE student.studentID = ?");
+                                $stmt->bind_param('s', $studid);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                $row = $result->fetch_assoc();
 
-                                        }
+                               /* while*/ 
+                                //$studID = $row['studID'];
+                                $studid = $row['studentID'];
+                                $studname = $row['studName'];
+                                $studAddr = $row['studAddress'];
+                                $studno = $row['studContcNo'];
+                                $parent = $row['parentName'];
+                                $email = $row['parentEmail'];
+                                $question = $row['recoQuestion'];
+                                //$answer = $row['recoAnswer'];
+                                $hr = $row['className'];
 
+                            }
+
+                            ?>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <tr>
+                                    <td>Student ID</td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;
+                                    </td>
+                                    <td>:</td>
+                                    <td><?php echo $studid;?></td>
+                                </tr><br><br>
+                                <tr>
+                                    <td>Full Name</td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;
+                                    </td>
+                                    <td>:</td>
+                                    <td><?php echo $studname;?></td>
+                                </tr><br><br>
+                                <tr>
+                                    <td>Address</td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                    <td>:</td>
+                                    <td><?php echo $studAddr;?>
+                                    </td>
+                                </tr><br><br>
+                                <tr>
+                                    <td>Contact No</td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;
+                                    </td>
+                                    <td>:</td>
+                                    <td><?php echo $studno;?></td>
+                                </tr><br><br>
+                                <tr>
+                                    <td>Homeroom</td>
+                                    <td>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;
+                                    </td>
+                                    <td>:</td>
+                                    <td><?php echo $hr;?></td>
+                                </tr><br><br>
+                                <tr>
+                                    <td>Recovery Question</td>
+                                    <td>&nbsp;&nbsp;&nbsp;</td>
+                                    <td>:</td>
+                                    <td><?php 
+                                            $question;
+                                            if($question == 0)
+                                            {
+                                                echo "What is your father ic number?";
+                                            }
+                                            else if ($question == 1)
+                                            {
+                                                 echo "Where is your birth place?";
+                                            }
+                                            else if ($question == 2)
+                                            {
+                                                 echo "What is your mother ic number?";
+                                            }
                                         ?>
-                                        <td>Student ID</td>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        </td>
-                                        <td>:</td>
-                                        <td><?php echo $studentID;?></td>
-                                    </tr><br><br>
-                                    <tr>
-                                        <td>Full Name</td>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;
-                                        </td>
-                                        <td>:</td>
-                                        <td><?php echo $studname;?></td>
-                                    </tr><br><br>
-                                    <tr>
-                                        <td>Address</td>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        </td>
-                                        <td>:</td>
-                                        <td><?php echo $studAddr;?>
-                                        </td>
-                                    </tr><br><br>
-                                    <tr>
-                                        <td>Contact No</td>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;
-                                        </td>
-                                        <td>:</td>
-                                        <td><?php echo $studno;?></td>
-                                    </tr><br><br>
-                                    <tr>
-                                        <td>Homeroom</td>
-                                        <td>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        </td>
-                                        <td>:</td>
-                                        <td><?php echo $hr;?></td>
-                                    </tr><br><br>
-                                    <tr>
-                                        <td>Recovery Question</td>
-                                        <td>&nbsp;&nbsp;&nbsp;</td>
-                                        <td>:</td>
-                                        <td><?php 
-                                                $question;
-                                                if($question == 0)
-                                                {
-                                                    echo "What was the name of your first pet?";
-                                                }
-                                                else if ($question == 1)
-                                                {
-                                                     echo "What was the first thing you learned to cook?";
-                                                }
-                                                else if ($question == 2)
-                                                {
-                                                     echo "What was the first film you saw in the cinema?";
-                                                }
-                                                else if ($question == 3)
-                                                {
-                                                     echo "Where did you go the first time you flew on an airplane?";
-                                                }
-                                                else if ($question == 4)
-                                                {
-                                                     echo "In what city did your parents meet?";
-                                                }
-                                            ?>
-                                        </td>
-                                    </tr><br><br>
-                                    <tr>
-                                        <td>Recovery Answer</td>
-                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                        <td>:</td>
-                                        <td><?php echo $answer;?></td>
-                                    </tr><br><br>
-                                    <tr>
-                                        <!--<button type="submit" class="btn btn-primary" name="update">Update Profile</button>-->
-                                        <button type="submit" class="btn btn-danger" name="del">Delete Account</button>
-                                    </tr>
-                                </div>
+                                    </td>
+                                </tr><br><br>
+<!--                                <tr>
+                                    <td>Recovery Answer</td>
+                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                    <td>:</td>
+                                    <td type="password"><?php //echo $answer;?></td>
+                                </tr><br><br>-->
+                                <tr>
+                                    <!--<button type="submit" class="btn btn-primary" name="update">Update Profile</button>-->
+                                    <button type="submit" class="btn btn-danger" name="del">Delete Account</button>
+                                </tr>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             
