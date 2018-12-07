@@ -183,7 +183,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" name="studentid" class="form-control col-md-7 col-xs-12" value="<?php echo $studentID ; ?>" readonly>
-                            <input type="hidden" name="studid" value="<?php echo $studID ?>">
+                          <input type="hidden" name="studid" value="<?php echo $studID ?>">
                         </div>
                       </div>
                       <div class="form-group">

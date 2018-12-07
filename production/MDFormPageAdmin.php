@@ -57,30 +57,17 @@
             </div>
 
             <div class="clearfix"></div>
-  <?php
-                                        include('../Connections/connection.php');
 
-                                        if (isset($_GET['userid']))
-                                        {
-                                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
-                                            $stmt->bind_param('s', $userid);
-                                            $stmt->execute();
-                                            $result = $stmt->get_result();
-                                            $row = $result->fetch_assoc();
-
-                                            $staffname = $row['staffName'];
-                                        }
-              ?>
             <!-- menu profile quick info -->
-                  <div class="profile clearfix">
+<!--                  <div class="profile clearfix">
                      <div class="profile_pic">
                         <img src="images/img.JPG" alt="..." class="img-circle profile_img">
                      </div>
                      <div class="profile_info">
                         <span>Admin</span>
-                        <h2><?php echo $staffname;?></h2>
+                        <h2><?php //echo $staffname;?></h2>
                      </div>
-                  </div>
+                  </div>-->
             <!-- /menu profile quick info -->
 
             <br />
@@ -88,25 +75,26 @@
              <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <h3>Actions</h3>
                 <ul class="nav side-menu">
-                  <li><a href="admin_index.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Dashboard</a>
-                  </li>
+                    <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
+                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
+                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Schedule</a></li>
                 </ul>
               </div>
-              <div class="menu_section">
+<!--              <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
                   <li><a href="#"><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
                        <ul class="nav child_menu">
-                       <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>">Merit & Demerit</a></li>
-                      <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>">Demerit Stage</a></li>
-                      <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>">Merit & Demerit Schedule</a></li>
-                      <li><a href="#">Assign Students</a></li> <!--kalau sempat, buat form utk assign student-->
+                       <li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>">Merit & Demerit</a></li>
+                      <li><a href="demerit_stage.php?userid=<?php //echo $userid; ?>">Demerit Stage</a></li>
+                      <li><a href="merit_schedule.php?userid=<?php //echo $userid; ?>">Merit & Demerit Schedule</a></li>
+                      <li><a href="#">Assign Students</a></li> kalau sempat, buat form utk assign student
                       </ul>
                   </li>
                 </ul>
-              </div>
+              </div>-->
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
@@ -119,7 +107,8 @@
             <!-- /sidebar menu -->
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="loginPage.php">
+              
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -128,34 +117,56 @@
         </div>
 
         <!-- top navigation -->
-            <div class="top_nav">
-               <div class="nav_menu">
-                  <nav>
-                     <div class="nav toggle">
-                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                     </div>
-                     <ul class="nav navbar-nav navbar-right">
-                        <li class="">
-                           <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                           <img src="images/img.jpg" alt=""><?php echo $staffname;?>
-                           <span class=" fa fa-angle-down"></span>
-                           </a>
-                           <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                <li><a href="admin_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
-                                <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
-                                <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                           </ul>
-                        </li>
-                        <li role="presentation" class="dropdown">
-                           <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                           <i class="fa fa-envelope-o"></i>
-                           <span class="badge bg-green">6</span>
-                           </a>
-                        </li>
-                     </ul>
-                  </nav>
-               </div>
-            </div>
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                      <?php
+                        include('../Connections/connection.php');
+
+                        if (isset($_GET['userid']))
+                        {
+                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                            $stmt->bind_param('s', $userid);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            $row = $result->fetch_assoc();
+                            if($row['img'] == NULL)
+                            {
+                                echo '<div><img src="images/user.png">'.$row['staffName'].'  <span class=" fa fa-angle-down"></span></div>';
+                            }
+                            else
+                            {
+                                echo '<div><img src="data:images/JPG;base64,'.base64_encode( $row['img'] ).'"/>'.$row['staffName'].'  <span class=" fa fa-angle-down"></span></div>';
+                            }
+                        }
+                    ?>
+                    <!--<img src="images/user.png" alt=""><?php //echo $staffname;?>-->
+                    <!--<span class=" fa fa-angle-down"></span>-->
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="admin_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
+                    <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
+                    <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+<!--                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                </li>-->
+              </ul>
+            </nav>
+          </div>
+        </div>
         <!-- /top navigation -->
 
         <!-- page content -->
@@ -173,22 +184,22 @@
                     <form method="post" action="mForm.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                       <?php 
                         
-                      /*  $studid = $_GET["studid"];  
+                        $studentID = $_GET["studid"];  
                                        
-                        $stmt2 = $conn->prepare("SELECT studentID FROM student WHERE studID = ?");
-                        $stmt2->bind_param("s", $studid);
+                        $stmt2 = $conn->prepare("SELECT studID, studName FROM student WHERE studentID = ?");
+                        $stmt2->bind_param("s", $studentID);
                         $stmt2->execute();
                         $result2 = $stmt2->get_result();
                         $row2 = $result2->fetch_assoc();
-                        $studentID = $row2["studentID"];  
+                        $studID = $row2["studID"];  
                         $studName =  $row2["studName"];
-                        $studContcNo =  $row2 ["studContcNo"];*/
                             
                         ?>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="studid" name="studid" class="form-control col-md-7 col-xs-12">
+                          <input type="text" name="studentid" class="form-control col-md-7 col-xs-12" value="<?php echo $studentID ; ?>" readonly>
+                          <input type="hidden" name="studid" value="<?php echo $studID ?>">
                         </div>
                       </div>
                       <div class="form-group">
@@ -266,7 +277,7 @@
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="studid" class="form-control col-md-7 col-xs-12">
+                          <input type="text" name="studid" class="form-control col-md-7 col-xs-12" readonly>
                         </div>
                       </div>
                       <div class="form-group">

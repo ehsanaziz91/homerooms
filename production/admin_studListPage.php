@@ -244,7 +244,7 @@
 
                                              <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
 
-                                             <a href="MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
+                                             <a href="MDFormPageAdmin.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
 
                                              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#exampleModalsms">SMS</button>
 
