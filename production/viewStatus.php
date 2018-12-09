@@ -50,7 +50,7 @@ if (isset($_SESSION['userid']))
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
+              <a href="#" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -94,9 +94,9 @@ if (isset($_SESSION['userid']))
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
                     <!--<li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit</a></li>-->
-                    <li><a href="viewStatus.php?userid=<?php echo $userid;?>"><i class="fa fa-home"></i>Status Merit & Demerit </a></li>
-                    <li><a href="sdemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
-                    <li><a href="smerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="viewStatus.php?userid=<?php echo $userid;?>"><i class="fa fa-tasks"></i>Status Merit & Demerit </a></li>
+                    <li><a href="sdemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
+                    <li><a href="smerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-edit"></i>Merit & Demerit Schedule</a></li>
                     
                 </ul>
               </div>
@@ -115,7 +115,7 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
+                  <li><a href="#"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
@@ -258,14 +258,29 @@ if (isset($_SESSION['userid']))
                           </select>
                         </div>
                       </div>
+                            <!--<div class="form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
+                                
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <input type="submit" value="Search">
+                            <div class='input-group date'>
+                                
+                               <input type='date' name="date" class="form-control" />
+                                
+                               <span class="input-group-addon">
+                               <span class="glyphicon glyphicon-calendar"></span>
+                               </span>
+                            </div>
+                         </div>
+                      </div>-->
                            <div class="x_content">
                               <table id="datatable-buttons" class="table table-striped table-bordered">
                                  <thead>
                                     <tr>
                                        <th>Student ID</th>
                                        <th>Student Name</th>
-                                        <th>Student Name</th>
                                         <th>Date</th>
+                                        <th>Merit Name</th>
                                         <th>Merit Point</th>
                                         <th>Demerit Name</th>
                                        <th>Demerit Point</th>
@@ -275,7 +290,10 @@ if (isset($_SESSION['userid']))
                                  <tbody>
                                     <?php
                                        include('../Connections/connection.php');
-                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, record.meritPoint as meritPoint, record.demeritPoint as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)) FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = $userid AND record.date = $date");
+                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, record.date, record.meritPoint AS meritPoint, record.demeritName AS demeritName, record.demeritPoint AS demeritPoint, SUM(record.meritPoint) AS total FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = $userid AND DATE_FORMAT(record.date, "%m") = '11'");
+                                    /* SELECT student.studentID, student.studName, record.date, record.meritPoint AS meritPoint, record.demeritName AS demeritName, record.demeritPoint AS demeritPoint, SUM(record.meritPoint) AS total FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = "ASP961803" AND DATE_FORMAT(record.date, "%m") = '11'*/
+                                      /*$stmt1 = $conn->prepare("SELECT student.studentID, student.studName, record.meritPoint as meritPoint, record.demeritPoint as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)) FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = $userid AND WHERE date >= DATEADD(MONTH, -3, GETDATE())");*/
+                                    /* SELECT student.studentID, student.studName, record.meritPoint as meritPoint, record.demeritPoint as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)) FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = $userid AND WHERE date >= DATEADD(MONTH, -3, GETDATE())*/
                                          $stmt1->execute();
                                          $stmt1 -> bind_result($userid, $studname, $date, $mname, $mpoint, $dname, $dpoint, $monthpoint);
                                          while($stmt1->fetch()) 
