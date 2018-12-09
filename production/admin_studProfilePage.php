@@ -173,6 +173,7 @@ if (isset($_SESSION['userid']))
               </div>
             </div>
             <div class="clearfix"></div>
+              
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-24">
                 <div class="x_panel">
@@ -341,6 +342,98 @@ if (isset($_SESSION['userid']))
                 </div>
               </div>
             </div>
+              
+            <div class="row">
+            <form method="post" action="admin_studList.php">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <?php
+                    include('../Connections/connection.php');
+                    if(isset($_GET['studid']))
+                    {
+                        $stmt = $conn->prepare("SELECT studID  FROM `student` WHERE studentID=?");
+                        $stmt->bind_param('s', $studid);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $row = $result->fetch_assoc();
+
+                        $studentid = $row['studID'];
+
+                        $stmt1 = $conn->prepare("SELECT record.meritName, record.meritPoint, record.date, record.demeritName, record.demeritPoint, student.studentID, homeroom.staffID FROM record JOIN student ON student.studID = record.studID LEFT OUTER JOIN homeroom ON homeroom.hrID = student.hrID WHERE student.studID = ?");
+                        $stmt1->bind_param('s', $studentid);
+                        $stmt1->execute();
+                        $stmt1 -> bind_result($mName, $mPoint, $date, $dName, $dPoint, $studid, $userid);
+                        $stmt1->fetch();
+                    }
+                    ?>
+                    <h2>View History (Teacher ID : <?php echo $userid;?>)</h2>
+                      <div class="content">
+                         <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success pull-right">Merit / Demerit</a>
+                         <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#exampleModalsms">SMS</button>
+                         <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#exampleModalEmail">Email</button>
+                      </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Merit Name</th>
+                          <th>Merit Point</th>
+                          <th>Demerit Name</th>
+                          <th>Demerit Point</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        include('../Connections/connection.php');
+                        if(isset($_GET['studid']))
+                        {
+                            $stmt = $conn->prepare("SELECT studID  FROM `student` WHERE studentID=?");
+                            $stmt->bind_param('s', $studid);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            $row = $result->fetch_assoc();
+
+                            $studentid = $row['studID'];
+
+                            $stmt1 = $conn->prepare("SELECT record.meritName, record.meritPoint, record.date, record.demeritName, record.demeritPoint, student.studentID FROM record JOIN student ON student.studID = record.studID LEFT OUTER JOIN homeroom ON homeroom.hrID = student.hrID WHERE student.studID = ?");
+                            $stmt1->bind_param('s', $studentid);
+                            $stmt1->execute();
+                            $stmt1 -> bind_result($mName, $mPoint, $date, $dName, $dPoint, $studid);
+                            while($stmt1->fetch()) 
+                            {
+                              echo '<tr>
+                                     <td>' . $date . '</td>
+                                     <td>' . $mName . '</td>
+                                     <td>' . $mPoint . '</td>
+                                     <td>' . $dName . '</td>
+                                     <td>' . $dPoint . '</td>
+                                     <td>
+                                         <form method="post" action="teacher_studList.php?userid='.$userid.'&studid='.$studid.'">
+
+                                             <input type="hidden" name="studid" value='.$studid.'></input>
+
+                                             <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
+                                         </form>
+                                     </td>
+                                 </tr>';
+                            }
+                            $stmt->close();
+                            $conn->close();
+                        }
+                        ?>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+             </form>
+            </div>
+            
           </div>
         </div>
         <!-- /page content -->

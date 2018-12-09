@@ -181,7 +181,7 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form method="post" action="mForm.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form method="post" action="admin_mForm.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
                       <?php 
                         
                         $studentID = $_GET["studid"];  
@@ -272,12 +272,13 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form method="post" action="dForm.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form method="post" action="admin_dForm.php" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Student ID</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" name="studid" class="form-control col-md-7 col-xs-12" readonly>
+                          <input type="text" name="studentid" class="form-control col-md-7 col-xs-12" value="<?php echo $studentID ; ?>" readonly>
+                          <input type="hidden" name="studid" value="<?php echo $studID ?>">
                         </div>
                       </div>
                       <div class="form-group">
@@ -410,7 +411,7 @@
             if(catID){
                 $.ajax({
                     type:'POST',
-                    url:'mForm.php',
+                    url:'admin_mForm.php',
                     data:'categoryID='+catID,
                     success:function(html){
                         $('#merit').html(html);
@@ -426,7 +427,7 @@
             if(meritID){
                 $.ajax({
                     type:'POST',
-                    url:'mForm.php',
+                    url:'admin_mForm.php',
                     data:'meritID='+meritID,
                     success:function(html){
                         //$('#city').html(html);
@@ -444,7 +445,7 @@
             if(cateID){
                 $.ajax({
                     type:'POST',
-                    url:'dForm.php',
+                    url:'admin_dForm.php',
                     data:'categoryID='+cateID,
                     success:function(html){
                         $('#demerit').html(html);
@@ -460,7 +461,7 @@
             if(demeritID){
                 $.ajax({
                     type:'POST',
-                    url:'dForm.php',
+                    url:'admin_dForm.php',
                     data:'demeritID='+demeritID,
                     success:function(html){
                         //$('#city').html(html);

@@ -19,7 +19,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>HMDS Admin Stud List</title>
+    <title>HMDS Teacher List View</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -73,6 +73,13 @@
                     <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
                     <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
                     <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Schedule</a></li>
+                </ul>
+              </div>
+              <div class="menu_section">
+                <h3>Users</h3>
+                <ul class="nav side-menu">
+                    <li><a href="admin_viewTeachers.php?userid=<?php echo $userid; ?>"><i class="fa fa-user"></i>Teachers</a></li>
+                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-users"></i>Students</a></li>
                 </ul>
               </div>
 <!--              <div class="menu_section">
@@ -168,7 +175,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Homerooms Students</h3>
+                <h3>View Teachers</h3>
               </div>
             </div>
 
@@ -179,80 +186,54 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Teachers Name</h2>
-                        <div class="content">
-                             <div class="col-md-4 col-sm-4 col-xs-8">
-                                <?php
-
-                                $position = "02";
-
-                                $stmt = $conn->prepare("SELECT * FROM staff WHERE position = ?");
-                                $stmt->bind_param('s',$position);
-                                $stmt->execute();
-                                $result = $stmt->get_result();
-                                ?>
-                                <select id="filter_staff" name="filter_staff" class="form-control">
-                                    <option value="" selected="selected">Select Teacher</option>
-                                    <?php
-                                    if($result->num_rows>0){
-                                        while($row = $result->fetch_assoc()){ 
-                                            echo '<option value="'.$row['staffID'].'">'.$row['staffName'].'</option>';
-                                        }
-                                    }else{
-                                        echo '<option value="">Teacher not found</option>';
-                                    }
-                                    ?>
-                                </select>
-                             </div><button type="submit" class="btn btn-success" name="filter">Filter</button>
-                        </div>
+                    <h2>List of Teachers</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Student ID</th>
-                          <th>Student Name</th>
-                          <th>Merit Point</th>
-                          <th>Demerit Point</th>
-                          <th>Current Points</th>
+                          <th>Staff ID</th>
+                          <th>Staff Name</th>
+                          <th>Phone Number</th>
+                          <th>Email</th>
+                          <th>Homeroom</th>
                           <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
                       <?php
-                       include('../Connections/connection.php');
+                        include('../Connections/connection.php');
 
-                         if($stmt = $conn->prepare("SELECT student.studentID, student.studName, SUM(record.meritPoint) as meritPoint, SUM(record.demeritPoint) as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)), homeroom.staffID FROM student LEFT OUTER JOIN record ON record.studID = student.studID JOIN homeroom ON homeroom.hrID = student.hrID GROUP BY studentID")) 
-                         {
-                             $stmt -> execute();
-                             $stmt -> bind_result($studid, $studname, $mpoint, $dpoint, $cpoint, $userID);
-                             while($stmt->fetch()) 
-                             {
-                                 echo '<tr>
-                                         <td>' . $studid . '</td>
-                                         <td>' . $studname . '</td>
-                                         <td>' . $mpoint . '</td>
-                                         <td>' . $dpoint . '</td>
-                                         <td>' . $cpoint . '</td>
-                                         <td>
-                                             <form method="post" action="admin_studList.php?userid='.$userid.'&studid='.$studid.'">
+                            $position = '02';
 
-                                             <input type="hidden" name="studid" value='.$studid.'></input>
+                            $stmt1 = $conn->prepare("SELECT staff.staffID, staff.staffName, staff.phoneNo, staff.email, homeroom.className FROM staff JOIN homeroom ON homeroom.staffID = staff.staffID WHERE staff.position = ?");
+                            $stmt1->bind_param('s', $position);
+                            $stmt1->execute();
+                            $stmt1 -> bind_result($userID, $staffname, $number, $email, $home);
+                            while($stmt1->fetch()) 
+                            {
+                              echo '<tr>
+                                     <td>' . $userID . '</td>
+                                     <td>' . $staffname . '</td>
+                                     <td>' . $number . '</td>
+                                     <td>' . $email . '</td>
+                                     <td>' . $home . '</td>
+                                     <td>
+                                         <form method="post" action="admin_viewTeachers.php?userid='.$userid.'&userID='.$userID.'">
 
-                                             <a href="admin_studProfilePage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-primary">Details</a>
-
-                                             <a href="admin_MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
-                                             
+                                             <input type="hidden" name="userID" value='.$userID.'></input>
+                                            
+                                             <button class="btn btn-primary" name="asign" onclick="document.submit();">Asign Homeroom</button>
                                              <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
                                          </form>
-                                         </td>
-                                     </tr>';
-                             }
-                               $stmt->close();
-                               $conn->close();
-                         }
-                       ?>
+                                     </td>
+                                 </tr>';
+                            }
+                            $stmt->close();
+                            $conn->close();
+                        
+                        ?> 
                       </tbody>
                     </table>
                   </div>

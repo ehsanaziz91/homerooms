@@ -19,7 +19,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>HMDS Admin Stud List</title>
+    <title>HMDS Demerit Stage</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -70,29 +70,23 @@
               <div class="menu_section">
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
-                    <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
-                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
+                    <li><a href="admin_studListPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
+                    <li><a href="admin_demeritStagePage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
                     <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Schedule</a></li>
                 </ul>
               </div>
-<!--              <div class="menu_section">
+              <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
-                       <ul class="nav child_menu">
-                       <li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>">Merit & Demerit</a></li>
-                      <li><a href="demerit_stage.php?userid=<?php //echo $userid; ?>">Demerit Stage</a></li>
-                      <li><a href="merit_schedule.php?userid=<?php //echo $userid; ?>">Merit & Demerit Schedule</a></li>
-                      <li><a href="#">Assign Students</a></li> kalau sempat, buat form utk assign student
-                      </ul>
-                  </li>
+                    <li><a href="admin_viewTeachersPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-user"></i>Teachers</a></li>
+                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-users"></i>Students</a></li>
                 </ul>
-              </div>-->
+              </div>
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
-                  </li>
+                  <li><a href="admin_chartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
+                  <li><a href="admin_echartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
                 </ul>
               </div>
 
@@ -168,97 +162,76 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Homerooms Students</h3>
+                <h3>Demerit Stage</h3>
               </div>
             </div>
 
             <div class="clearfix"></div>
-
+              
             <div class="row">
-            <form method="post" action="admin_studList.php">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Teachers Name</h2>
-                        <div class="content">
-                             <div class="col-md-4 col-sm-4 col-xs-8">
-                                <?php
-
-                                $position = "02";
-
-                                $stmt = $conn->prepare("SELECT * FROM staff WHERE position = ?");
-                                $stmt->bind_param('s',$position);
-                                $stmt->execute();
-                                $result = $stmt->get_result();
-                                ?>
-                                <select id="filter_staff" name="filter_staff" class="form-control">
-                                    <option value="" selected="selected">Select Teacher</option>
-                                    <?php
-                                    if($result->num_rows>0){
-                                        while($row = $result->fetch_assoc()){ 
-                                            echo '<option value="'.$row['staffID'].'">'.$row['staffName'].'</option>';
-                                        }
-                                    }else{
-                                        echo '<option value="">Teacher not found</option>';
-                                    }
-                                    ?>
-                                </select>
-                             </div><button type="submit" class="btn btn-success" name="filter">Filter</button>
-                        </div>
+                    <h2>List of Demerit Stage</h2>
+                      <!-- Button trigger modal -->
+                      <div class="content">
+                         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#stage<?php echo $userid;?>">Add Demerit Stage</button>
+                         <?php include ('admin_demeritStageModal.php'); ?>
+                      </div>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <table id="datatable-buttons" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>Student ID</th>
-                          <th>Student Name</th>
-                          <th>Merit Point</th>
-                          <th>Demerit Point</th>
-                          <th>Current Points</th>
+                          <th>Stage ID</th>
+                          <th>Current Point</th>
+                          <th>Descriptions</th>
                           <th>Action</th>
                         </tr>
                       </thead>
+
                       <tbody>
-                      <?php
-                       include('../Connections/connection.php');
-
-                         if($stmt = $conn->prepare("SELECT student.studentID, student.studName, SUM(record.meritPoint) as meritPoint, SUM(record.demeritPoint) as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)), homeroom.staffID FROM student LEFT OUTER JOIN record ON record.studID = student.studID JOIN homeroom ON homeroom.hrID = student.hrID GROUP BY studentID")) 
-                         {
-                             $stmt -> execute();
-                             $stmt -> bind_result($studid, $studname, $mpoint, $dpoint, $cpoint, $userID);
-                             while($stmt->fetch()) 
+                        <?php
+                           include('../Connections/connection.php');
+                          
+                             if($stmt = $conn->prepare("SELECT stageID, currentPoint, description FROM stage")) 
                              {
-                                 echo '<tr>
-                                         <td>' . $studid . '</td>
-                                         <td>' . $studname . '</td>
-                                         <td>' . $mpoint . '</td>
-                                         <td>' . $dpoint . '</td>
-                                         <td>' . $cpoint . '</td>
-                                         <td>
-                                             <form method="post" action="admin_studList.php?userid='.$userid.'&studid='.$studid.'">
+                                 $stmt -> execute();
+                                 $stmt -> bind_result($stage, $cPoint, $desc);
+                                 while($stmt->fetch()) 
+                                 {
+                                     include ('admin_demeritStageModal.php');
+                                     echo '<tr>
+                                             <td>' . $stage . '</td>
+                                             <td>' . $cPoint . '</td>
+                                             <td>' . $desc . '</td>
+                                             <td>
+                                                 <form method="post" action="admin_demeritStage.php?userid='.$userid.'&stageid='.$stage.'">
 
-                                             <input type="hidden" name="studid" value='.$studid.'></input>
+                                                 <input type="hidden" name="stageid" value='.$stage.'></input>';?>
+                          
+                                         
+                                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#updatestage<?php echo $stage;?>"><i class="fa fa-refresh"></i></button>
+                                                 <input type="hidden" name="userid" value="<?php echo $userid;?>">
 
-                                             <a href="admin_studProfilePage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-primary">Details</a>
+                                                 <?php echo'
 
-                                             <a href="admin_MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
-                                             
-                                             <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
-                                         </form>
-                                         </td>
-                                     </tr>';
+                                                 <button class="btn btn-danger" name="del" onclick="document.submit();"><i class="fa fa-trash"></i></button>
+                                             </form>
+                                             </td>
+                                         </tr>';
+                                 }
+                                   $stmt->close();
+                                   $conn->close();
                              }
-                               $stmt->close();
-                               $conn->close();
-                         }
-                       ?>
+                           ?>
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-             </form>
+
             </div>
               
           </div>
@@ -305,26 +278,6 @@
 
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
-      
-<!--    <script>
-    $(document).ready(function() {
-        $("#filter_staff").change(function(){
-            var val = $('#filter_staff option:selected').val();    
-            $.ajax({
-                url: "admin_studList.php",
-                type: "POST",
-                dataType: "HTML",
-                data: {"staffID": val}
-                async: false,
-                success: function(data) {
-                  // for textbox add id as price
-                     $("#studid").val(data);// data will have the price echoed in somefilename.php          
-                }
-          }); 
-
-        });
-    });
-    </script>-->
 
   </body>
 </html>
