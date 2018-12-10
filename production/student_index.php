@@ -263,7 +263,7 @@ if (isset($_SESSION['userid']))
                         <!-- merit demerit element -->
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
-                            <div class="title">
+                            <div class="title" style="background-color: #ec971f">
                               <h1>Status Merit & Demerit</h1>
                             </div>
                             <div class="x_content">
@@ -276,7 +276,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="viewStatus.php?userid=<?php echo $userid;?>" class="btn btn-success btn-block" role="button">View</a>
+                                <a href="viewStatus.php?userid=<?php echo $userid;?>" class="btn btn-warning btn-block" role="button">View</a>
                                 <p>
                                 </p>
                               </div>
@@ -288,7 +288,7 @@ if (isset($_SESSION['userid']))
                         <!-- stage element -->
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
-                            <div class="title">
+                            <div class="title" style="background-color: #c9302c">
                               <h1>Demerit Class</h1>
                             </div>
                             <div class="x_content">
@@ -313,7 +313,7 @@ if (isset($_SESSION['userid']))
                         <!-- schedule element -->
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
-                            <div class="title">
+                            <div class="title" style="background-color: #394D5F">
                               <h1>Merit & Demerit Schema</h1>
                             </div>
                             <div class="x_content">
@@ -334,6 +334,30 @@ if (isset($_SESSION['userid']))
                           </div>
                         </div>
                         <!-- schedule element -->
+                           <!-- optional -->
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <div class="pricing">
+                            <div class="title">
+                              <h1>Analysis</h1>
+                            </div>
+                            <div class="x_content">
+                              <div class="">
+                                <div class="pricing_features">
+                                  <ul class="list-unstyled text-left">
+                                    <li><i class="fa fa-check text-success"></i> <strong>View Student's Merit Demerit Graph</strong></li>
+                                    <li><i class="fa fa-check text-success"></i> <strong>View Graph By Category</strong></li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="pricing_footer">
+                                <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button">View</a>
+                                <p>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- merit demerit element -->
                       </div>
                     </div>
                   </div>
@@ -346,6 +370,14 @@ if (isset($_SESSION['userid']))
 
 
 
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            HMD System@2018/19 - WorkshopII | BITS | FTMK | UTeM
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
     </div>
 
