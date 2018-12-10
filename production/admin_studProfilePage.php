@@ -52,48 +52,31 @@ if (isset($_SESSION['userid']))
             </div>
 
             <div class="clearfix"></div>
-            <!-- menu profile quick info -->
-<!--            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img.JPG" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Teacher</span>
-                 <h2><?php //echo $name;?></h2>
-              </div>
-            </div>-->
-            <!-- /menu profile quick info -->
 
             <br />
               
- <!-- sidebar menu -->
+            <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
-                    <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
-                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
+                    <li><a href="admin_studListPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
+                    <li><a href="admin_demeritStagePage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
                     <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Schedule</a></li>
                 </ul>
               </div>
-<!--              <div class="menu_section">
+              <div class="menu_section">
                 <h3>Users</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-users"></i>Admin<span class="fa fa-chevron-down"></span></a>
-                       <ul class="nav child_menu">
-                       <li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>">Merit & Demerit</a></li>
-                      <li><a href="demerit_stage.php?userid=<?php //echo $userid; ?>">Demerit Stage</a></li>
-                      <li><a href="merit_schedule.php?userid=<?php //echo $userid; ?>">Merit & Demerit Schedule</a></li>
-                      <li><a href="#">Assign Students</a></li> kalau sempat, buat form utk assign student
-                      </ul>
-                  </li>
+                    <li><a href="admin_viewTeachersPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-user"></i>Teachers</a></li>
+                    <li><a href="#"><i class="fa fa-users"></i>Students</a></li>
                 </ul>
-              </div>-->
+              </div>
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
-                  </li>
+                  <li><a href="admin_chartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
+                  <li><a href="admin_echartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
                 </ul>
               </div>
 
@@ -369,7 +352,7 @@ if (isset($_SESSION['userid']))
                     ?>
                     <h2>View History (Teacher ID : <?php echo $userid;?>)</h2>
                       <div class="content">
-                         <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success pull-right">Merit / Demerit</a>
+                         <a href="admin_MDFormPage.php?userid=<?php echo $userid;?>&studid=<?php echo $studid;?>" class="btn btn-success pull-right">Merit / Demerit</a>
                          <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#exampleModalsms">SMS</button>
                          <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#exampleModalEmail">Email</button>
                       </div>
@@ -490,9 +473,33 @@ if (isset($_SESSION['userid']))
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.min.js"></script>
       
-   
-    
+    <!-- ECharts -->
+    <script src="../vendors/echarts/dist/echarts.min.js"></script>
+    <script src="../vendors/echarts/map/js/world.js"></script>
+      
+    <script type="text/javascript">
+        $(document).ready(function () {
 
+            $.getJSON("admin_studProfileChart.php", function (result) {
 
+                var chart = new CanvasJS.Chart("graph_bar", {
+                    title: {
+                        text: "Demerit Record - 2019"
+                    },
+                    data: [
+                        {
+                            dataPoints: result,
+                            type:"graph_bar",
+                            yValueFormatString: "#,##0.##",
+                            indexLabel: "({y})",
+                        }
+                    ]
+                });
+
+                chart.render();
+            });
+        });
+    </script>
+      
   </body>
 </html>

@@ -51,18 +51,6 @@
 
             <div class="clearfix"></div>
 
-            <!-- menu profile quick info -->
-<!--            <div class="profile clearfix">
-              <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
-              </div>
-              <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
-              </div>
-            </div>-->
-            <!-- /menu profile quick info -->
-
             <br />
 
             <!-- sidebar menu -->
@@ -79,7 +67,7 @@
                 <h3>Users</h3>
                 <ul class="nav side-menu">
                     <li><a href="admin_viewTeachersPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-user"></i>Teachers</a></li>
-                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-users"></i>Students</a></li>
+                    <li><a href="#"><i class="fa fa-users"></i>Students</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -193,7 +181,7 @@
                         <!-- merit demerit element -->
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
-                            <div class="title">
+                            <div class="title" style="background-color: #ec971f">
                               <h1>Merit & Demerit</h1>
                             </div>
                             <div class="x_content">
@@ -219,7 +207,7 @@
                         <!-- stage element -->
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
-                            <div class="title">
+                            <div class="title" style="background-color: #c9302c">
                               <h1>Demerit Stage</h1>
                             </div>
                             <div class="x_content">
@@ -244,7 +232,7 @@
                         <!-- schedule element -->
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
-                            <div class="title">
+                            <div class="title" style="background-color: #394D5F">
                               <h1>Merit & Demerit Schedule</h1>
                             </div>
                             <div class="x_content">
@@ -268,7 +256,7 @@
                           
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
-                            <div class="title">
+                            <div class="title" style="background-color: #26B99A">
                               <h1>Optional</h1>
                             </div>
                             <div class="x_content">
@@ -281,7 +269,7 @@
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="#" class="btn btn-primary btn-block" role="button"><i class="fa fa-eye"></i> View</a>
+                                <a href="#" class="btn btn-success btn-block" role="button"><i class="fa fa-eye"></i> View</a>
                                 <p>
                                 </p>
                               </div>
@@ -338,6 +326,7 @@
                           <th>Merit Point</th>
                           <th>Demerit Point</th>
                           <th>Current Points</th>
+                          <th>Demerit Class</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -361,18 +350,42 @@
                                          
                                          <td>
                                              <?php 
-                                                if($cpoint>0)
+                                                if($cpoint >0)
                                                 {
                                                     echo "<p style='color:#00e600;'>$cpoint</p>";
-                                                }else
+                                                }else if($cpoint >= -1 || $cpoint <= -49)
+                                                {
+                                                    echo"<p style='color:#0000ff;'>$cpoint</p>";
+                                                }else if($cpoint >= -50 || $cpoint <= -99)
+                                                {
+                                                    echo"<p style='color:#cccc00;'>$cpoint</p>";
+                                                }else if($cpoint >= -100 || $cpoint <= -119)
+                                                {
+                                                    echo"<p style='color:#ff6600;'>$cpoint</p>";
+                                                }else if($cpoint >= -120 || $cpoint <= -149)
                                                 {
                                                     echo"<p style='color:#ff0000;'>$cpoint</p>";
+                                                }else if($cpoint >= -150 || $cpoint <= -179)
+                                                {
+                                                    echo"<p style='color:#862d86;'>$cpoint</p>";
+                                                }else if($cpoint >= -180 || $cpoint <= -199)
+                                                {
+                                                    echo"<p style='color:#5c5c3d;'>$cpoint</p>";
+                                                }else if($cpoint >= -200)
+                                                {
+                                                    echo"<p style='color:#000000;'>$cpoint</p>";
                                                 }
                                              ?>
                                         </td>
                                         
                         <?php
-                                 echo ' <td><form method="post" action="admin_studList.php?userid='.$userid.'&studid='.$studid.'">
+                                 echo ' <td>    
+                                            <fieldset>
+                                                Good <br>
+                                                Poor
+                                            </fieldset>
+                                        </td>
+                                        <td><form method="post" action="admin_studList.php?userid='.$userid.'&studid='.$studid.'">
 
                                              <input type="hidden" name="studid" value='.$studid.'></input>
 

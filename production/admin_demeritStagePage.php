@@ -181,7 +181,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                    <table id="datatable-dynamic" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>Stage ID</th>
