@@ -290,12 +290,18 @@ if (isset($_SESSION['userid']))
                                  <tbody>
                                     <?php
                                        include('../Connections/connection.php');
-                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, record.date, record.meritPoint AS meritPoint, record.demeritName AS demeritName, record.demeritPoint AS demeritPoint, SUM(record.meritPoint) AS total FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = $userid AND DATE_FORMAT(record.date, "%m") = '11'");
+                                     
+                                     
+                                     
+                                     //$userid = $_GET['userid'];
+                                     //$date = $_GET['date'];
+                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, record.date, record.meritName AS meritName, record.meritPoint AS meritPoint, record.demeritName AS demeritName, record.demeritPoint AS demeritPoint FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = ? AND DATE_FORMAT(record.date, '%m') = ?");
                                     /* SELECT student.studentID, student.studName, record.date, record.meritPoint AS meritPoint, record.demeritName AS demeritName, record.demeritPoint AS demeritPoint, SUM(record.meritPoint) AS total FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = "ASP961803" AND DATE_FORMAT(record.date, "%m") = '11'*/
                                       /*$stmt1 = $conn->prepare("SELECT student.studentID, student.studName, record.meritPoint as meritPoint, record.demeritPoint as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)) FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = $userid AND WHERE date >= DATEADD(MONTH, -3, GETDATE())");*/
                                     /* SELECT student.studentID, student.studName, record.meritPoint as meritPoint, record.demeritPoint as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)) FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = $userid AND WHERE date >= DATEADD(MONTH, -3, GETDATE())*/
+                                         $stmt1->bind_param('ss',$userid, $date);
                                          $stmt1->execute();
-                                         $stmt1 -> bind_result($userid, $studname, $date, $mname, $mpoint, $dname, $dpoint, $monthpoint);
+                                         $stmt1 -> bind_result($userid, $studname, $date, $mname, $mpoint, $dname, $dpoint);
                                          while($stmt1->fetch()) 
                                      
                                                    /*  if (!empty($_REQUEST['date'])) {
@@ -316,7 +322,6 @@ if (isset($_SESSION['userid']))
                                                      <td>' . $mpoint . '</td>
                                                      <td>' . $dname . '</td>
                                                      <td>' . $dpoint . '</td>
-                                                     <td>' . $monthpoint . '</td> 
                                                  </tr>';
                                                         
                /* echo '<tr>
@@ -344,6 +349,14 @@ if (isset($_SESSION['userid']))
             <!-- /page content -->
 
 
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            HMD System@2018/19 - WorkshopII | BITS | FTMK | UTeM
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
 
       </div>
     </div>
