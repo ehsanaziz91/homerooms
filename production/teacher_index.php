@@ -107,7 +107,7 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
+                  <li><a href="teacher_studProfilePage3.php?userid=<?php echo $userid;?>"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
@@ -213,7 +213,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="demerit_stage.php?userid=<?php echo $userid; ?>" class="btn btn-danger btn-block" role="button">View</a>
+                                <a href="demerit_stage.php?userid=<?php echo $userid; ?>" class="btn btn-danger btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
@@ -238,7 +238,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="merit_schedule.php?userid=<?php echo $userid; ?>" class="btn btn-dark btn-block" role="button">View</a>
+                                <a href="merit_schedule.php?userid=<?php echo $userid; ?>" class="btn btn-dark btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
@@ -262,7 +262,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="teacher_studListPage.php?userid=<?php echo $userid; ?>" class="btn btn-warning btn-block" role="button">View</a>
+                                <a href="teacher_studListPage.php?userid=<?php echo $userid; ?>" class="btn btn-warning btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
@@ -286,7 +286,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button">View</a>
+                                <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
