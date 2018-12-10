@@ -86,9 +86,9 @@
                <div class="menu_section">
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
-                    <li><a href="teacherDemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
-                    <li><a href="tmerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
-                    <li><a href="teacher_studListPage.php?userid=<?php echo $userid;?>"><i class="fa fa-home"></i>List of Students</a></li>
+                    <li><a href="teacherDemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Demerit Stage</a></li>
+                    <li><a href="tmerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="teacher_studListPage.php?userid=<?php echo $userid;?>"><i class="fa fa-edit"></i>List of Students</a></li>
                 </ul>
               </div>
            <!--   <div class="menu_section">
@@ -106,7 +106,7 @@
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
+                  <li><a href="#"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
@@ -226,11 +226,11 @@
 
                                                              <input type="hidden" name="studid" value='.$studid.'></input>
 
-                                                             <a href="teacher_studProfilePage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-primary">Details</a>
+                                                             <a href="teacher_studProfilePage2.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-primary">Details</a>
                                                              
                                                              <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
 
-                                                             <a href="MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
+                                                             <a href="teacher_MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
                                                              
                                                              <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#exampleModalsms">SMS</button>
                                                              
