@@ -88,8 +88,8 @@
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
                     <li><a href="admin_studListPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
-                    <li><a href="admin_demeritStagePage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
-                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="admin_demeritStagePage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Class</a></li>
+                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Scheme</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -103,7 +103,7 @@
                 <h3>Report</h3>
                 <ul class="nav side-menu">
                   <li><a href="admin_chartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
-                  <li><a href="admin_echartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
+                  <li><a href="admin_chartPage2.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
                 </ul>
               </div>
 
@@ -237,13 +237,13 @@
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
                             <div class="title" style="background-color: #c9302c">
-                              <h1>Demerit Stage</h1>
+                              <h1>Demerit Class</h1>
                             </div>
                             <div class="x_content">
                               <div class="">
                                 <div class="pricing_features">
                                   <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong>View Demerit Stage</strong></li>
+                                    <li><i class="fa fa-check text-success"></i><strong>View Demerit Class</strong></li>
                                     <li><i class="fa fa-check text-success"></i> <strong>Reference for students and Parents</strong></li>
                                   </ul>
                                 </div>
@@ -262,13 +262,13 @@
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
                             <div class="title" style="background-color: #394D5F">
-                              <h1>Merit & Demerit Schedule</h1>
+                              <h1>Merit & Demerit Scheme</h1>
                             </div>
                             <div class="x_content">
                               <div class="">
                                 <div class="pricing_features">
                                   <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i> <strong>Schedule for Merit and Demerit</strong></li>
+                                    <li><i class="fa fa-check text-success"></i> <strong>Scheme for Merit and Demerit</strong></li>
                                     <li><i class="fa fa-check text-success"></i> <strong>For Students and Parents Reference</strong>
                                   </ul>
                                 </div>
@@ -286,19 +286,19 @@
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
                             <div class="title" style="background-color: #26B99A">
-                              <h1>Optional</h1>
+                              <h1>Analysis</h1>
                             </div>
                             <div class="x_content">
                               <div class="">
                                 <div class="pricing_features">
                                   <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i> <strong>Schedule for Merit and Demerit</strong></li>
-                                    <li><i class="fa fa-check text-success"></i> <strong>For Students and Parents Reference</strong>
+                                                                       <li><i class="fa fa-check text-success"></i> <strong>View Student's Merit Demerit Graph</strong></li>
+                                    <li><i class="fa fa-check text-success"></i> <strong>View Graph By Category</strong></li>
                                   </ul>
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="#" class="btn btn-success btn-block" role="button"><i class="fa fa-eye"></i> View</a>
+                                <a href="admin_chartPage2.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button"><i class="fa fa-eye"></i> View</a>
                                 <p>
                                 </p>
                               </div>

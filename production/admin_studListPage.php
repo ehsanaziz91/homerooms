@@ -46,21 +46,27 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
+              <a href="#" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
             </div>
 
             <div class="clearfix"></div>
 
             <br />
-
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+               <div class="menu_section">
+                    <ul class="nav side-menu">
+                    <li><a href="admin_index.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Dashboard</a></li>
+                </ul>
+                   </div>
+                       </div>
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
                     <li><a href="admin_studListPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
-                    <li><a href="admin_demeritStagePage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
-                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="admin_demeritStagePage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Class</a></li>
+                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Scheme</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -74,7 +80,7 @@
                 <h3>Report</h3>
                 <ul class="nav side-menu">
                   <li><a href="admin_chartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
-                  <li><a href="admin_echartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
+                  <li><a href="admin_chartPage2.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
                 </ul>
               </div>
 
