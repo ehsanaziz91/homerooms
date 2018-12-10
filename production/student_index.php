@@ -276,7 +276,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="viewStatus.php?userid=<?php echo $userid;?>" class="btn btn-warning btn-block" role="button">View</a>
+                                <a href="viewStatus.php?userid=<?php echo $userid;?>" class="btn btn-warning btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
@@ -301,7 +301,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="sdemerit_stage.php?userid=<?php echo $userid; ?>" class="btn btn-danger btn-block" role="button">View</a>
+                                <a href="sdemerit_stage.php?userid=<?php echo $userid; ?>" class="btn btn-danger btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
@@ -326,7 +326,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="smerit_schedule.php?userid=<?php echo $userid; ?>" class="btn btn-dark btn-block" role="button">View</a>
+                                <a href="smerit_schedule.php?userid=<?php echo $userid; ?>" class="btn btn-dark btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
@@ -350,7 +350,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button">View</a>
+                                <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
