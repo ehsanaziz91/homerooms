@@ -87,8 +87,8 @@ if (isset($_SESSION['userid']))
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
                     <!--<li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit</a></li>-->
-                    <li><a href="teacherDemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Demerit Stage</a></li>
-                    <li><a href="tmerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="teacherDemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Demerit Class</a></li>
+                    <li><a href="tmerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Merit & Demerit Scheme</a></li>
                     <li><a href="teacher_studListPage.php?userid=<?php echo $userid;?>"><i class="fa fa-edit"></i>List of Students</a></li>
                 </ul>
               </div>
@@ -201,13 +201,13 @@ if (isset($_SESSION['userid']))
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
                             <div class="title" style="background-color: #c9302c">
-                              <h1>Demerit Stage</h1>
+                              <h1>Demerit Class</h1>
                             </div>
                             <div class="x_content">
                               <div class="">
                                 <div class="pricing_features">
                                   <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i><strong>View Demerit Stage</strong></li>
+                                    <li><i class="fa fa-check text-success"></i><strong>View Demerit Class</strong></li>
                                     <li><i class="fa fa-check text-success"></i> <strong>Reference for students and Parents</strong></li>
                                   </ul>
                                 </div>
@@ -226,13 +226,13 @@ if (isset($_SESSION['userid']))
                         <div class="col-md-3 col-sm-6 col-xs-12">
                           <div class="pricing">
                             <div class="title" style="background-color: #394D5F">
-                              <h1>Merit & Demerit Schedule</h1>
+                              <h1>Merit & Demerit Scheme</h1>
                             </div>
                             <div class="x_content">
                               <div class="">
                                 <div class="pricing_features">
                                   <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i> <strong>Schedule for Merit and Demerit</strong></li>
+                                    <li><i class="fa fa-check text-success"></i> <strong>Scheme for Merit and Demerit</strong></li>
                                     <li><i class="fa fa-check text-success"></i> <strong>For Students and Parents Reference</strong>
                                   </ul>
                                 </div>
