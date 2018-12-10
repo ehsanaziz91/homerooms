@@ -46,11 +46,24 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
+              <a href="#" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
             </div>
 
             <div class="clearfix"></div>
+ <?php
+                                        include('../Connections/connection.php');
 
+                                        if (isset($_GET['userid']))
+                                        {
+                                            $stmt = $conn->prepare("SELECT * FROM student WHERE studentID = ?");
+                                            $stmt->bind_param('s', $userid);
+                                            $stmt->execute();
+                                            $result = $stmt->get_result();
+                                            $row = $result->fetch_assoc();
+
+                                            $studname = $row['studName'];
+                                        }
+              ?>
             <!-- menu profile quick info -->
 <!--            <div class="profile clearfix">
               <div class="profile_pic">
@@ -76,9 +89,9 @@
               <div class="menu_section">
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
-                    <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit</a></li>
-                    <li><a href="sdemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
-                    <li><a href="smerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
+                    <li><a href="sdemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
+                    <li><a href="smerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-edit"></i>Merit & Demerit Schedule</a></li>
                 </ul>
               </div>
 <!--              <div class="menu_section">
@@ -97,7 +110,7 @@
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
+                  <li><a href="#"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
@@ -128,7 +141,7 @@
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                       <?php
-                        include('../Connections/connection.php');
+                       /* include('../Connections/connection.php');
 
                         if (isset($_GET['userid']))
                         {
@@ -145,13 +158,13 @@
                             {
                                 echo '<div><img src="data:images/JPG;base64,'.base64_encode( $row['img'] ).'"/>'.$row['staffName'].'  <span class=" fa fa-angle-down"></span></div>';
                             }
-                        }
+                        }*/
                     ?>
-                    <!--<img src="images/user.png" alt=""><?php //echo $staffname;?>-->
-                    <!--<span class=" fa fa-angle-down"></span>-->
+                    <img src="images/user.png" alt=""><?php echo $studname;?>
+                    <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="admin_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
+                    <li><a href="student_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
                     <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
                     <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
