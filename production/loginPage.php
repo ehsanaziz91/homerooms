@@ -57,6 +57,7 @@
                 <div>
                   <h2><i class="fa fa-university" aria-hidden="true"></i> Homeroom Merit Demerit</h2>
                   <p>©2018 All Rights Reserved. Homeroom Merit Demerit is a CopyRight template. Privacy and Terms</p>
+                   
                 </div>
               </div>
           </section>
