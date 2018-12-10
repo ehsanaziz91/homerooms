@@ -253,6 +253,14 @@ if (isset($_SESSION['userid']))
         <!-- /page content -->
 
 
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            HMD System@2018/19 - WorkshopII | BITS | FTMK | UTeM
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
       </div>
     </div>
 
