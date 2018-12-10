@@ -94,9 +94,9 @@ if (isset($_SESSION['userid']))
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
                     <!--<li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit</a></li>-->
-                    <li><a href="viewStatus.php?userid=<?php echo $userid;?>"><i class="fa fa-home"></i>Status Merit & Demerit </a></li>
-                    <li><a href="sdemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
-                    <li><a href="smerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="viewStatus.php?userid=<?php echo $userid;?>"><i class="fa fa-tasks"></i>Status Merit & Demerit </a></li>
+                    <li><a href="sdemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
+                    <li><a href="smerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-edit"></i>Merit & Demerit Schedule</a></li>
                     
                 </ul>
               </div>
@@ -115,7 +115,7 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
+                  <li><a href="#"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
