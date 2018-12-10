@@ -48,7 +48,7 @@ if (isset($_SESSION['userid']))
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
+              <a href="#" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -185,6 +185,7 @@ if (isset($_SESSION['userid']))
                      
                 <h3>Student's Profile</h3>
                 <div class="x_panel">
+                    <form method="post" action="admin_studProfile.php">
                     <div class="panel-body">
                         <?php
                             include('../Connections/connection.php');
@@ -200,7 +201,7 @@ if (isset($_SESSION['userid']))
                                 $row = $result->fetch_assoc();
 
                                /* while*/ 
-                                //$studID = $row['studID'];
+                                $studID = $row['studID'];
                                 $studid = $row['studentID'];
                                 $studname = $row['studName'];
                                 $studAddr = $row['studAddress'];
@@ -291,13 +292,16 @@ if (isset($_SESSION['userid']))
                                 </tr><br><br>-->
                                 <tr>
                                     <!--<button type="submit" class="btn btn-primary" name="update">Update Profile</button>-->
+                                    <input type="hidden" name="studID" value="<?php echo $studID; ?>">
+                                    <input type="hidden" name="userid" value="<?php echo $userid; ?>">
                                     <button type="submit" class="btn btn-danger" name="del">Delete Account</button>
                                 </tr>
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
-            
+                
                      
                      
                     </div>
@@ -346,15 +350,16 @@ if (isset($_SESSION['userid']))
                         $stmt1 = $conn->prepare("SELECT record.meritName, record.meritPoint, record.date, record.demeritName, record.demeritPoint, student.studentID, homeroom.staffID FROM record JOIN student ON student.studID = record.studID LEFT OUTER JOIN homeroom ON homeroom.hrID = student.hrID WHERE student.studID = ?");
                         $stmt1->bind_param('s', $studentid);
                         $stmt1->execute();
-                        $stmt1 -> bind_result($mName, $mPoint, $date, $dName, $dPoint, $studid, $userid);
+                        $stmt1 -> bind_result($mName, $mPoint, $date, $dName, $dPoint, $studid, $userID);
                         $stmt1->fetch();
                     }
                     ?>
-                    <h2>View History (Teacher ID : <?php echo $userid;?>)</h2>
+                    <h2>View History (Teacher ID : <?php echo $userID;?>)</h2>
                       <div class="content">
                          <a href="admin_MDFormPage.php?userid=<?php echo $userid;?>&studid=<?php echo $studid;?>" class="btn btn-success pull-right">Merit / Demerit</a>
-                         <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#exampleModalsms">SMS</button>
-                         <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#exampleModalEmail">Email</button>
+                         <?php include ('../production/admin_studProfileModal.php');?>
+                         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModalsms">SMS</button>
+                         <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#exampleModalEmail<?php echo $userid;?><?php echo $studid;?>">Email</button>
                       </div>
                     <div class="clearfix"></div>
                   </div>
@@ -383,10 +388,10 @@ if (isset($_SESSION['userid']))
 
                             $studentid = $row['studID'];
 
-                            $stmt1 = $conn->prepare("SELECT record.meritName, record.meritPoint, record.date, record.demeritName, record.demeritPoint, student.studentID FROM record JOIN student ON student.studID = record.studID LEFT OUTER JOIN homeroom ON homeroom.hrID = student.hrID WHERE student.studID = ?");
+                            $stmt1 = $conn->prepare("SELECT record.recordID , record.meritName, record.meritPoint, record.date, record.demeritName, record.demeritPoint, student.studentID FROM record JOIN student ON student.studID = record.studID LEFT OUTER JOIN homeroom ON homeroom.hrID = student.hrID WHERE student.studID = ?");
                             $stmt1->bind_param('s', $studentid);
                             $stmt1->execute();
-                            $stmt1 -> bind_result($mName, $mPoint, $date, $dName, $dPoint, $studid);
+                            $stmt1 -> bind_result($recordid, $mName, $mPoint, $date, $dName, $dPoint, $studid);
                             while($stmt1->fetch()) 
                             {
                               echo '<tr>
@@ -396,11 +401,11 @@ if (isset($_SESSION['userid']))
                                      <td>' . $dName . '</td>
                                      <td>' . $dPoint . '</td>
                                      <td>
-                                         <form method="post" action="teacher_studList.php?userid='.$userid.'&studid='.$studid.'">
+                                         <form method="post" action="admin_studProfile.php?userid='.$userid.'&recordid='.$recordid.'">
 
-                                             <input type="hidden" name="studid" value='.$studid.'></input>
+                                             <input type="hidden" name="recordid" value='.$recordid.'></input>
 
-                                             <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
+                                             <button class="btn btn-danger" name="delrecord" onclick="document.submit();"><i class="fa fa-trash"></i></button>
                                          </form>
                                      </td>
                                  </tr>';

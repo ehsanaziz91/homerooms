@@ -34,7 +34,7 @@
 
         $mail->isHTML(true);                                  // Set email format to HTML
 
-        $mail->Subject = 'Parcel Notification';
+        $mail->Subject = 'Amaran Pelajar';
         $mail->Body    = 'Your parcel has arrived at the post office.<br/>
                           The parcel will sent to your hostel within <strong>2 days</strong>.<br/>
                           You can take your parcel with the given <strong>QR code</strong> as shown the link below this email.<br/>
@@ -52,6 +52,9 @@
             echo "<script type='text/javascript'>alert('Mailer Error: ' . $mail->ErrorInfo)</script>";
         } else {
           echo "<script type='text/javascript'>alert('Message has been sent')</script>";
+            /*echo "<script type=\"text/javascript\">";
+            echo "alert('Deleted data successfully'),location.href='admin_studListPage.php?userid=$userid'";
+            echo "</script>";*/
         }
 
       }

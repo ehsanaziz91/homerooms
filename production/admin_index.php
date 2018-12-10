@@ -38,6 +38,35 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+      
+    <!-- Custom Table Data Style -->
+    <style>
+        #badge1{
+            background-color: forestgreen;
+        }
+        #badge2{
+            background-color: blue;
+        }
+        #badge3{
+            background-color: yellow;
+        }
+        #badge4{
+            background-color: orange;
+        }
+        #badge5{
+            background-color: red;
+        }
+        #badge6{
+            background-color: purple;
+        }
+        #badge7{
+            background-color: grey;
+        }
+        #badge8{
+            background-color: black;
+        }
+    </style>
+      
   </head>
 
   <body class="nav-md">
@@ -348,43 +377,42 @@
                                          <td>' . $dpoint . '</td>'
                             ;?>
                                          
-                                         <td>
+                                         <td align="center">
                                              <?php 
                                                 if($cpoint >0)
                                                 {
-                                                    echo "<p style='color:#00e600;'>$cpoint</p>";
+                                                    echo "<p class='badge' id='badge1'> $cpoint</p>";
                                                 }else if($cpoint >= -1 || $cpoint <= -49)
                                                 {
-                                                    echo"<p style='color:#0000ff;'>$cpoint</p>";
+                                                    echo"<p class='badge' id='badge2'> $cpoint</p>";
                                                 }else if($cpoint >= -50 || $cpoint <= -99)
                                                 {
-                                                    echo"<p style='color:#cccc00;'>$cpoint</p>";
+                                                    echo"<p class='badge' id='badge3'> $cpoint</p>";
                                                 }else if($cpoint >= -100 || $cpoint <= -119)
                                                 {
-                                                    echo"<p style='color:#ff6600;'>$cpoint</p>";
+                                                    echo"<p class='badge' id='badge4'> $cpoint</p>";
                                                 }else if($cpoint >= -120 || $cpoint <= -149)
                                                 {
-                                                    echo"<p style='color:#ff0000;'>$cpoint</p>";
+                                                    echo"<p class='badge' id='badge5'> $cpoint</p>";
                                                 }else if($cpoint >= -150 || $cpoint <= -179)
                                                 {
-                                                    echo"<p style='color:#862d86;'>$cpoint</p>";
+                                                    echo"<p class='badge' id='badge6'> $cpoint</p>";
                                                 }else if($cpoint >= -180 || $cpoint <= -199)
                                                 {
-                                                    echo"<p style='color:#5c5c3d;'>$cpoint</p>";
+                                                    echo"<p class='badge' id='badge7'> $cpoint</p>";
                                                 }else if($cpoint >= -200)
                                                 {
-                                                    echo"<p style='color:#000000;'>$cpoint</p>";
+                                                    echo"<p class='badge' id='badge8'> $cpoint</p>";
                                                 }
                                              ?>
                                         </td>
+                                        <td>
+                                            <a><span class="badge" id="badge1">.</span>Good</a><br><br>
+                                            <a><span class="badge" id="badge2">.</span>Poor</a><br>
+                                        </td>
                                         
                         <?php
-                                 echo ' <td>    
-                                            <fieldset>
-                                                Good <br>
-                                                Poor
-                                            </fieldset>
-                                        </td>
+                                 echo ' 
                                         <td><form method="post" action="admin_studList.php?userid='.$userid.'&studid='.$studid.'">
 
                                              <input type="hidden" name="studid" value='.$studid.'></input>
