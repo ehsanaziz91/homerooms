@@ -46,7 +46,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
+              <a href="#" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -76,9 +76,9 @@
                <div class="menu_section">
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
-                    <li><a href="teacherDemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
-                    <li><a href="tmerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
-                    <li><a href="teacher_studListPage.php?userid=<?php echo $userid;?>"><i class="fa fa-home"></i>List of Students</a></li>
+                    <li><a href="teacherDemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Demerit Stage</a></li>
+                    <li><a href="tmerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Merit & Demerit Schedule</a></li>
+                    <li><a href="teacher_studListPage.php?userid=<?php echo $userid;?>"><i class="fa fa-edit"></i>List of Students</a></li>
                 </ul>
               </div>
            <!--   <div class="menu_section">
@@ -96,7 +96,7 @@
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
+                  <li><a href="#"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
@@ -184,7 +184,7 @@
                   <div class="x_title">
                     <h2>List of Merit</h2>
                         <div class="content">
-                            <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addMerit">Add New Merit</button>
+                           
                         </div>
                     <div class="clearfix"></div>
                   </div>
@@ -233,7 +233,7 @@
                   <div class="x_title">
                     <h2>List of Demerit</h2>
                     <div class="content">
-                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#addDemerit">Add New Demerit</button>
+                    
                     </div>
                     <div class="clearfix"></div>
                   </div>
