@@ -222,57 +222,20 @@ if (isset($_SESSION['userid']))
             <!-- /page content -->
                       
                         <!-- monthly page content -->
-            <div class="right_col" role="main">
+                       <div class="right_col" role="main">
                <div class="">
                   <div class="clearfix"></div>
                   <div class="row">
                      <!--start of modal page-->
-                     <div class="col-md-12 col-sm-12 col-xs-12">
+                     <div class="col-md-80 col-sm-20 col-xs-20">
                         <div class="x_panel">
                              
                            <div class="x_title">
                               
-                              <h2>Monthly Merit & Demerit Record <?php echo ($userid); ?></h2>
+                              <h2> Merit & Demerit Record <?php echo $userid; ?></h2>
                               <!-- Button trigger modal -->
                               <div class="clearfix"></div>
-                               
                            </div>
-                            <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Month</label>
-                        <input type="submit" value="Search">
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select id="merit" name="merit" class="form-control">
-                            <option value="">-------------------      Select Month      -----------------</option>
-                            <option value="1">January</option>
-                              <option value="2">February</option>
-                              <option value="3">March</option>
-                              <option value="4">April</option>
-                              <option value="5">May</option>
-                              <option value="6">June</option>
-                              <option value="7">July</option>
-                              <option value="8">August</option>
-                              <option value="9">September</option>
-                              <option value="10">October</option>
-                              <option value="11">November</option>
-                              <option value="12">December</option>
-                          </select>
-                        </div>
-                      </div>
-                            <!--<div class="form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date</label>
-                                
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="submit" value="Search">
-                            <div class='input-group date'>
-                                
-                               <input type='date' name="date" class="form-control" />
-                                
-                               <span class="input-group-addon">
-                               <span class="glyphicon glyphicon-calendar"></span>
-                               </span>
-                            </div>
-                         </div>
-                      </div>-->
                            <div class="x_content">
                               <table id="datatable-buttons" class="table table-striped table-bordered">
                                  <thead>
@@ -281,62 +244,33 @@ if (isset($_SESSION['userid']))
                                        <th>Student Name</th>
                                         <th>Date</th>
                                         <th>Merit Name</th>
-                                        <th>Merit Point</th>
-                                        <th>Demerit Name</th>
+                                       <th>Merit Point</th>
+                                        <th>demerit Name</th>
                                        <th>Demerit Point</th>
-                                       <th>Monthly Points</th>
+                                       
                                     </tr>
                                  </thead>
                                  <tbody>
                                     <?php
                                        include('../Connections/connection.php');
-                                     
-                                     
-                                     
-                                     //$userid = $_GET['userid'];
-                                     //$date = $_GET['date'];
-                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, record.date, record.meritName AS meritName, record.meritPoint AS meritPoint, record.demeritName AS demeritName, record.demeritPoint AS demeritPoint FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = ? AND DATE_FORMAT(record.date, '%m') = ?");
-                                    /* SELECT student.studentID, student.studName, record.date, record.meritPoint AS meritPoint, record.demeritName AS demeritName, record.demeritPoint AS demeritPoint, SUM(record.meritPoint) AS total FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = "ASP961803" AND DATE_FORMAT(record.date, "%m") = '11'*/
-                                      /*$stmt1 = $conn->prepare("SELECT student.studentID, student.studName, record.meritPoint as meritPoint, record.demeritPoint as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)) FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = $userid AND WHERE date >= DATEADD(MONTH, -3, GETDATE())");*/
-                                    /* SELECT student.studentID, student.studName, record.meritPoint as meritPoint, record.demeritPoint as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)) FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = $userid AND WHERE date >= DATEADD(MONTH, -3, GETDATE())*/
-                                         $stmt1->bind_param('ss',$userid, $date);
+                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, record.date, record.meritName AS meritName, record.meritPoint AS meritPoint, record.demeritName AS demeritName, record.demeritPoint AS demeritPoint FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = ? AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())");
+
+                                         $stmt1->bind_param('s', $userid);
                                          $stmt1->execute();
-                                         $stmt1 -> bind_result($userid, $studname, $date, $mname, $mpoint, $dname, $dpoint);
+                                          $stmt1 -> bind_result($userid, $studname, $date, $mname, $mpoint, $dname, $dpoint);
+
                                          while($stmt1->fetch()) 
-                                     
-                                                   /*  if (!empty($_REQUEST['date'])) {
-                                                      $search = $_GET['date'];
-
-
-                                                    $sql = "SELECT student.studentID, student.studName, record.meritPoint as meritPoint, record.demeritPoint as demeritPoint, (SUM(meritPoint) + SUM(demeritPoint)) FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = ? AND record.date LIKE '%$search%'"; 
-                                                    $r_query = mysqli_query($conn,$sql); 
-
-
-                                                    while ($row = mysqli_fetch_array($r_query))*/
                                          {
                                               echo '<tr>
-                                                     <td>' . $userid . '</td>
+                                                      <td>' . $userid . '</td>
                                                      <td>' . $studname . '</td>
                                                      <td>' . $date . '</td>
                                                      <td>' . $mname . '</td>
                                                      <td>' . $mpoint . '</td>
                                                      <td>' . $dname . '</td>
                                                      <td>' . $dpoint . '</td>
+ 
                                                  </tr>';
-                                                        
-               /* echo '<tr>
-					
-					
-				<td><input type="text" name="userid" value="'.$row['userid'].'" >'.$row['userid'].'</td>
-				<td><input type="text" name="studname" value="'.$row['studname'].'" >'.$row['studname'].'</td>
-				<td><input type="text" name="date" value="'.$row['date'].'" >'.$row['date'].'</td>
-                <td><input type="text" name="mname" value="'.$row['mname'].'" >'.$row['mname'].'</td>
-                <td><input type="text" name="mpoint" value="'.$row['mpoint'].'" >'.$row['mpoint'].'</td>
-                <td><input type="text" name="dname" value="'.$row['dname'].'" >'.$row['dname'].'</td>
-                <td><input type="text" name="dpoint" value="'.$row['dpoint'].'" >'.$row['dpoint'].'</td>
-                <td><input type="text" name="monthpoint" value="'.$row['monthpoint'].'" >'.$row['monthpoint'].'</td>
-				
-				</tr>';*/
                                          }
                                        
                                        ?>
