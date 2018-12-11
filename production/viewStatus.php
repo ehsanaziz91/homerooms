@@ -221,67 +221,7 @@ if (isset($_SESSION['userid']))
             </div>
             <!-- /page content -->
                       
-                        <!-- monthly page content -->
-                       <div class="right_col" role="main">
-               <div class="">
-                  <div class="clearfix"></div>
-                  <div class="row">
-                     <!--start of modal page-->
-                     <div class="col-md-80 col-sm-20 col-xs-20">
-                        <div class="x_panel">
-                             
-                           <div class="x_title">
-                              
-                              <h2> Merit & Demerit Record <?php echo $userid; ?></h2>
-                              <!-- Button trigger modal -->
-                              <div class="clearfix"></div>
-                           </div>
-                           <div class="x_content">
-                              <table id="datatable-buttons" class="table table-striped table-bordered">
-                                 <thead>
-                                    <tr>
-                                       <th>Student ID</th>
-                                       <th>Student Name</th>
-                                        <th>Date</th>
-                                        <th>Merit Name</th>
-                                       <th>Merit Point</th>
-                                        <th>demerit Name</th>
-                                       <th>Demerit Point</th>
-                                       
-                                    </tr>
-                                 </thead>
-                                 <tbody>
-                                    <?php
-                                       include('../Connections/connection.php');
-                                         $stmt1 = $conn->prepare("SELECT student.studentID, student.studName, record.date, record.meritName AS meritName, record.meritPoint AS meritPoint, record.demeritName AS demeritName, record.demeritPoint AS demeritPoint FROM student LEFT OUTER JOIN record ON record.studID WHERE studentID = ? AND MONTH(date) = MONTH(CURRENT_DATE()) AND YEAR(date) = YEAR(CURRENT_DATE())");
-
-                                         $stmt1->bind_param('s', $userid);
-                                         $stmt1->execute();
-                                          $stmt1 -> bind_result($userid, $studname, $date, $mname, $mpoint, $dname, $dpoint);
-
-                                         while($stmt1->fetch()) 
-                                         {
-                                              echo '<tr>
-                                                      <td>' . $userid . '</td>
-                                                     <td>' . $studname . '</td>
-                                                     <td>' . $date . '</td>
-                                                     <td>' . $mname . '</td>
-                                                     <td>' . $mpoint . '</td>
-                                                     <td>' . $dname . '</td>
-                                                     <td>' . $dpoint . '</td>
- 
-                                                 </tr>';
-                                         }
-                                       
-                                       ?>
-                                 </tbody>
-                              </table>
-                           </div>
-                          
-                         </div>
-            </div>
-            <!-- /page content -->
-
+                       
 
         <!-- footer content -->
         <footer>

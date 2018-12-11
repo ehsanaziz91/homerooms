@@ -106,7 +106,7 @@
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
+                  <li><a href="teacher_chartPage.php?userid=<?php echo $userid;?>"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
@@ -226,7 +226,7 @@
 
                                                              <input type="hidden" name="studid" value='.$studid.'></input>
 
-                                                             <a href="teacher_studProfilePage2.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-primary">Details</a>
+                                                             <a href="teacher_studProfilePage4.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-primary">Details</a>
                                                              
                                                              <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
 

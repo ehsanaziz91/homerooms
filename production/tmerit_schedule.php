@@ -96,7 +96,7 @@
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
+                  <li><a href="teacher_chartPage.php?userid=<?php echo $userid;?>"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
