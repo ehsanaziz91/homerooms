@@ -571,7 +571,7 @@ if (isset($_SESSION['userid']))
                     ?>
                     <h2>View History (Teacher ID : <?php echo $userid;?>)</h2>
                       <div class="content">
-                         <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success pull-right">Merit / Demerit</a>
+                         <a href="admin_MDFormPage.php?userid=<?php echo $userid; ?>" class="btn btn-success pull-right">Merit / Demerit</a>
                          <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#exampleModalsms">SMS</button>
                          <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#exampleModalEmail">Email</button>
                       </div>

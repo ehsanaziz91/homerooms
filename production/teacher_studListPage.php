@@ -232,9 +232,7 @@
 
                                                              <a href="teacher_MDFormPage.php?userid='.$userid.'&studid='.$studid.'" class="btn btn-success">Merit / Demerit</a>
                                                              
-                                                             <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#exampleModalsms">SMS</button>
-                                                             
-                                                             <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#exampleModalEmail">Email</button>';
+                                                             ';
                                              ?>
                                                              
                                                              <?php include ('email/emailinterface.php'); ?>
