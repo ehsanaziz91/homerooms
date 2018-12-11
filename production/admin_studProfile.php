@@ -10,7 +10,7 @@ if (isset($_SESSION['userid']))
     header ('location:../production/loginPage.php');
 };
 
-//delete student
+//delete student acc
 if (isset($_POST['del']))
 {
     $studID = $_REQUEST['studID'];

@@ -1,9 +1,13 @@
 <?php
  require 'php-mailer-master/PHPMailerAutoload.php';
+include('../../Connections/connection.php');
+
+
 
   if(isset($_POST['send']))
   {
     $email=$_POST['email'];
+    $userid = $_REQUEST['userid'];
 
     if(filter_var($email, FILTER_VALIDATE_EMAIL) === false)
     {
@@ -34,27 +38,34 @@
 
         $mail->isHTML(true);                                  // Set email format to HTML
 
-        $mail->Subject = 'Amaran Pelajar';
-        $mail->Body    = 'Your parcel has arrived at the post office.<br/>
-                          The parcel will sent to your hostel within <strong>2 days</strong>.<br/>
-                          You can take your parcel with the given <strong>QR code</strong> as shown the link below this email.<br/>
-                          <p style="color:red;">Note:Please take your parcel within 2 weeks.After 2 weeks, the parcel will send back to the main post office Melaka.</p> ';
+        $mail->Subject = 'Amaran Kepada Pelajar';
+        $mail->Body    = 'PERAKUAN TINGKAH LAKU DAN DISIPLIN MURID<br/>
+                          Saya dengan ini diarahkan untuk memaklumkan bahawa anak / jagaan Tuan / Puan bahawa telah mengumpul pungutan mata demerit disiplin sekolah pada tahap tertinggi berturut- turut mengikut <Strong>Buku Peraturan Sistem Demerit Sekolah</strong>.<br/>
+                          Sila maklumi pihak sekolah atau berhubung terus Guru Besar dengan kadar segera untuk berbincang.<br/>
+                          Mengikut Peraturan Sekolah anak Tuan / Puan boleh <strong>dikenakan tindakan gantung / buang sekolah</strong> jika masih meneruskan perbuatan yang menyebabkan penambahan mata demerit.<br/>
+                          Sekian untuk makluman. Terima Kasih.<br/>
+                          <strong>BERKHIDMAT UNTUK NEGARA<strong>';
 
 
-        $mail->AltBody = 'Your parcel has arrived at the post office.<br/>
-                          The parcel will sent to your hostel within <strong>2 days</strong>.<br/>
-                          You can take your parcel with the given <strong>QR code</strong> as shown the link below this email.<br/>
-                          <p style="color:red;">Note:Please take your parcel within 2 weeks.After 2 weeks, the parcel will send back to the main post office Melaka.</p>';
+        $mail->AltBody = 'PERAKUAN TINGKAH LAKU DAN DISIPLIN MURID<br/>
+                          Saya dengan ini diarahkan untuk memaklumkan bahawa anak / jagaan Tuan / Puan bahawa telah mengumpul pungutan mata demerit disiplin sekolah pada tahap tertinggi berturut- turut mengikut <Strong>Buku Peraturan Sistem Demerit Sekolah</strong>.<br/>
+                          Sila maklumi pihak sekolah atau berhubung terus Guru Besar dengan kadar segera untuk berbincang.<br/>
+                          Mengikut Peraturan Sekolah anak Tuan / Puan boleh <strong>dikenakan tindakan gantung / buang sekolah</strong> jika masih meneruskan perbuatan yang menyebabkan penambahan mata demerit.<br/>
+                          Sekian untuk makluman. Terima Kasih.<br/>
+                          <strong>BERKHIDMAT UNTUK NEGARA<strong>';
 
         if(!$mail->send()) {
 
-            echo "<script type='text/javascript'>alert('Message could not be sent.')</script>";
+            /*echo "<script type='text/javascript'>alert('Message could not be sent.')</script>";*/
+            echo "<script type=\"text/javascript\">";
+            echo "alert('Message could not be sent !'),location.href='../admin_studListPage.php?userid=$userid'";
+            echo "</script>";
             echo "<script type='text/javascript'>alert('Mailer Error: ' . $mail->ErrorInfo)</script>";
         } else {
-          echo "<script type='text/javascript'>alert('Message has been sent')</script>";
-            /*echo "<script type=\"text/javascript\">";
-            echo "alert('Deleted data successfully'),location.href='admin_studListPage.php?userid=$userid'";
-            echo "</script>";*/
+          /*echo "<script type='text/javascript'>alert('Message has been sent')</script>";*/
+            echo "<script type=\"text/javascript\">";
+            echo "alert('Message has been sent !'),location.href='../admin_studListPage.php?userid=$userid'";
+            echo "</script>";
         }
 
       }

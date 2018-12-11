@@ -179,7 +179,7 @@
                                 $stmt->execute();
                                 $result = $stmt->get_result();
                                 ?>
-                                <select id="filter_staff" name="filter_staff" class="form-control">
+                                <select id="myselect" name="myselect" class="form-control">
                                     <option value="" selected="selected">Select Teacher</option>
                                     <?php
                                     if($result->num_rows>0){
@@ -243,6 +243,7 @@
                        ?>
                       </tbody>
                     </table>
+                    <div id="show_product">
                   </div>
                 </div>
               </div>
@@ -313,6 +314,33 @@
         });
     });
     </script>-->
+      
+    <script>  
+ $(document).ready(function(){
+
+      var myselect = $(this).val();  
+           $.ajax({  
+                url:"admin_studList.php",  
+                method:"POST",  
+                data:{myselect:myselect},  
+                success:function(data){  
+                     $('#show_product').html(data);  
+                }  
+           });
+
+      $('#myselect').change(function(){  
+           var myselect = $(this).val();  
+           $.ajax({  
+                url:"admin_studList.php",  
+                method:"POST",  
+                data:{myselect:myselect},  
+                success:function(data){  
+                     $('#show_product').html(data);  
+                }  
+           });  
+      });  
+ });  
+ </script>
 
   </body>
 </html>
