@@ -292,20 +292,222 @@ if (isset($_SESSION['userid']))
                     </div>
                       <div style="width:left; height:280px;">
                     <div class="col-md-9 col-sm-6 col-xs-12" style="width:50%; height:280px;">
-                        
+
                       <div class="profile_title">
                         <div class="col-md-6">
                           <h2>User Activity Report</h2>
                         </div>
-                        <div class="col-md-6">
-                          <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
-                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                            <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                          </div>
-                        </div>
+                        
                       </div>
                       <!-- start of user-activity-graph -->
-                      <div id="graph_bar" style="width:100%; height:280px;"></div>
+                      <?php
+                      $janm = "SELECT * FROM record WHERE MONTH(date) = 1 AND YEAR(date) = 2018 AND studID='$studID'";
+                        $resultjanm = $conn->query($janm);
+                        $sumjanm = 0;
+                        $sumjand = 0;
+                        if($resultjanm == true){
+                        while($rjanm = $resultjanm->fetch_assoc()) {
+                        $sumjanm = $sumjanm+$rjanm['meritPoint'];
+                        $sumjand = $sumjand+$rjanm['demeritPoint'];
+                      }
+                    }
+
+                      $febm = "SELECT * FROM record WHERE MONTH(date) = 2 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultfebm = $conn->query($febm);
+                      $sumfebm = 0;
+                      $sumfebd = 0;
+                      if($resultfebm == true){
+                      while($rfebm = $resultfebm->fetch_assoc()) {
+                      $sumfebm = $sumfebm+$rfebm['meritPoint'];
+                      $sumfebd = $sumfebd+$rfebm['demeritPoint'];
+                    }}
+
+                      $marm = "SELECT * FROM record WHERE MONTH(date) = 3 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultmarm = $conn->query($marm);
+                      $summarm = 0;
+                      $summard = 0;
+                      if($resultmarm == true){
+                      while($rmarm = $resultmarm->fetch_assoc()) {
+                      $summarm = $summarm+$rmarm['meritPoint'];
+                      $summard = $summard+$rmarm['demeritPoint'];
+                      }
+                    }
+
+                      $aplm = "SELECT * FROM record WHERE MONTH(date) = 4 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultaplm = $conn->query($aplm);
+                      $sumaplm = 0;
+                      $sumapld = 0;
+                      if($resultaplm == true){
+                      while($raplm = $resultaplm->fetch_assoc()) {
+                      $sumaplm = $sumaplm+$raplm['meritPoint'];
+                      $sumapld = $sumapld+$raplm['demeritPoint'];
+                    }}
+
+                      $maym = "SELECT * FROM record WHERE MONTH(date) = 5 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultmaym = $conn->query($maym);
+                      $summaym = 0;
+                      $summayd = 0;
+                      if($resultmaym == true){
+                      while($rmaym = $resultmaym->fetch_assoc()) {
+                      $summaym = $summaym+$rmaym['meritPoint'];
+                      $summayd = $summayd+$rmaym['demeritPoint'];
+                    }}
+
+                      $junm = "SELECT * FROM record WHERE MONTH(date) = 6 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultjunm = $conn->query($junm);
+                      $sumjunm = 0;
+                      $sumjund = 0;
+                      if($resultjunm == true){
+                      while($rjunm = $resultjunm->fetch_assoc()) {
+                      $sumjunm = $sumjunm+$rjunm['meritPoint'];
+                      $sumjund = $sumjund+$rjunm['demeritPoint'];
+                    }}
+
+                      $julm = "SELECT * FROM record WHERE MONTH(date) = 7 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultjulm = $conn->query($julm);
+                      $sumjulm = 0;
+                      $sumjuld = 0;
+                      if($resultjulm == true){
+                      while($rjulm = $resultjulm->fetch_assoc()) {
+                      $sumjulm = $sumjulm+$rjulm['meritPoint'];
+                      $sumjuld = $sumjuld+$rjulm['demeritPoint'];
+                    }}
+
+                      $augm = "SELECT * FROM record WHERE MONTH(date) = 8 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultaugm = $conn->query($augm);
+                      $sumaugm = 0;
+                      $sumaugd = 0;
+                      if($resultaugm == true){
+                      while($raugm = $resultaugm->fetch_assoc()) {
+                      $sumaugm = $sumaugm+$raugm['meritPoint'];
+                      $sumaugd = $sumaugd+$raugm['demeritPoint'];
+                    }}
+
+                      $sepm = "SELECT * FROM record WHERE MONTH(date) = 9 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultsepm = $conn->query($sepm);
+                      $sumsepm = 0;
+                      $sumsepd = 0;
+                      if($resultsepm == true){
+                      while($rsepm = $resultsepm->fetch_assoc()) {
+                      $sumsepm = $sumsepm+$rsepm['meritPoint'];
+                      $sumsepd = $sumsepd+$rsepm['demeritPoint'];
+                    }}
+
+                      $octm = "SELECT * FROM record WHERE MONTH(date) = 10 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultoctm = $conn->query($octm);
+                      $sumoctm = 0;
+                      $sumoctd = 0;
+                      if($resultoctm == true){
+                      while($roctm = $resultoctm->fetch_assoc()) {
+                      $sumoctm = $sumoctm+$roctm['meritPoint'];
+                      $sumoctd = $sumoctd+$roctm['demeritPoint'];
+                    }}
+
+                      $novm = "SELECT * FROM record WHERE MONTH(date) = 11 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultnovm = $conn->query($novm);
+                      $sumnovm = 0;
+                      $sumnovd = 0;
+                      if($resultnovm == true){
+                      while($rnovm = $resultnovm->fetch_assoc()) {
+                      $sumnovm = $sumnovm+$rnovm['meritPoint'];
+                      $sumnovd = $sumnovd+$rnovm['demeritPoint'];
+                    }}
+
+                      $decm = "SELECT * FROM record WHERE MONTH(date) = 12 AND YEAR(date) = 2018 AND studID='$studID'";
+                      $resultdecm = $conn->query($decm);
+                      $sumdecm = 0;
+                      $sumdecd = 0;
+                      if($resultdecm == true){
+                      while($rdecm = $resultdecm->fetch_assoc()) {
+                      $sumdecm = $sumdecm+$rdecm['meritPoint'];
+                      $sumdecd = $sumdecd+$rdecm['demeritPoint'];
+                    }}
+                       ?>
+
+                      <div id="main" style="height:350px;"></div>
+                      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+                      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+                      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+                      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+                      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+                      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+                      <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+                      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+                      <script>
+                // based on prepared DOM, initialize echarts instance
+                var myChart = echarts.init(document.getElementById('main'));
+
+                // specify chart configuration item and data
+                var option = {
+        title : {
+            text: '',
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['Merit','Demerit']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                data : ['January','Febuary','March','April','May','Juna','July','August','September','October','November','December']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'Merit',
+                type:'bar',
+                data:[<?php echo $sumjanm  ?>, <?php echo $sumfebm  ?>, <?php echo $summarm  ?>, <?php echo $sumaplm  ?>, <?php echo $summaym  ?>, <?php echo $sumjunm  ?>, <?php echo $sumjulm  ?>, <?php echo $sumaugm  ?>, <?php echo $sumsepm  ?>, <?php echo $sumoctm  ?>, <?php echo $sumnovm  ?>, <?php echo $sumdecm  ?>],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: 'Maximum'},
+                        {type : 'min', name: 'Minimum'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name: 'Average'}
+                    ]
+                }
+            },
+            {
+                name:'Demerit',
+                type:'bar',
+                data:[<?php echo $sumjand*(-1)  ?>, <?php echo $sumfebd*(-1)  ?>, <?php echo $summard*(-1)  ?>, <?php echo $sumapld*(-1)  ?>, <?php echo $summayd*(-1)  ?>, <?php echo $sumjund*(-1)  ?>, <?php echo $sumjuld*(-1)  ?>, <?php echo $sumaugd*(-1)  ?>, <?php echo $sumsepd*(-1)  ?>, <?php echo $sumoctd*(-1)  ?>, <?php echo $sumnovd*(-1)  ?>, <?php echo $sumdecd*(-1)  ?>],
+                markPoint : {
+                    data : [
+                      {type : 'max', name: 'Maximum'},
+                      {type : 'min', name: 'Minimum'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : 'Average'}
+                    ]
+                }
+            }
+        ]
+    };
+
+
+                myChart.setOption(option);
+                      </script>
                       <!-- end of user-activity-graph -->
 
                     </div>
