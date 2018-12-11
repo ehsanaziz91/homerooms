@@ -24,12 +24,12 @@ include('../../Connections/connection.php');
         $mail->isSMTP();                                      // Set mailer to use SMTP
         $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
         $mail->SMTPAuth = true;                               // Enable SMTP authentication
-        $mail->Username = 'homeroomsmeritdemerit@gmail.com';                 // SMTP username
+        $mail->Username = 'homeroomofficial@gmail.com';                 // SMTP username
         $mail->Password = '123456Abc';                           // SMTP password
         $mail->SMTPSecure = false;                            // Enable TLS encryption, `ssl` also accepted
         $mail->Port = 587;                                    // TCP port to connect to
 
-        $mail->setFrom('homeroomsmeritdemerit@gmail.com', 'HomeroomsMeritDemeritlOfficial');     // Add a recipient
+        $mail->setFrom('homeroomofficial@gmail.com', 'HomeroomsMeritDemeritlOfficial');     // Add a recipient
         $mail->addAddress($email);               // Name is optional
         //$mail->addReplyTo('info@example.com', 'Information');
         //$mail->addCC('cc@example.com');

@@ -61,16 +61,20 @@
          #badge8{
          background-color: black;
          }
+          
+         
       </style>
    </head>
-   <body class="nav-md">
+   <body class="nav-md" style="background-color:#674d3c">
       <div class="container body">
-         <div class="main_container">
-            <div class="col-md-3 left_col">
-               <div class="left_col scroll-view">
-                  <div class="navbar nav_title" style="border: 0;">
+         <div class="main_container" style="background-color:#674d3c">
+            <div class="col-md-3 left_col" style="background-color:#674d3c">
+               <div class="left_col scroll-view" style="background-color:#674d3c">
+                  
+                  <div class="nav"><a href="#" class="navbar-left"><img src="images/mrsm.png" style="max-width:130px; margin-top:20px; margin-left:40px; margin-bottom:20px;"></a></div>
+<!--                  <div class="navbar nav_title" style="border: 0;">
                      <a href="#" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
-                  </div>
+                  </div>-->
                   <div class="clearfix"></div>
                   <br />
                   <!-- sidebar menu -->
@@ -87,14 +91,14 @@
                         <h3>Users</h3>
                         <ul class="nav side-menu">
                            <li><a href="admin_viewTeachersPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-user"></i>Teachers</a></li>
-                           <li><a href="admin_studListPage.php?<?php echo $userid; ?>"><i class="fa fa-users"></i>Students</a></li>
+                           <li><a href="admin_studListPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-users"></i>Students</a></li>
                         </ul>
                      </div>
                      <div class="menu_section">
                         <h3>Report</h3>
                         <ul class="nav side-menu">
-                           <li><a href="admin_chartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
-                           <li><a href="admin_chartPage2.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
+                           <li><a href="admin_chartPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
+                           <li><a href="admin_chartPage2.php?userid=<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
                         </ul>
                      </div>
                   </div>

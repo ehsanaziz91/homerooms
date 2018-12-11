@@ -2,7 +2,7 @@
 include('../Connections/connection.php');
 
 //filter student 
-if(isset($_POST['myselect']))
+/*if(isset($_POST['myselect']))
 {
     echo $userid = $_GET['staffID'];
 
@@ -11,7 +11,7 @@ if(isset($_POST['myselect']))
     $stmt1->execute();
     $stmt1 -> bind_result($studid, $studname, $mpoint, $dpoint, $cpoint, $userid);
     $stmt1->fetch();
-};
+};*/
 
 
 //delete student
