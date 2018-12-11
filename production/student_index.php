@@ -131,7 +131,7 @@ if (isset($_SESSION['userid']))
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="background-color:#d9ad7c">
                     <img src="images/user.png" alt=""><?php echo $studname;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
@@ -326,9 +326,9 @@ if (isset($_SESSION['userid']))
                           </div>
                         </div>
                         <!-- schedule element -->
-                           <!-- optional -->
-                         <div class="nav" style="border: 0;"><a href="#" class="navbar-left"><img src="images/quotes.jpg" style="max-width:250px; margin-top:5px; margin-left:40px; margin-bottom:10px;"></a></div>
-                        <!-- merit demerit element -->
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                          <img src="images/quotes.jpg" style="max-width:250px; max-height:1250px; margin-left:-3px; margin-bottom:10px;">
+                        </div>
                       </div>
                     </div>
                   </div>
