@@ -39,7 +39,7 @@
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
               <a href="#" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
-            <!--</div>-->
+            </div>
 
             <div class="clearfix"></div>
 
@@ -56,21 +56,15 @@
             <!-- /menu profile quick info -->
 
             <br />
-<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-               <div class="menu_section">
-                    <ul class="nav side-menu">
-                    <li><a href="admin_index.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Dashboard</a></li>
-                </ul>
-                   </div>
-                       </div>
+
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
-                    <li><a href="admin_studListPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
-                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Class</a></li>
-                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Scheme</a></li>
+                    <li><a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
+                    <li><a href="demerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Stage</a></li>
+                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Schedule</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -97,7 +91,7 @@
                 <h3>Report</h3>
                 <ul class="nav side-menu">
                   <li><a href="admin_chartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
-                  <li><a href="admin_chartPage2.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
+                  <li><a href="admin_echartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
                 </ul>
               </div>
 
@@ -167,22 +161,21 @@
           </div>
         </div>
         <!-- top navigation -->
-          <div class="right_col" role="main">
+        <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
               <div class="title_left">
                 <h3>View Analysis</h3>
               </div>
             </div>
-
         <!-- page content -->
         <div class="clearfix"></div>
 
         <div class="row">
-          <div class="col-md-8 col-sm-8 col-xs-12">
+          <div class="col-md-12 col-sm-8 col-xs-12">
             <div class="x_panel">
               <div class="x_title">
-                <h2>Students' Analysis by Merit Demerit</h2>
+                <h2>Bar Graph</h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -198,7 +191,7 @@
                   <li><a class="close-link"><i class="fa fa-close"></i></a>
                   </li>
                 </ul>
-                <div class="clearfix"></div>
+                <div class="clearfix" ></div>
               </div>
               <div class="x_content">
                 <?php
@@ -326,7 +319,7 @@
               }}
                  ?>
 
-                <div id="main" style="height:350px;"></div>
+                <div id="main" style="width:1000px;height:350px;"></div>
                 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
                 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
                 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
@@ -335,14 +328,15 @@
                 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
                 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
                 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
-                <script>
+                <script type="text/javascript">
+
           // based on prepared DOM, initialize echarts instance
           var myChart = echarts.init(document.getElementById('main'));
 
           // specify chart configuration item and data
           var option = {
   title : {
-      text: 'All Student Merit',
+      text: 'All Student MErit',
   },
   tooltip : {
       trigger: 'axis'
@@ -409,17 +403,18 @@
 
 
           myChart.setOption(option);
-                </script>
+
+              </script>
 
               </div>
             </div>
           </div>
 
 
-          <div class="col-md-10 col-sm-6 col-xs-12" >
+          <div class="col-md-12 col-sm-6 col-xs-12" >
             <div class="x_panel">
               <div class="x_title">
-                <h2>Merit Comparison</h2>
+                <h2>Merit Comparism</h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -435,13 +430,13 @@
                   <li><a class="close-link"><i class="fa fa-close"></i></a>
                   </li>
                 </ul>
-                <div class="clearfix"></div>
+                <div class="clearfix" ></div>
               </div>
               <div class="x_content">
                 <?php
 
 
-                $merit1 = "SELECT * FROM record WHERE categoryID = 14  ";
+                $merit1 = "SELECT * FROM record WHERE categoryID = 14 AND YEAR(date) = 2018  ";
                 $resultmerit1 = $conn->query($merit1);
                 $summ1 = 0;
                 if($resultmerit1 == true){
@@ -449,7 +444,7 @@
                 $summ1= $summ1+1;
               }}
 
-                $merit2 = "SELECT * FROM record WHERE categoryID = 15  ";
+                $merit2 = "SELECT * FROM record WHERE categoryID = 15 AND YEAR(date) = 2018 ";
                 $resultmerit2 = $conn->query($merit2);
                 $summ2 = 0;
                 if($resultmerit2 == true){
@@ -457,7 +452,7 @@
                 $summ2 = $summ2+1;
               }}
 
-                $merit3 = "SELECT * FROM record WHERE categoryID = 16  ";
+                $merit3 = "SELECT * FROM record WHERE categoryID = 16 AND YEAR(date) = 2018 ";
                 $resultmerit3 = $conn->query($merit3);
                 $summ3 = 0;
                 if($resultmerit3 == true){
@@ -465,16 +460,51 @@
                 $summ3 = $summ3+1;
               }}
 
-                $merit4 = "SELECT * FROM record WHERE categoryID = 17  ";
+                $merit4 = "SELECT * FROM record WHERE categoryID = 17 AND YEAR(date) = 2018 ";
                 $resultmerit4 = $conn->query($merit4);
                 $summ4 = 0;
                 if($resultmerit4 == true){
                 while($rm4 = $resultmerit4->fetch_assoc()) {
                 $summ4 = $summ4+1;
               }}
+
+
+
+
+              $merit17 = "SELECT * FROM record WHERE categoryID = 14 AND YEAR(date) = 2017  ";
+              $resultmerit17 = $conn->query($merit17);
+              $summ17 = 0;
+              if($resultmerit17 == true){
+              while($rm17 = $resultmerit17->fetch_assoc()) {
+              $summ17= $summ17+1;
+            }}
+
+              $merit27 = "SELECT * FROM record WHERE categoryID = 15 AND YEAR(date) = 2017 ";
+              $resultmerit27 = $conn->query($merit27);
+              $summ27 = 0;
+              if($resultmerit27 == true){
+              while($rm27 = $resultmerit27->fetch_assoc()) {
+              $summ27 = $summ27+1;
+            }}
+
+              $merit37 = "SELECT * FROM record WHERE categoryID = 16 AND YEAR(date) = 2017 ";
+              $resultmerit37 = $conn->query($merit37);
+              $summ37 = 0;
+              if($resultmerit37 == true){
+              while($rm37 = $resultmerit37->fetch_assoc()) {
+              $summ37 = $summ37+1;
+            }}
+
+              $merit47 = "SELECT * FROM record WHERE categoryID = 17 AND YEAR(date) = 2017 ";
+              $resultmerit47 = $conn->query($merit47);
+              $summ47 = 0;
+              if($resultmerit47 == true){
+              while($rm47 = $resultmerit47->fetch_assoc()) {
+              $summ47 = $summ47+1;
+            }}
                  ?>
 
-                <div id="radar" style="width:900px;height:460px;"></div>
+                <div id="radar" style="width:1000px;height:460px;"></div>
                 <script type="text/javascript">
          var dom = document.getElementById("radar");
          var myChart = echarts.init(dom);
@@ -482,7 +512,7 @@
          option = null;
          option = {
              title: {
-                 text: 'Merit by Category'
+                 text: 'Merit'
              },
              tooltip: {},
              legend: {
@@ -515,7 +545,7 @@
                          name : '2018'
                      },
                       {
-                         value : [5, 4, 6, 0],
+                         value : [<?php echo $summ17 ?>, <?php echo $summ27 ?>, <?php echo $summ37 ?>, <?php echo $summ47 ?>],
                          name : '2017'
                      }
                  ]
@@ -530,10 +560,10 @@
             </div>
           </div>
 
-          <div class="col-md-10 col-sm-6 col-xs-12" >
-            <div class="x_panel">
+          <div class="col-md-12 col-sm-6 col-xs-12" >
+            <div class="x_panel" >
               <div class="x_title">
-                <h2>Demerit Comparison</h2>
+                <h2>Demerit Comparism</h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -555,7 +585,7 @@
                 <?php
 
 
-                $demerit1 = "SELECT * FROM record WHERE categoryID = 1  ";
+                $demerit1 = "SELECT * FROM record WHERE categoryID = 1 AND YEAR(date) = 2018 ";
                 $resultdemerit1 = $conn->query($demerit1);
                 $sumdm1 = 0;
                 if($resultdemerit1 == true){
@@ -563,93 +593,190 @@
                 $sumdm1= $sumdm1+1;
               }}
 
-              $demerit2 = "SELECT * FROM record WHERE categoryID = 2  ";
+              $demerit2 = "SELECT * FROM record WHERE categoryID = 2 AND YEAR(date) = 2018 ";
               $resultdemerit2 = $conn->query($demerit2);
               $sumdm2 = 0;
               if($resultdemerit2 == true){
               while($rdm2 = $resultdemerit2->fetch_assoc()) {
               $sumdm2= $sumdm2+1;
             }}
-            $demerit3 = "SELECT * FROM record WHERE categoryID = 3  ";
+            $demerit3 = "SELECT * FROM record WHERE categoryID = 3 AND YEAR(date) = 2018 ";
             $resultdemerit3 = $conn->query($demerit3);
             $sumdm3 = 0;
             if($resultdemerit3 == true){
             while($rdm3 = $resultdemerit3->fetch_assoc()) {
             $sumdm3= $sumdm3+1;
           }}
-          $demerit4 = "SELECT * FROM record WHERE categoryID = 4  ";
+          $demerit4 = "SELECT * FROM record WHERE categoryID = 4 AND YEAR(date) = 2018 ";
           $resultdemerit4 = $conn->query($demerit4);
           $sumdm4 = 0;
           if($resultdemerit4 == true){
           while($rdm4 = $resultdemerit4->fetch_assoc()) {
           $sumdm4= $sumdm4+1;
         }}
-        $demerit5 = "SELECT * FROM record WHERE categoryID = 5  ";
+        $demerit5 = "SELECT * FROM record WHERE categoryID = 5 AND YEAR(date) = 2018 ";
         $resultdemerit5 = $conn->query($demerit5);
         $sumdm5 = 0;
         if($resultdemerit5 == true){
         while($rdm5 = $resultdemerit5->fetch_assoc()) {
         $sumdm5= $sumdm5+1;
       }}
-      $demerit6 = "SELECT * FROM record WHERE categoryID = 6  ";
+      $demerit6 = "SELECT * FROM record WHERE categoryID = 6 AND YEAR(date) = 2018 ";
       $resultdemerit6 = $conn->query($demerit6);
       $sumdm6 = 0;
       if($resultdemerit6 == true){
       while($rdm1 = $resultdemerit6->fetch_assoc()) {
       $sumdm6= $sumdm6+1;
     }}
-    $demerit7 = "SELECT * FROM record WHERE categoryID = 7  ";
+    $demerit7 = "SELECT * FROM record WHERE categoryID = 7 AND YEAR(date) = 2018 ";
     $resultdemerit7 = $conn->query($demerit7);
     $sumdm7 = 0;
     if($resultdemerit7 == true){
     while($rdm7 = $resultdemerit7->fetch_assoc()) {
     $sumdm7= $sumdm7+1;
   }}
-  $demerit8 = "SELECT * FROM record WHERE categoryID = 8  ";
+  $demerit8 = "SELECT * FROM record WHERE categoryID = 8 AND YEAR(date) = 2018 ";
   $resultdemerit8 = $conn->query($demerit8);
   $sumdm8 = 0;
   if($resultdemerit8 == true){
   while($rdm8 = $resultdemerit8->fetch_assoc()) {
   $sumdm8= $sumdm8+1;
 }}
-$demerit9 = "SELECT * FROM record WHERE categoryID = 9  ";
+$demerit9 = "SELECT * FROM record WHERE categoryID = 9 AND YEAR(date) = 2018 ";
 $resultdemerit9 = $conn->query($demerit9);
 $sumdm9 = 0;
 if($resultdemerit9 == true){
 while($rdm9 = $resultdemerit9->fetch_assoc()) {
 $sumdm9= $sumdm9+1;
 }}
-$demerit10 = "SELECT * FROM record WHERE categoryID = 10  ";
+$demerit10 = "SELECT * FROM record WHERE categoryID = 10  AND YEAR(date) = 2018";
 $resultdemerit10 = $conn->query($demerit10);
 $sumdm10 = 0;
 if($resultdemerit10 == true){
 while($rdm10 = $resultdemerit10->fetch_assoc()) {
 $sumdm10= $sumdm10+1;
 }}
-$demerit11 = "SELECT * FROM record WHERE categoryID = 11  ";
+$demerit11 = "SELECT * FROM record WHERE categoryID = 11 AND YEAR(date) = 2018 ";
 $resultdemerit11 = $conn->query($demerit11);
 $sumdm11 = 0;
 if($resultdemerit11 == true){
 while($rdm11 = $resultdemerit11->fetch_assoc()) {
 $sumdm11= $sumdm11+1;
 }}
-$demerit12 = "SELECT * FROM record WHERE categoryID = 12  ";
+$demerit12 = "SELECT * FROM record WHERE categoryID = 12  AND YEAR(date) = 2018";
 $resultdemerit12 = $conn->query($demerit12);
 $sumdm12 = 0;
 if($resultdemerit12 == true){
 while($rdm12 = $resultdemerit12->fetch_assoc()) {
 $sumdm12= $sumdm12+1;
 }}
-$demerit13 = "SELECT * FROM record WHERE categoryID = 13  ";
+$demerit13 = "SELECT * FROM record WHERE categoryID = 13 AND YEAR(date) = 2018 ";
 $resultdemerit13 = $conn->query($demerit13);
 $sumdm13 = 0;
 if($resultdemerit13 == true){
 while($rdm13 = $resultdemerit13->fetch_assoc()) {
 $sumdm13= $sumdm13+1;
 }}
+
+
+
+
+
+$demerit17 = "SELECT * FROM record WHERE categoryID = 1 AND YEAR(date) = 2017 ";
+$resultdemerit17 = $conn->query($demerit17);
+$sumdm17 = 0;
+if($resultdemerit17 == true){
+while($rdm17 = $resultdemerit17->fetch_assoc()) {
+$sumdm17= $sumdm17+1;
+}}
+
+$demerit27 = "SELECT * FROM record WHERE categoryID = 2 AND YEAR(date) = 2017 ";
+$resultdemerit27 = $conn->query($demerit27);
+$sumdm27 = 0;
+if($resultdemerit27 == true){
+while($rdm27 = $resultdemerit27->fetch_assoc()) {
+$sumdm27= $sumdm27+1;
+}}
+$demerit37 = "SELECT * FROM record WHERE categoryID = 3 AND YEAR(date) = 2017 ";
+$resultdemerit37 = $conn->query($demerit37);
+$sumdm37 = 0;
+if($resultdemerit37 == true){
+while($rdm37= $resultdemerit37->fetch_assoc()) {
+$sumdm37= $sumdm37+1;
+}}
+$demerit47 = "SELECT * FROM record WHERE categoryID = 4 AND YEAR(date) = 2017 ";
+$resultdemerit47 = $conn->query($demerit47);
+$sumdm47 = 0;
+if($resultdemerit47 == true){
+while($rdm47 = $resultdemerit47->fetch_assoc()) {
+$sumdm47= $sumdm47+1;
+}}
+$demerit57 = "SELECT * FROM record WHERE categoryID = 5 AND YEAR(date) = 2017 ";
+$resultdemerit57 = $conn->query($demerit57);
+$sumdm57 = 0;
+if($resultdemerit57 == true){
+while($rdm57 = $resultdemerit57->fetch_assoc()) {
+$sumdm57= $sumdm57+1;
+}}
+$demerit67 = "SELECT * FROM record WHERE categoryID = 6 AND YEAR(date) = 2017 ";
+$resultdemerit67 = $conn->query($demerit67);
+$sumdm67 = 0;
+if($resultdemerit67 == true){
+while($rdm67 = $resultdemerit67->fetch_assoc()) {
+$sumdm67= $sumdm67+1;
+}}
+$demerit77 = "SELECT * FROM record WHERE categoryID = 7 AND YEAR(date) = 2017 ";
+$resultdemerit77 = $conn->query($demerit77);
+$sumdm77 = 0;
+if($resultdemerit77 == true){
+while($rdm77 = $resultdemerit77->fetch_assoc()) {
+$sumdm77= $sumdm77+1;
+}}
+$demerit87 = "SELECT * FROM record WHERE categoryID = 8 AND YEAR(date) = 2017 ";
+$resultdemerit87 = $conn->query($demerit87);
+$sumdm87 = 0;
+if($resultdemerit87 == true){
+while($rdm87 = $resultdemerit87->fetch_assoc()) {
+$sumdm87= $sumdm87+1;
+}}
+$demerit97 = "SELECT * FROM record WHERE categoryID = 9 AND YEAR(date) = 2017 ";
+$resultdemerit97 = $conn->query($demerit97);
+$sumdm97 = 0;
+if($resultdemerit97 == true){
+while($rdm97 = $resultdemerit97->fetch_assoc()) {
+$sumdm97= $sumdm97+1;
+}}
+$demerit107 = "SELECT * FROM record WHERE categoryID = 10  AND YEAR(date) = 2017";
+$resultdemerit107 = $conn->query($demerit107);
+$sumdm107 = 0;
+if($resultdemerit107 == true){
+while($rdm107 = $resultdemerit107->fetch_assoc()) {
+$sumdm107= $sumdm107+1;
+}}
+$demerit117 = "SELECT * FROM record WHERE categoryID = 11 AND YEAR(date) = 2017 ";
+$resultdemerit117 = $conn->query($demerit117);
+$sumdm117 = 0;
+if($resultdemerit117 == true){
+while($rdm117 = $resultdemerit117->fetch_assoc()) {
+$sumdm117= $sumdm117+1;
+}}
+$demerit127 = "SELECT * FROM record WHERE categoryID = 12  AND YEAR(date) = 2017";
+$resultdemerit127 = $conn->query($demerit127);
+$sumdm127 = 0;
+if($resultdemerit127 == true){
+while($rdm127 = $resultdemerit127->fetch_assoc()) {
+$sumdm127= $sumdm127+1;
+}}
+$demerit137 = "SELECT * FROM record WHERE categoryID = 13 AND YEAR(date) = 2017 ";
+$resultdemerit137 = $conn->query($demerit137);
+$sumdm137 = 0;
+if($resultdemerit137 == true){
+while($rdm137 = $resultdemerit137->fetch_assoc()) {
+$sumdm137= $sumdm137+1;
+}}
                  ?>
 
-                <div id="radar1" style="width:900px;height:460px;"></div>
+                <div id="radar1" style="width:1000px;height:460px;"></div>
                 <script type="text/javascript">
           var dom = document.getElementById("radar1");
           var myChart = echarts.init(dom);
@@ -657,7 +784,7 @@ $sumdm13= $sumdm13+1;
           option = null;
           option = {
              title: {
-                 text: 'Demerit by Category'
+                 text: 'Demerit'
              },
              tooltip: {},
              legend: {
@@ -700,7 +827,7 @@ $sumdm13= $sumdm13+1;
                          name : '2018'
                      },
                       {
-                         value : [5, 4, 6, 0, 1 , 2 , 7 , 5 , , 40 ,0 ,15],
+                         value : [<?php echo $sumdm17 ?>, <?php echo $sumdm27 ?>, <?php echo $sumdm37 ?>, <?php echo $sumdm47 ?>,<?php echo $sumdm57  ?>,<?php echo $sumdm67 ?>,<?php echo $sumdm77 ?>,<?php echo $sumdm87 ?>,<?php echo $sumdm97 ?>,<?php echo $sumdm107 ?>,<?php echo $sumdm117 ?>,<?php echo $sumdm127 ?>,<?php echo $sumdm137 ?>],
                          name : '2017'
                      }
                  ]
@@ -714,14 +841,7 @@ $sumdm13= $sumdm13+1;
               </div>
             </div>
           </div>
- <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            HMD System@2018/19 - WorkshopII | BITS | FTMK | UTeM
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
+
     <!-- jQuery -->
     <script src="../vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->
