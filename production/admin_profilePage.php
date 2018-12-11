@@ -297,7 +297,7 @@ if (isset($_SESSION['userid']))
 
               </div>
 
-              <div class="col-md-5 col-xs-12">
+<!--              <div class="col-md-5 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Upload Profile Image</h2>
@@ -310,7 +310,7 @@ if (isset($_SESSION['userid']))
                   </div>
                   <div class="x_content">
                     <br />
-                    <form class="form-horizontal form-label-left" action="imgUpload.php" method="post" enctype="multipart/form-data">
+                    <form class="form-horizontal form-label-left" action="admin_profile.php" method="post" enctype="multipart/form-data">
                         <?php
                         include('../Connections/connection.php');
 
@@ -346,14 +346,13 @@ if (isset($_SESSION['userid']))
                         <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                           <input type="hidden" name="userid" value="<?php echo $userid; ?>">
                           <button type="submit" class="btn btn-success" name="upload">Upload</button>
-                            <!--<a href="imgUpload.php?userid=<?php //echo $userid; ?>" class="btn btn-success" name="upload">Upload</a>-->
                           <button type="button" class="btn btn-primary">Cancel</button>
                         </div>
                       </div>
 
                     </form>
                   </div>
-                </div>
+                </div>-->
               </div>
             </div>
             <!-- Modal -->

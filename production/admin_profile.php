@@ -33,6 +33,32 @@ if (isset($_POST['update']))
     }
     $stmt->close();
     $conn->close();
-}
+};
 
+if(isset($_POST['upload']))
+{		
+    echo $userid = $_POST['userid'];
+    echo $product_image = $_FILES['image']['name'];
+    echo $product_image_tmp = $_FILES['image']['tmp_name'];
+    
+    $stmt1 = $conn->prepare("UPDATE staff SET img=? WHERE staffID=?");
+    $stmt1->bind_param('bs', $product_image, $userid);
+    $stmt1->execute();
+    
+    if($stmt1->execute())
+    {
+        move_uploaded_file($product_image_tmp,"homerooms/production/images/$product_image");
+        print "<script type=\"text/javascript\">";
+        print "alert('Record Update Successful'),location.href='admin_profilePage.php?userid=$userid'";
+        print "</script>";
+    }
+    else
+    {
+        print "<script type=\"text/javascript\">";
+        print "alert('Error Updating Record !')";
+        print "</script>";
+    }
+    $stmt->close();
+    $conn->close();
+}
 ?>
