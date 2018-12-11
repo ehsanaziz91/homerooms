@@ -43,14 +43,12 @@ if (isset($_SESSION['userid']))
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMDS</span></a>
-            </div>
+   <body class="nav-md" style="background-color:#674d3c">
+      <div class="container body" style="background-color:#674d3c">
+         <div class="main_container" style="background-color:#674d3c">
+            <div class="col-md-3 left_col" style="background-color:#674d3c">
+               <div class="left_col scroll-view" style="background-color:#674d3c">
+                  <div class="nav" style="border: 0;"><a href="#" class="navbar-left"><img src="images/mrsm.png" style="max-width:130px; margin-top:20px; margin-left:40px; margin-bottom:20px;"></a></div>
 
             <div class="clearfix"></div>
               
@@ -113,19 +111,19 @@ if (isset($_SESSION['userid']))
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
+            <!--<div class="sidebar-footer hidden-small">
              
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
-            </div>
+            </div>-->
             <!-- /menu footer buttons -->
           </div>
         </div>
 
         <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
+        <div class="top_nav" style="background-color:#d9ad7c">
+               <div class="nav_menu" style="background-color:#d9ad7c">
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
@@ -137,7 +135,7 @@ if (isset($_SESSION['userid']))
                     <img src="images/user.png" alt=""><?php echo $studname;?>
                     <span class=" fa fa-angle-down"></span>
                   </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <ul class="dropdown-menu dropdown-usermenu pull-right" style="background-color:#d9ad7c">
                     <li><a href="student_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
                     <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
                     <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
@@ -270,7 +268,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="viewStatus.php?userid=<?php echo $userid;?>" class="btn btn-warning btn-block" role="button"><i class="fa fa-eye"></i>View</a>
+                                <a href="viewStatus2.php?userid=<?php echo $userid;?>" class="btn btn-warning btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
@@ -329,28 +327,7 @@ if (isset($_SESSION['userid']))
                         </div>
                         <!-- schedule element -->
                            <!-- optional -->
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                          <div class="pricing">
-                            <div class="title">
-                              <h1>Analysis</h1>
-                            </div>
-                            <div class="x_content">
-                              <div class="">
-                                <div class="pricing_features">
-                                  <ul class="list-unstyled text-left">
-                                    <li><i class="fa fa-check text-success"></i> <strong>View Student's Merit Demerit Graph</strong></li>
-                                    <li><i class="fa fa-check text-success"></i> <strong>View Graph By Category</strong></li>
-                                  </ul>
-                                </div>
-                              </div>
-                              <div class="pricing_footer">
-                                <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button"><i class="fa fa-eye"></i>View</a>
-                                <p>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                         <div class="nav" style="border: 0;"><a href="#" class="navbar-left"><img src="images/quotes.jpg" style="max-width:250px; margin-top:5px; margin-left:40px; margin-bottom:10px;"></a></div>
                         <!-- merit demerit element -->
                       </div>
                     </div>
