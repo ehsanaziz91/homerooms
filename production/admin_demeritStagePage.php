@@ -71,7 +71,7 @@
                      <div class="menu_section">
                         <h3>Report</h3>
                         <ul class="nav side-menu">
-                           <li><a href="admin_chartPage2.php?userid=<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
+                           <li><a href="admin_chartPage5.php?userid=<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
                         </ul>
                      </div>
                   </div>
