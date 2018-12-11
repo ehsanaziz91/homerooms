@@ -518,6 +518,13 @@ if (isset($_SESSION['userid']))
             </div>
               
             <div class="row">
+            <form method="post" action="sms/smsfunctions.php">
+                          <div class="form-group">
+                            <input type="hidden" class="form-control" name="num" value="<?php echo $studno;?>">
+                          </div>
+                          <input type="hidden" name="userid" value="<?php echo $userid; ?>">
+                          <button type="submit" class="btn btn-warning pull-right" name="abc"><i class="fa fa-comments-o"></i> SMS</button>
+                        </form>
             <form method="post" action="admin_studList.php">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -548,13 +555,7 @@ if (isset($_SESSION['userid']))
                          <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModalsms"><i class="fa fa-comments-o"></i> SMS</button>-->
 <!--                         <button type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#exampleModalEmail<?php //echo $userid;?><?php //echo $studid;?>"><i class="fa fa-envelope-o"></i></button>-->
                           
-                        <form method="post" action="sms/smsfunctions.php">
-                          <div class="form-group">
-                            <input type="hidden" class="form-control" name="num" value="<?php echo $studno;?>">
-                          </div>
-                          <input type="hidden" name="userid" value="<?php echo $userid; ?>">
-                          <button type="submit" class="btn btn-warning pull-right" name="abc"><i class="fa fa-comments-o"></i> SMS</button>
-                        </form>
+                        
                           
                          <form method="post" action="email/sendingemail.php">
                           <div class="form-group">

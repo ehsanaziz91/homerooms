@@ -164,7 +164,6 @@
                           <th>Phone Number</th>
                           <th>Email</th>
                           <th>Homeroom</th>
-                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -185,15 +184,7 @@
                                      <td>' . $number . '</td>
                                      <td>' . $email . '</td>
                                      <td>' . $home . '</td>
-                                     <td>
-                                         <form method="post" action="admin_viewTeachers.php?userid='.$userid.'&userID='.$userID.'">
 
-                                             <input type="hidden" name="userID" value='.$userID.'></input>
-                                            
-                                             <button class="btn btn-primary" name="asign" onclick="document.submit();">Asign Homeroom</button>
-                                             <button class="btn btn-danger" name="del" onclick="document.submit();">Delete</button>
-                                         </form>
-                                     </td>
                                  </tr>';
                             }
                             $stmt->close();

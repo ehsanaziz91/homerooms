@@ -20,7 +20,7 @@ if (isset($_SESSION['userid']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>HMDS Teacher Profile</title>
+    <title>HMDS Student Profile</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,15 +35,12 @@ if (isset($_SESSION['userid']))
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <!--<img src="images/mrsm.png" class="img-thumbnail" width="140" height="80" style="background-transparent">-->
-              <a href="index.html" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
-            </div>
+  <body class="nav-md" style="background-color:#674d3c">
+    <div class="container body" style="background-color:#674d3c">
+      <div class="main_container" style="background-color:#674d3c">
+        <div class="col-md-3 left_col" style="background-color:#674d3c">
+          <div class="left_col scroll-view" style="background-color:#674d3c">
+                  <div class="nav" style="border: 0;"><a href="#" class="navbar-left"><img src="images/mrsm.png" style="max-width:130px; margin-top:20px; margin-left:40px; margin-bottom:20px;"></a></div>
 
             <div class="clearfix"></div>
 
@@ -72,9 +69,10 @@ if (isset($_SESSION['userid']))
                <div class="menu_section">
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
-                    <li><a href="viewStatus.php?userid=<?php echo $userid;?>"><i class="fa fa-home"></i>Status Merit & Demerit</a></li>
-                    <li><a href="sdemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Demerit Stage</a></li>
-                    <li><a href="smerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit Schedule</a></li>
+                    <!--<li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit</a></li>-->
+                    <li><a href="viewStatus2.php?userid=<?php echo $userid;?>"><i class="fa fa-tasks"></i>Status Merit & Demerit </a></li>
+                    <li><a href="sdemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Class</a></li>
+                    <li><a href="smerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Schema</a></li>
                     
                 </ul>
               </div>
@@ -101,12 +99,7 @@ if (isset($_SESSION['userid']))
             </div>
             <!-- /sidebar menu -->
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-             
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout.php">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
+
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -125,8 +118,8 @@ if (isset($_SESSION['userid']))
                                         }
               ?>
         <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
+        <div class="top_nav" style="background-color:#d9ad7c">
+          <div class="nav_menu" style="background-color:#d9ad7c">
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
@@ -304,64 +297,7 @@ if (isset($_SESSION['userid']))
 
               </div>
 
-              <div class="col-md-5 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Upload Profile Image</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="panel-body">
-                    <div class="alert alert-info">
-                        If You have already upload your image, ignore it !
-                    </div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <form class="form-horizontal form-label-left" action="imgUpload.php" method="post" enctype="multipart/form-data">
-                        <?php
-                        include('../Connections/connection.php');
 
-                        if (isset($_GET['userid']))
-                        {
-                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
-                            $stmt->bind_param('s', $userid);
-                            $stmt->execute();
-                            $result = $stmt->get_result();
-                            $row = $result->fetch_assoc();
-
-                            $name = $row['staffName'];
-                            $position = $row['position'];
-                            $no = $row['phoneNo'];
-                            $email = $row['email'];
-                            $question = $row['recoQuestion'];
-                            $answer = $row['recoAnswer'];
-                            $img = $row['img'];
-
-                        }
-
-                        ?>
-                      <div class="form-group" align="middle">
-                          <img src="images/user.png" class="img-rounded" width="160" height="140">
-                      </div>
-                      <div class="form-group" align="middle" style="">
-                          <input type="file" name="image" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
-                          Only JPEG, PNG and GIFs are allowed. <br>(Max: 2,048KiB) 
-                      </div>
-
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                          <input type="hidden" name="userid" value="<?php echo $userid; ?>">
-                          <button type="submit" class="btn btn-success" name="upload">Upload</button>
-                            <!--<a href="imgUpload.php?userid=<?php //echo $userid; ?>" class="btn btn-success" name="upload">Upload</a>-->
-                          <button type="button" class="btn btn-primary">Cancel</button>
-                        </div>
-                      </div>
-
-                    </form>
-                  </div>
-                </div>
-              </div>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
