@@ -89,7 +89,7 @@ if (isset($_SESSION['userid']))
                 <h3>Actions</h3>
                 <ul class="nav side-menu">
                     <!--<li><a href="MDFormPageAdmin.php?userid=<?php //echo $userid; ?>"><i class="fa fa-home"></i>Merit & Demerit</a></li>-->
-                    <li><a href="viewStatus.php?userid=<?php echo $userid;?>"><i class="fa fa-tasks"></i>Status Merit & Demerit </a></li>
+                    <li><a href="viewStatus2.php?userid=<?php echo $userid;?>"><i class="fa fa-tasks"></i>Status Merit & Demerit </a></li>
                     <li><a href="sdemerit_stage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Class</a></li>
                     <li><a href="smerit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Schema</a></li>
                     
@@ -107,13 +107,7 @@ if (isset($_SESSION['userid']))
                   </li>
                 </ul>
               </div>-->
-              <div class="menu_section">
-                <h3>Report</h3>
-                <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-bar-chart-o"></i>Demerit Record</a>
-                  </li>
-                </ul>
-              </div>
+              
 
             </div>
             <!-- /sidebar menu -->
