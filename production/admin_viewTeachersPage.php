@@ -40,19 +40,17 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="#" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
-            </div>
+  <body class="nav-md" style="background-color:#674d3c">
+    <div class="container body" style="background-color:#674d3c">
+      <div class="main_container" style="background-color:#674d3c">
+        <div class="col-md-3 left_col" style="background-color:#674d3c">
+          <div class="left_col scroll-view" style="background-color:#674d3c">
+                              <div class="nav" style="border: 0;"><a href="#" class="navbar-left"><img src="images/mrsm.png" style="max-width:130px; margin-top:20px; margin-left:40px; margin-bottom:20px;"></a></div>
 
             <div class="clearfix"></div>
 
             <br />
-<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                <div class="menu_section">
                     <ul class="nav side-menu">
                     <li><a href="admin_index.php?userid=<?php echo $userid; ?>"><i class="fa fa-home"></i>Dashboard</a></li>
@@ -60,47 +58,39 @@
                    </div>
                        </div>
             <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <h3>Actions</h3>
-                <ul class="nav side-menu">
-                    <li><a href="admin_studListPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
-                    <li><a href="admin_demeritStagePage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Class</a></li>
-                    <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Scheme</a></li>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Users</h3>
-                <ul class="nav side-menu">
-                    <li><a href="admin_viewTeachersPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-user"></i>Teachers</a></li>
-                    <li><a href="#"><i class="fa fa-users"></i>Students</a></li>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Report</h3>
-                <ul class="nav side-menu">
-                  <li><a href="admin_chartPage.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
-                  <li><a href="admin_chartPage2.php?<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis 2</a></li>
-                </ul>
-              </div>
-
-            </div>
+                  <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                     <div class="menu_section">
+                        <h3>Actions</h3>
+                        <ul class="nav side-menu">
+                           <li><a href="admin_studListPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-tasks"></i>Merit & Demerit</a></li>
+                           <li><a href="admin_demeritStagePage.php?userid=<?php echo $userid; ?>"><i class="fa fa-line-chart"></i>Demerit Class</a></li>
+                           <li><a href="merit_schedule.php?userid=<?php echo $userid; ?>"><i class="fa fa-pencil-square-o"></i>Merit & Demerit Scheme</a></li>
+                        </ul>
+                     </div>
+                     <div class="menu_section">
+                        <h3>Users</h3>
+                        <ul class="nav side-menu">
+                           <li><a href="admin_viewTeachersPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-user"></i>Teachers</a></li>
+                           <li><a href="admin_studListPage.php?userid=<?php echo $userid; ?>"><i class="fa fa-users"></i>Students</a></li>
+                        </ul>
+                     </div>
+                     <div class="menu_section">
+                        <h3>Report</h3>
+                        <ul class="nav side-menu">
+                           <li><a href="admin_chartPage2.php?userid=<?php echo $userid; ?>"><i class="fa fa-edit"></i>Record Analysis</a></li>
+                        </ul>
+                     </div>
+                  </div>
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
-              
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout.php">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
-            </div>
             <!-- /menu footer buttons -->
           </div>
         </div>
 
         <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
+        <div class="top_nav" style="background-color:#d9ad7c">
+          <div class="nav_menu" style="background-color:#d9ad7c">
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
@@ -108,7 +98,7 @@
 
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="background-color:#d9ad7c">
                       <?php
                         include('../Connections/connection.php');
 
@@ -132,7 +122,7 @@
                     <!--<img src="images/user.png" alt=""><?php //echo $staffname;?>-->
                     <!--<span class=" fa fa-angle-down"></span>-->
                   </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                  <ul class="dropdown-menu dropdown-usermenu pull-right" style="background-color:#d9ad7c">
                     <li><a href="admin_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
                     <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
                     <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
@@ -154,11 +144,6 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>View Teachers</h3>
-              </div>
-            </div>
 
             <div class="clearfix"></div>
 
@@ -167,7 +152,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>List of Teachers</h2>
+                    <h2>View List of Teachers</h2>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
