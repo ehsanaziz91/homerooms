@@ -133,8 +133,28 @@ if (isset($_SESSION['userid']))
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/user.png" alt=""><?php echo $staffname;?>
-                    <span class=" fa fa-angle-down"></span>
+                      <?php
+                        include('../Connections/connection.php');
+
+                        if (isset($_GET['userid']))
+                        {
+                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
+                            $stmt->bind_param('s', $userid);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            $row = $result->fetch_assoc();
+                            if($row['img'] == NULL)
+                            {
+                                echo '<div><img src="images/user.png">'.$row['staffName'].'  <span class=" fa fa-angle-down"></span></div>';
+                            }
+                            else
+                            {
+                                echo '<div><img src="data:images/JPG;base64,'.base64_encode( $row['img'] ).'"/>'.$row['staffName'].'  <span class=" fa fa-angle-down"></span></div>';
+                            }
+                        }
+                    ?>
+                    <!--<img src="images/user.png" alt=""><?php //echo $staffname;?>-->
+                    <!--<span class=" fa fa-angle-down"></span>-->
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right" style="background-color:#d9ad7c">
                     <li><a href="teacher_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
@@ -211,7 +231,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="demerit_stage.php?userid=<?php echo $userid; ?>" class="btn btn-danger btn-block" role="button"><i class="fa fa-eye"></i>View</a>
+                                <a href="teacherDemerit_stage.php?userid=<?php echo $userid; ?>" class="btn btn-danger btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
@@ -284,7 +304,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="MDFormPageAdmin.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button"><i class="fa fa-eye"></i>View</a>
+                                <a href="teacher_chartPage.php?userid=<?php echo $userid; ?>" class="btn btn-success btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
