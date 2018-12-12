@@ -90,7 +90,7 @@ if (isset($_SESSION['userid']))
               <div class="menu_section">
                 <h3>Report</h3>
                 <ul class="nav side-menu">
-                  <li><a href="#"><i class="fa fa-edit"></i>Demerit Record</a>
+                  <li><a href="teacher_chartPage.php?userid=<?php echo $userid;?>"><i class="fa fa-edit"></i>Demerit Record</a>
                   </li>
                 </ul>
               </div>
@@ -311,64 +311,7 @@ if (isset($_SESSION['userid']))
 
               </div>
 
-              <div class="col-md-5 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Upload Profile Image</h2>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="panel-body">
-                    <div class="alert alert-info">
-                        If You have already upload your image, ignore it !
-                    </div>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <form class="form-horizontal form-label-left" action="imgUpload.php" method="post" enctype="multipart/form-data">
-                        <?php
-                        include('../Connections/connection.php');
 
-                        if (isset($_GET['userid']))
-                        {
-                            $stmt = $conn->prepare("SELECT * FROM staff WHERE staffID = ?");
-                            $stmt->bind_param('s', $userid);
-                            $stmt->execute();
-                            $result = $stmt->get_result();
-                            $row = $result->fetch_assoc();
-
-                            $name = $row['staffName'];
-                            $position = $row['position'];
-                            $no = $row['phoneNo'];
-                            $email = $row['email'];
-                            $question = $row['recoQuestion'];
-                            $answer = $row['recoAnswer'];
-                            $img = $row['img'];
-
-                        }
-
-                        ?>
-                      <div class="form-group" align="middle">
-                          <img src="images/user.png" class="img-rounded" width="160" height="140">
-                      </div>
-                      <div class="form-group" align="middle" style="">
-                          <input type="file" name="image" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage">
-                          Only JPEG, PNG and GIFs are allowed. <br>(Max: 2,048KiB) 
-                      </div>
-
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                          <input type="hidden" name="userid" value="<?php echo $userid; ?>">
-                          <button type="submit" class="btn btn-success" name="upload">Upload</button>
-                            <!--<a href="imgUpload.php?userid=<?php //echo $userid; ?>" class="btn btn-success" name="upload">Upload</a>-->
-                          <button type="button" class="btn btn-primary">Cancel</button>
-                        </div>
-                      </div>
-
-                    </form>
-                  </div>
-                </div>
-              </div>
             </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
