@@ -32,15 +32,12 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
   </head>
 
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="#" class="site_title"><i class="fa fa-university"></i> <span>HMD System</span></a>
-            </div>
-
+  <body class="nav-md" style="background-color:#674d3c">
+      <div class="container body" style="background-color:#674d3c">
+         <div class="main_container" style="background-color:#674d3c">
+            <div class="col-md-3 left_col" style="background-color:#674d3c">
+               <div class="left_col scroll-view" style="background-color:#674d3c">
+                  <div class="nav" style="border: 0;"><a href="#" class="navbar-left"><img src="images/mrsm.png" style="max-width:130px; margin-top:20px; margin-left:40px; margin-bottom:20px;"></a></div>
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
@@ -99,19 +96,19 @@
             <!-- sidebar menu -->
 
             <!-- menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
+          <!--  <div class="sidebar-footer hidden-small">
 
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout.php">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
-            </div>
+            </div>-->
             <!-- menu footer buttons -->
           </div>
         </div>
 
         <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
+        <div class="top_nav" style="background-color:#d9ad7c">
+               <div class="nav_menu" style="background-color:#d9ad7c">
             <nav>
               <div class="nav toggle">
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
@@ -143,8 +140,8 @@
                     <!--<img src="images/user.png" alt=""><?php //echo $staffname;?>-->
                     <!--<span class=" fa fa-angle-down"></span>-->
                   </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="admin_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right" style="background-color:#d9ad7c">
+                    <li><a href="teacher_profilePage.php?userid=<?php echo $userid; ?>"> Profile</a></li>
                     <li><a href="recoveryPage.php?userid=<?php echo $userid; ?>"> Change Password</a></li>
                     <li><a href="logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
