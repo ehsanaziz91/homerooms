@@ -256,7 +256,7 @@ if (isset($_SESSION['userid']))
                                 </div>
                               </div>
                               <div class="pricing_footer">
-                                <a href="merit_schedule.php?userid=<?php echo $userid; ?>" class="btn btn-dark btn-block" role="button"><i class="fa fa-eye"></i>View</a>
+                                <a href="tmerit_schedule.php?userid=<?php echo $userid; ?>" class="btn btn-dark btn-block" role="button"><i class="fa fa-eye"></i>View</a>
                                 <p>
                                 </p>
                               </div>
